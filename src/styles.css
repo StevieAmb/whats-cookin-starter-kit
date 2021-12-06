@@ -23,12 +23,21 @@ body {
 .suggested-recipe {
   width: 50%;
   height: 40%;
+  align-items: center;
+  display: flex;
 }
 
 .try-this-recipe {
   border-radius: 50%;
   height: 100px;
   width: 100px;
+  position: relative;
+  bottom: 100px
+}
+
+.favorite-button {
+  position: relative;
+  top: 100px;
 }
 
 .hidden {
