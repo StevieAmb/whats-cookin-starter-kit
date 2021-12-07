@@ -54,16 +54,6 @@ body, html {
   display: flex;
 }
 
-/* .recipe-information-view {
-  display: flex;
-  justify-content: space-around;
-  padding: 10vh;
-  width: 50%;
-  height: 50%;
-  align-items: center;
-  margin: 10%;
-} */
-
 .recipe-info {
   padding: 10vh;
   width: 50%;
@@ -73,16 +63,21 @@ body, html {
   margin: 10%;
 }
 
-.recipe-title {
-  display: flex;
-  margin: 10%;
-}
-
 .wrapped {
-  display: block;
-  flex-direction: row;
+  position: relative;
+  bottom: 10vh;
+  right: 10vh;
 }
 
+.current-recipe-image {
+  position: relative;
+  right: 20vh;
+}
+
+.ingredients-block {
+  position: relative;
+  bottom: 10vh;
+}
 .hidden {
   display: none;
 }
