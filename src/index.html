@@ -1,123 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
-    <title>What's Cookin'</title>
-  </head>
-  <body>
-    <header> 
-      <!-- <nav class="nav-bar">  we don't need to wrap this in a nav tag. The header does the same job and semantically houses a heading and/or a set of navigational links. -->
-        <!-- <h1 class="page-title">What's Cookin'</h1> This can be isolated as the only h1 tag if we take advantage of other heading tags and then wouldn't need a class -->
-        <h1>What's Cookin'</h1>
-        <!-- <input class="search-input" placeholder="search..."/> this doesn't need a class. Can be pulled by the element tag -->
-        <input placeholder="search..."/>
-        <button class="favorited-recipes-btn">Favorite Recipes</button>
-        <!-- Add home button from wireframe -->
-        <button class= "home-btn hidden">Home</button>
-      <!-- </nav> -->
-    </header>  
-      <!-- <section class="suggested-recipe-view hidden">  this can be an article tag- article tags can hold product cards semantically--> 
-        <article class="suggested-recipe-view">
-         <button class="try-this-recipe-btn">Try This Recipe</button> <!--Why is this a button? What does it do? -->
-         <section>
-           <!-- move image tag inside section and give section a tag for styling purposes -->
-          <img class="suggested-recipe-image" src="./images/cookies.jpg" alt="food image">
-          <!-- <h1 class="suggested-recipe-title">Recipe Title</h1> switch to h2 tag for consistency -->
-          <h2>Recipe Title</h2>
-          <!-- <h2>Recipe Information</h2>  What kind of info goes here? change to h3 for consistency-- possibly p tag depending on the info it houses-->
-          <h3>Recipe Information</h3>
-        </section>  
-        <button class="favorite-button">favorite this recipe</button>
-      </article>
-      <!-- </section>   -->
-      <!-- <section class="search-result-view hidden">  this is unnecessary - hidden can be added to the h1 and div that it encases -->
-        <!-- <h1 class="search-title hidden">Here are your results:</h1> Doesn't need class name, can be grouped with the other h1 and styled the same then class would only be used to add and remove hidden property -->
-        <h1 class="hidden">Here are your results:</h1>
-        <!-- <section class="recipe-results">   this can be a div because all it does is wrap the content to manipulate page position and apply and remove the hidden property-->
-        <div class="recipe-results hidden">
-          <article class="result-card"> <!--I made these articles and added h2s at the bottom because according to the wireframe these should be recipe result cards -->
-            <img class="result-image" alt="recipe" src="./images/cookies.jpg">
-            <h2>Recipe Title</h2>
-          </article>
-          <article class="result-card">
-            <img class="result-image" alt="recipe" src="./images/cookies.jpg">
-            <h2>Recipe Title</h2>
-          </article>
-          <article class="result-card">
-            <img class="result-image" alt="recipe" src="./images/cookies.jpg">
-            <h2>Recipe Title</h2>
-          </article>
-        </div>
-        <!-- </section>   -->
-      <!-- </section> -->
-      <!-- <section class="recipe-information-view"> unnecessary only applies hidden property to wrapped content - hidden can be added to an article tag that is more semantic and wraps the whole card-->
-        <!-- <div class="recipe-info"> -->
-          <!-- <div class="wrapped"> unnecessary wrapper-->
-        <article class="recipe-information-view hidden">
-            <!-- <h1 class="recipe-title">Recipe Title</h1> change to h2 for consistency and remove class-->
-            <h2>Recipe Title</h2>
-          <!-- </div>   -->
-            <img class="current-recipe-image" src="./images/cookies.jpg" alt="food-image">
-          <!-- <div class="ingredients-block"> unnecessary no effect to flex and limits placement of elements-->
-            <!-- <h2>Recipe ingredients</h2>
-            <h2>Recipe Cost Total</h2>  change both of these to h3 for consistency and add an ordered list <ol> and list items <li> for ingredients and span for total cost -->
-            <h3>Recipe ingredients</h3>
-            <ol>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ol>
-            <h3 class= total-cost>Recipe Cost Total: <span>$$$$$</span></h3>
-          <!-- </div> -->
-        </article>
-        <!-- </div> -->
-        <!-- </div> This is an extra closing tag-->
-      <!-- </section>   -->
-      <section class="favorite-recipes-view hidden">
-        <!-- <section class="favorited-recipes">  unnecessary wrapper -->
-          <!-- <section class="first-favorited-recipe"> article tag is more semantic-->
-          <article class= "fav-recipe-card">
-            <!-- <h1>Recipe Title</h1> change to h2 for consistency   -->
-            <h2 class= "fav-card-title">Recipe Title</h2>
-            <!-- <h2>Cost</h2> change to h3 for consistency -->
-            <div class= "box-content">
-              <h3>Cost: <span>$$$$</span></h3>
-              <button class="recipe-information-btn">Recipe Information</button>
-            </div>
-          </article>
-          <!-- </section> -->
-          <!-- <section class="second-favorited-recipe"> -->
-          <article class= "fav-recipe-card">
-            <!-- <h1>Recipe Title</h1> change to h2 for consistency   -->
-            <h2 class= "fav-card-title">Recipe Title</h2>
-            <!-- <h2>Cost</h2> change to h3 for consistency -->
-            <div class= "box-content">
-              <h3>Cost: <span>$$$$</span></h3>
-              <button class="recipe-information-btn">Recipe Information</button>
-            </div>
-          </article>
-          <!-- </section> -->
-          <!-- <section class="third-favorited-recipe"> -->
-          <article class= "fav-recipe-card">
-            <!-- <h1>Recipe Title</h1> change to h2 for consistency   -->
-            <h2 class= "fav-card-title">Recipe Title</h2>
-            <!-- <h2>Cost</h2> change to h3 for consistency -->
-            <div class= "box-content">
-              <h3>Cost: <span>$$$$</span></h3>
-              <button class="recipe-information-btn">Recipe Information</button>
-            </div>
-          </article>
-          <!-- </section> -->
-        <!-- </section> -->
-      </section>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+  <title>What's Cookin'</title>
+</head>
+
+<body>
+  <header>
+    <h1>What's Cookin'</h1>
+    <input placeholder="search..." />
+    <button class="favorited-recipes-btn">Favorite Recipes</button>
+    <button class="home-btn hidden">Home</button>
+  </header>
+  <article class="suggested-recipe-view">
+    <button class="try-this-recipe-btn">Try This Recipe</button>
+    <section>
+      <img class="suggested-recipe-image" src="./images/cookies.jpg" alt="food image">
+      <h2>Recipe Title</h2>
+      <h3>Recipe Instructions</h3>
+      <ol>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ol>
+    </section>
+    <button class="favorite-button">favorite this recipe</button>
+  </article>
+  <h1 class="hidden">Here are your results:</h1>
+  <div class="recipe-results hidden">
+    <article class="result-card">
+      <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+      <h2>Recipe Title</h2>
+    </article>
+    <article class="result-card">
+      <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+      <h2>Recipe Title</h2>
+    </article>
+    <article class="result-card">
+      <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+      <h2>Recipe Title</h2>
+    </article>
+  </div>
+  <article class="recipe-information-view hidden">
+    <h2>Recipe Title</h2>
+    <img class="current-recipe-image" src="./images/cookies.jpg" alt="food-image">
+    <h3>Recipe ingredients</h3>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <h3>Recipe Instructions</h3>
+    <ol>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+    <h3 class=total-cost>Recipe Cost Total: <span>$$$$$</span></h3>
+  </article>
+  <section class="favorite-recipes-view hidden">
+    <article class="fav-recipe-card">
+      <h2 class="fav-card-title">Recipe Title</h2>
+      <div class="box-content">
+        <h3>Cost: <span>$$$$</span></h3>
+        <button class="recipe-information-btn">Recipe Information</button>
+      </div>
+    </article>
+    <article class="fav-recipe-card">
+      <h2 class="fav-card-title">Recipe Title</h2>
+      <div class="box-content">
+        <h3>Cost: <span>$$$$</span></h3>
+        <button class="recipe-information-btn">Recipe Information</button>
+      </div>
+    </article>
+    <article class="fav-recipe-card">
+      <h2 class="fav-card-title">Recipe Title</h2>
+      <div class="box-content">
+        <h3>Cost: <span>$$$$</span></h3>
+        <button class="recipe-information-btn">Recipe Information</button>
+      </div>
+    </article>
+  </section>
+</body>
+
 </html>
