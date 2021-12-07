@@ -36,8 +36,8 @@ input {
   border-radius: 3px;
 }
 
-/* Add styling for favorited-recipes btn */
-.favorited-recipes-btn {
+/* Add styling for favorited-recipes btn and home btn */
+.home-btn, .favorited-recipes-btn {
   height: 5vh;
   width: 10vw;
   border-radius: 3px;
@@ -63,6 +63,9 @@ input {
 .favorite-button {
   /* display: flex; remove no effect and add align self to push to bottom right */
   align-self: flex-end;
+  height: 5vh;
+  width: 10vw;
+  border-radius: 3px;
 }
 .recipe-results {
   display: flex;
