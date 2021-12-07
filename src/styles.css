@@ -67,10 +67,12 @@ input {
   width: 10vw;
   border-radius: 3px;
 }
+
 .recipe-results {
   display: flex;
   /* justify-content: space-around; Remove space around because when you add new cards it will move each card closer instead of maintaining space*/
 }
+
 .try-this-recipe-btn {
   border-radius: 50%;
   height: 20vh;
@@ -79,7 +81,7 @@ input {
   bottom: 3vh;
   right: 2vw;
   align-self: flex-start;
-};
+}
 
 .result-card {
   margin: 5vh 13vh 0;
