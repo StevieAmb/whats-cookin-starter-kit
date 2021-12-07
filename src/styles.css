@@ -54,8 +54,33 @@ body, html {
   display: flex;
 }
 
-.recipe-information-view {
+/* .recipe-information-view {
+  display: flex;
+  justify-content: space-around;
   padding: 10vh;
+  width: 50%;
+  height: 50%;
+  align-items: center;
+  margin: 10%;
+} */
+
+.recipe-info {
+  padding: 10vh;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  margin: 10%;
+}
+
+.recipe-title {
+  display: flex;
+  margin: 10%;
+}
+
+.wrapped {
+  display: block;
+  flex-direction: row;
 }
 
 .hidden {
