@@ -1,3 +1,64 @@
-body {
-  background-color: blueviolet;
+/* @import './node_modules/normalize.css/normalize.css'; */
+
+* {
+border: 2px solid blue;
 }
+
+body, html {
+  background-color: blueviolet;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overscroll-behavior: none;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}      
+
+.suggested-recipe-view {
+  display: flex;
+  width: 50%;
+  height: 50%;
+  align-items: center;
+  margin: 10%;
+  /* background-image: */
+}
+
+.search-result {
+  display: flex;
+}
+
+.recipe-results {
+  display: flex;
+  justify-content: space-around;
+}
+
+.result-image {
+  width: 20vw;
+  height: 20vh;
+}
+
+.try-this-recipe {
+  border-radius: 50%;
+  height: 10vh;
+  width: 10vw;
+  position: relative;
+  bottom: 20%;
+}
+
+.favorite-button {
+  display: flex;
+}
+
+.recipe-information-view {
+  padding: 10vh;
+}
+
+.hidden {
+  display: none;
+}
+

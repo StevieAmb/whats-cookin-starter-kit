@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
     <title>Whats Cookin</title>
   </head>
   <body>
-    <h1>Whats Cookin</h1>
+    <header> 
+      <nav class="nav-bar"> 
+        <h1 class="page-title">Whats Cookin</h1>
+        <input class="search-input" placeholder="search..."/>
+        <button class="favorited-recipes">Favorited Recipes</button>
+      </nav>
+    </header>  
+      <section class="suggested-recipe-view">
+        <button class="try-this-recipe">Try This Recipe</button>
+        <img class="suggested-recipe-image" alt="food image">
+        <section>
+          <h1 class="suggested-recipe-title">Recipe Title</h1>
+          <h2>Recipe Information</h2>
+        </section>  
+        <button class="favorite-button">favorite this recipe</button>
+      </section>  
+      <section class="search-result-view hidden">
+        <h1 class="search-title">Here are your results:</h1>
+        <section class="recipe-results">
+          <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+          <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+          <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+        </section>  
+      </section>
+      <section class="recipe-information-view hidden">
+          <h1>Recipe Title</h1>
+          <img class="current-recipe-image" alt="food-image">
+          <h2>Recipe ingredients</h2>
+          <h2>Recipe Cost Total</h2>
+      </section>  
+      <section class="favorite-recipes-view hidden">
+        <section class="favorited-recipes">
+          <section class="first-favorited-recipe">
+            <h1>Recipe Title</h1>  
+            <h2>Cost</h2>
+            <button class="recipe-information"></button>
+          </section>
+          <section class="second-favorited-recipe">
+            <h1>Recipe Title</h1>  
+            <h2>Cost</h2>
+            <button class="recipe-information"></button>
+          </section>
+          <section class="third-favorited-recipe">
+            <h1>Recipe Title</h1>  
+            <h2>Cost</h2>
+            <button class="recipe-information"></button>
+          </section>
+        </section>
+      </section>
   </body>
 </html>
