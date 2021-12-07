@@ -1,42 +1,30 @@
 /* @import './node_modules/normalize.css/normalize.css'; */
 
-* {
-border: 2px solid blue;
-}
-
 body, html {
   margin: 0;
-  /* padding: 0; no effect*/
   height: 100vh;
   width: 100vw;
   overscroll-behavior: none;
 }
 
-/* .nav-bar { this is now labeled header since we were able to eliminate the nav tag in the HTML */
-  header {
+header {
   display: flex;
-  /* flex-direction: row;  This is already default with display flex*/
   justify-content: space-between;
-  /* add viewheight to maintain header size with adjustment of content size */
   height: 15vh;
-  /* add align items center to center content vertically */
   align-items: center;
 } 
 
-/* Add styling for h1 elements */
 h1 {
   height: fit-content;
   margin: 0 0 0 1rem;
 }
 
-/* Add styling for input element */
 input {
   height: 5vh;
   width: 20vw;
   border-radius: 3px;
 }
 
-/* Add styling for favorited-recipes btn and home btn */
 .home-btn, .favorited-recipes-btn {
   height: 5vh;
   width: 10vw;
@@ -50,18 +38,14 @@ input {
   height: 50vh;
   align-items: center;
   margin: 10%;
-  /* add justify-content in order to center main content */
   justify-content: space-between;
-  /* background-image: */
 }
 
-/* Add styling for suggested-recipe-image */
 .suggested-recipe-image {
   height: 30vh;
 }
 
 .favorite-button {
-  /* display: flex; remove no effect and add align self to push to bottom right */
   align-self: flex-end;
   height: 5vh;
   width: 10vw;
@@ -70,7 +54,6 @@ input {
 
 .recipe-results {
   display: flex;
-  /* justify-content: space-around; Remove space around because when you add new cards it will move each card closer instead of maintaining space*/
 }
 
 .try-this-recipe-btn {
@@ -88,12 +71,10 @@ input {
   
 }
 
-/* add h2 styling */
 h2 {
   margin: 0;
 }
 
-/* add recipe-information-view styling */
 .recipe-information-view {
   margin: 1rem;
   display: flex;
@@ -102,22 +83,17 @@ h2 {
 
 .current-recipe-image {
   width: 50em;
-  /* position: relative;
-  right: 20vh; */
 }
 
-/* add h3 styling */
 h3 {
   margin: 0;
   width: fit-content;
 }
 
-/* add ol styling */
 ol {
   width: 47em;
 }
 
-/* add total-cost h3 styling */
 .total-cost {
   align-self: flex-end;
 }
@@ -144,36 +120,6 @@ ol {
   height: 8vh;
   align-items: center;
 }
-
-/* .search-result {
-  display: flex;
-}
-
-.result-image {
-  width: 20vw;
-  height: 20vh;
-}
-
-.recipe-info {
-  padding: 10vh;
-  width: 50%;
-  height: 50%;
-  display: flex;
-  flex-direction: row;
-  margin: 10%;
-} */
-
-/* .wrapped {
-  position: relative;
-  bottom: 10vh;
-  right: 10vh;
-} */
-
-
-/* .ingredients-block { */
-  /* position: relative; Remove - interferes with flexbox*/
-  /* bottom: 10vh; no effect without position property*/
-/* } */
 
 .hidden {
   display: none;
