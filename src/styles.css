@@ -5,53 +5,147 @@ border: 2px solid blue;
 }
 
 body, html {
-  background-color: blueviolet;
   margin: 0;
-  padding: 0;
+  /* padding: 0; no effect*/
   height: 100vh;
   width: 100vw;
   overscroll-behavior: none;
 }
 
-.nav-bar {
+/* .nav-bar { this is now labeled header since we were able to eliminate the nav tag in the HTML */
+  header {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row;  This is already default with display flex*/
   justify-content: space-between;
-}      
+  /* add viewheight to maintain header size with adjustment of content size */
+  height: 15vh;
+  /* add align items center to center content vertically */
+  align-items: center;
+} 
+
+/* Add styling for h1 elements */
+h1 {
+  height: fit-content;
+  margin: 0 0 0 1rem;
+}
+
+/* Add styling for input element */
+input {
+  height: 5vh;
+  width: 20vw;
+  border-radius: 3px;
+}
+
+/* Add styling for favorited-recipes btn */
+.favorited-recipes-btn {
+  height: 5vh;
+  width: 10vw;
+  border-radius: 3px;
+  margin: 0 1rem 0 0;
+}
 
 .suggested-recipe-view {
   display: flex;
-  width: 50%;
-  height: 50%;
+  width: 50vw;
+  height: 50vh;
   align-items: center;
   margin: 10%;
+  /* add justify-content in order to center main content */
+  justify-content: space-between;
   /* background-image: */
 }
 
-.search-result {
-  display: flex;
+/* Add styling for suggested-recipe-image */
+.suggested-recipe-image {
+  height: 30vh;
 }
 
+.favorite-button {
+  /* display: flex; remove no effect and add align self to push to bottom right */
+  align-self: flex-end;
+}
 .recipe-results {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; Remove space around because when you add new cards it will move each card closer instead of maintaining space*/
+}
+.try-this-recipe-btn {
+  border-radius: 50%;
+  height: 20vh;
+  width: 10vw;
+  position: relative;
+  bottom: 3vh;
+  right: 2vw;
+  align-self: flex-start;
+};
+
+.result-card {
+  margin: 5vh 13vh 0;
+}
+
+/* add h2 styling */
+h2 {
+  margin: 0;
+}
+
+/* add recipe-information-view styling */
+.recipe-information-view {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.current-recipe-image {
+  width: 50em;
+  /* position: relative;
+  right: 20vh; */
+}
+
+/* add h3 styling */
+h3 {
+  margin: 0;
+  width: fit-content;
+}
+
+/* add ol styling */
+ol {
+  width: 47em;
+}
+
+/* add total-cost h3 styling */
+.total-cost {
+  align-self: flex-end;
+}
+
+.fav-recipe-card {
+  margin: 5vh;
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+}
+
+.recipe-information-btn {
+  width: 10vw;
+  height: 5vh;
+}
+
+.fav-card-title {
+  height: 6vh;
+}
+
+.box-content {
+  display: flex;
+  justify-content: space-between;
+  height: 8vh;
+  align-items: center;
+}
+
+/* .search-result {
+  display: flex;
 }
 
 .result-image {
   width: 20vw;
   height: 20vh;
-}
-
-.try-this-recipe {
-  border-radius: 50%;
-  height: 10vh;
-  width: 10vw;
-  position: relative;
-  bottom: 20%;
-}
-
-.favorite-button {
-  display: flex;
 }
 
 .recipe-info {
@@ -61,23 +155,20 @@ body, html {
   display: flex;
   flex-direction: row;
   margin: 10%;
-}
+} */
 
-.wrapped {
+/* .wrapped {
   position: relative;
   bottom: 10vh;
   right: 10vh;
-}
+} */
 
-.current-recipe-image {
-  position: relative;
-  right: 20vh;
-}
 
-.ingredients-block {
-  position: relative;
-  bottom: 10vh;
-}
+/* .ingredients-block { */
+  /* position: relative; Remove - interferes with flexbox*/
+  /* bottom: 10vh; no effect without position property*/
+/* } */
+
 .hidden {
   display: none;
 }
