@@ -13,7 +13,7 @@ class Recipe {
   determineIngredient(recipeId) {
     const ingredients = new Ingredients();
     ingredients.ingredients.filter(ingredient => {
-      if(recipeId === ingredient.id) {
+      if (recipeId === ingredient.id) {
         return ingredient;
       }
     }
@@ -21,15 +21,31 @@ class Recipe {
 
   determineCost(recipeId) {
     const ingredients = new Ingredients();
-    ingredients.ingredients.filter(ingredient => {
-      if(recipeId === ingredient.id) {
+    const result = ingredients.ingredients.filter(ingredient => {
+      if (recipeId === ingredient.id) {
+        const cost = ingredients.estimatedCostInCents;
+        //this creates an array of each cost
+        console.log(costs);
 
-        const totalCents += ingredients.estimatedCostInCents;
 
+        return result;
+        // this.ingredients.filter(ingredient => ingredient.amount)
       }
     })
 
   }
+
+  determineCost = (recipeId) => {
+    const ingredientsData = new Ingredients();
+    let result = ingredientsData.ingredients.filter((ingredient) => {
+      if (recipeId === ingredient.id) {
+        return ingredient.estimatedCostInCents;
+      }
+    }).map((cost) => cost * ingredientsData.ingredients.amount)
+    return result;
+  }
+
+  
   //need to get access to the ingredients of a specific recipe
   //the costs and the units will be multiplied together
   //the cost is in the ingredients file 
