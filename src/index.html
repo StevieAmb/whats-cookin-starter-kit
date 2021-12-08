@@ -1,67 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="./styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
-    <title>Whats Cookin</title>
-  </head>
-  <body>
-    <header> 
-      <nav class="nav-bar"> 
-        <h1 class="page-title">Whats Cookin</h1>
-        <input class="search-input" placeholder="search..."/>
-        <button class="favorited-recipes">Favorited Recipes</button>
-      </nav>
-    </header>  
-      <section class="suggested-recipe-view hidden">
-        <button class="try-this-recipe">Try This Recipe</button>
-        <img class="suggested-recipe-image" alt="food image">
-        <section>
-          <h1 class="suggested-recipe-title">Recipe Title</h1>
-          <h2>Recipe Information</h2>
-        </section>  
-        <button class="favorite-button">favorite this recipe</button>
-      </section>  
-      <section class="search-result-view hidden">
-        <h1 class="search-title">Here are your results:</h1>
-        <section class="recipe-results">
-          <img class="result-image" alt="recipe" src="./images/cookies.jpg">
-          <img class="result-image" alt="recipe" src="./images/cookies.jpg">
-          <img class="result-image" alt="recipe" src="./images/cookies.jpg">
-        </section>  
-      </section>
-      <section class="recipe-information-view">
-        <div class="recipe-info">
-          <div class="wrapped">
-            <h1 class="recipe-title">Recipe Title</h1>
-          </div>  
-            <img class="current-recipe-image" alt="food-image">
-          <div class="ingredients-block">
-            <h2>Recipe ingredients</h2>
-            <h2>Recipe Cost Total</h2>
-          </div>
-        </div>
-        </div>
-      </section>  
-      <section class="favorite-recipes-view hidden">
-        <section class="favorited-recipes">
-          <section class="first-favorited-recipe">
-            <h1>Recipe Title</h1>  
-            <h2>Cost</h2>
-            <button class="recipe-information"></button>
-          </section>
-          <section class="second-favorited-recipe">
-            <h1>Recipe Title</h1>  
-            <h2>Cost</h2>
-            <button class="recipe-information"></button>
-          </section>
-          <section class="third-favorited-recipe">
-            <h1>Recipe Title</h1>  
-            <h2>Cost</h2>
-            <button class="recipe-information"></button>
-          </section>
-        </section>
-      </section>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+  <title>What's Cookin'</title>
+</head>
+
+<body>
+  <header>
+    <h1>What's Cookin'</h1>
+    <input placeholder="search..." />
+    <button class="favorited-recipes-btn">Favorite Recipes</button>
+    <button class="home-btn hidden">Home</button>
+  </header>
+  <article class="suggested-recipe-view">
+    <button class="try-this-recipe-btn">Try This Recipe</button>
+    <section>
+      <img class="suggested-recipe-image" src="./images/cookies.jpg" alt="food image">
+      <h2>Recipe Title</h2>
+      <h3>Recipe Instructions</h3>
+      <ol>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ol>
+    </section>
+    <button class="favorite-button">favorite this recipe</button>
+  </article>
+  <h1 class="hidden">Here are your results:</h1>
+  <div class="recipe-results hidden">
+    <article class="result-card">
+      <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+      <h2>Recipe Title</h2>
+    </article>
+    <article class="result-card">
+      <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+      <h2>Recipe Title</h2>
+    </article>
+    <article class="result-card">
+      <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+      <h2>Recipe Title</h2>
+    </article>
+  </div>
+  <article class="recipe-information-view hidden">
+    <h2>Recipe Title</h2>
+    <img class="current-recipe-image" src="./images/cookies.jpg" alt="food-image">
+    <h3>Recipe ingredients</h3>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <h3>Recipe Instructions</h3>
+    <ol>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+    <h3 class=total-cost>Recipe Cost Total: <span>$$$$$</span></h3>
+  </article>
+  <section class="favorite-recipes-view hidden">
+    <article class="fav-recipe-card">
+      <h2 class="fav-card-title">Recipe Title</h2>
+      <div class="box-content">
+        <h3>Cost: <span>$$$$</span></h3>
+        <button class="recipe-information-btn">Recipe Information</button>
+      </div>
+    </article>
+    <article class="fav-recipe-card">
+      <h2 class="fav-card-title">Recipe Title</h2>
+      <div class="box-content">
+        <h3>Cost: <span>$$$$</span></h3>
+        <button class="recipe-information-btn">Recipe Information</button>
+      </div>
+    </article>
+    <article class="fav-recipe-card">
+      <h2 class="fav-card-title">Recipe Title</h2>
+      <div class="box-content">
+        <h3>Cost: <span>$$$$</span></h3>
+        <button class="recipe-information-btn">Recipe Information</button>
+      </div>
+    </article>
+  </section>
+</body>
+
 </html>

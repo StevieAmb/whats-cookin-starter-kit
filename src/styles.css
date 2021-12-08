@@ -1,83 +1,126 @@
 /* @import './node_modules/normalize.css/normalize.css'; */
 
-* {
-border: 2px solid blue;
-}
-
 body, html {
-  background-color: blueviolet;
   margin: 0;
-  padding: 0;
   height: 100vh;
   width: 100vw;
   overscroll-behavior: none;
 }
 
-.nav-bar {
+header {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-}      
+  height: 15vh;
+  align-items: center;
+} 
+
+h1 {
+  height: fit-content;
+  margin: 0 0 0 1rem;
+}
+
+input {
+  height: 5vh;
+  width: 20vw;
+  border-radius: 3px;
+}
+
+.home-btn, .favorited-recipes-btn {
+  height: 5vh;
+  width: 10vw;
+  border-radius: 3px;
+  margin: 0 1rem 0 0;
+}
 
 .suggested-recipe-view {
   display: flex;
-  width: 50%;
-  height: 50%;
+  width: 50vw;
+  height: 50vh;
   align-items: center;
   margin: 10%;
-  /* background-image: */
+  justify-content: space-between;
 }
 
-.search-result {
-  display: flex;
+.suggested-recipe-image {
+  height: 30vh;
+}
+
+.favorite-button {
+  align-self: flex-end;
+  height: 5vh;
+  width: 10vw;
+  border-radius: 3px;
 }
 
 .recipe-results {
   display: flex;
-  justify-content: space-around;
 }
 
-.result-image {
-  width: 20vw;
-  height: 20vh;
-}
-
-.try-this-recipe {
+.try-this-recipe-btn {
   border-radius: 50%;
-  height: 10vh;
+  height: 20vh;
   width: 10vw;
   position: relative;
-  bottom: 20%;
+  bottom: 3vh;
+  right: 2vw;
+  align-self: flex-start;
 }
 
-.favorite-button {
+.result-card {
+  margin: 5vh 13vh 0;
+  
+}
+
+h2 {
+  margin: 0;
+}
+
+.recipe-information-view {
+  margin: 1rem;
   display: flex;
-}
-
-.recipe-info {
-  padding: 10vh;
-  width: 50%;
-  height: 50%;
-  display: flex;
-  flex-direction: row;
-  margin: 10%;
-}
-
-.wrapped {
-  position: relative;
-  bottom: 10vh;
-  right: 10vh;
+  flex-direction: column;
 }
 
 .current-recipe-image {
-  position: relative;
-  right: 20vh;
+  width: 50em;
 }
 
-.ingredients-block {
-  position: relative;
-  bottom: 10vh;
+h3 {
+  margin: 0;
+  width: fit-content;
 }
+
+ol {
+  width: 47em;
+}
+
+.total-cost {
+  align-self: flex-end;
+}
+
+.fav-recipe-card {
+  margin: 5vh;
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+}
+
+.recipe-information-btn {
+  width: 10vw;
+  height: 5vh;
+}
+
+.fav-card-title {
+  height: 6vh;
+}
+
+.box-content {
+  display: flex;
+  justify-content: space-between;
+  height: 8vh;
+  align-items: center;
+}
+
 .hidden {
   display: none;
 }
