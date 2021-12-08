@@ -1,8 +1,8 @@
 class RecipeBox {
-  constructor() {
-
-    // One class to get you started!
+  constructor(recipeData) {
+    this.re
   }
 };
 
 export default RecipeBox;
+ 
