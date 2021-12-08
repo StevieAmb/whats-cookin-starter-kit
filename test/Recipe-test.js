@@ -5,7 +5,9 @@ import Recipe from '../src/classes/Recipe';
 describe('Recipe', () => {
 const recipe;
   beforeEach(() => {
-    recipe = new Recipe(1, "src", "ingredients", ['food', 'food', 'food'], "Spaghetti", ['pasta', 'brekkie']);
+    recipe1 = new Recipe(1, "src1", [{"ingred1"}, {"ingred2"}, {"ingred3"}], [{"instruct1"}, {"instruct2"}, {"instruct3"}], "Spaghetti", ["pasta", "main"])
+    recipe2 = new Recipe(2, "src2", [{"ingred1"}, {"ingred2"}, {"ingred3"}], [{"instruct1"}, {"instruct2"}, {"instruct3"}], "Grilled Cheese", ["sandwich", "main"])
+    recipe3 = new Recipe(3, "src3", [{"ingred1"}, {"ingred2"}, {"ingred3"}], [{"instruct1"}, {"instruct2"}, {"instruct3"}], "CheeseCake", ["dessert", "sweet"])
     
     it('Should be a function', () => {
       expect(Recipe).to.be.a('function');
@@ -28,15 +30,15 @@ const recipe;
     });
   
     it('Should have instructions', () => {
-      expect().to.be.a();
+      expect(recipe.instructions).to.equal(['food', 'food', 'food']);
     });
   
     it('Should have a name', () => {
-      expect().to.be.a();
+      expect(recipe.name).to.equal('Spaghetti');
     });
   
     it('Should have tags', () => {
-      expect().to.be.a();
+      expect(recipe.tags).to.equal(['pasta', 'brekkie']);
     });
   
     it('Should ', () => {
