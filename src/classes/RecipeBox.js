@@ -5,7 +5,8 @@ class RecipeBox {
   
 };
 
-export default RecipeBox;
+// export default RecipeBox;
+module.exports = RecipeBox; 
  
 
 //Should be able to take in recipe data
