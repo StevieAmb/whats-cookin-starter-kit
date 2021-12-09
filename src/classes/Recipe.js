@@ -20,22 +20,8 @@ class Recipe {
       }
     })
   }
-  
-  // determineCost(recipeId) {
-  //   const ingredients = new Ingredients();
-  //   const result = ingredients.ingredients.filter(ingredient => {
-  //     if (recipeId === ingredient.id) {
-  //       const cost = ingredients.estimatedCostInCents;
-  //       //this creates an array of each cost
-  //       console.log(costs);
 
-
-  //       return result;
-  //       // this.ingredients.filter(ingredient => ingredient.amount)
-  //     }
-  //   })
-
-  // }
+  //Returns ingredients based on recipe id
   determineCost(recipeId) {
     const ingredientsData = new Ingredients();
     let result = ingredientsData.ingredients.filter((ingredient) => {
@@ -51,7 +37,17 @@ class Recipe {
   //this method determineCost - creates a new instance of ingredients class
   //in order to access the ingredients array
   //it filters through the ingredients array, and if the recipe id
-  //being passed into the parameter matches any id of 
+  //being passed into the parameter matches any id of the ingredients
+  //in the array, it's going to pull the cost of that ingredient, and put it
+  //into an array. 
+  //So now we have an array of cost of ingredients we need for a particular recipe
+  //and we are going to iterate through that array and multiply that
+  //by the amount needed for each recipe. We will return that array
+  //of each cost times unit, so that we have an array of [cost * unit]
+  //Then, we are going to iterate through the method, using reduce, and
+  //
+
+  //Returning the cost of a recipe. 
 
 
   //need to get access to the ingredients of a specific recipe
