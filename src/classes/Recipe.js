@@ -14,10 +14,9 @@ class Recipe {
   }
 
   determineIngredients(recipeData) {
-   let ingredientIds = recipeData.map(recipe => recipe.ingredients.filter(ingredient => ingredient.id)
+   let ingredientIds = recipeData.map(recipe => recipe.ingredients.filter(ingredient => ingredient.id))
    return ingredientIds;
   }
-
   determineIngredientsEvenMore() {
   const ingredientsList = new IngredientsRepo();
   let ingredientIds = this.determineIngredients()
@@ -45,7 +44,7 @@ class Recipe {
   determineCost(recipeId) {
     const ingredient = new Ingredient();
     let result = this.ingredients.map(ingredient => ingredient.amount)
-    .map((amount) => amount * ingredient.estimatedCostInCents
+    .map((amount) => amount * ingredient.estimatedCostInCents)
   }
 
   //this method determineCost - creates a new instance of ingredients class

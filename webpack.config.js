@@ -9,6 +9,10 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   mode: 'development',
+  target: 'node',
+  externals: {
+    fsevents: "require('fsevents')"
+  },
   // CSS and file (image) loaders
   module: {
     rules: [
