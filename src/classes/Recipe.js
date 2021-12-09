@@ -1,4 +1,4 @@
-// import Ingredient from "./Ingredient";
+
 const RecipeBox = require('./RecipeBox');
 const Ingredient = require('./Ingredient');
 
@@ -42,9 +42,16 @@ class Recipe {
       if (recipeId === ingredient.id) {
         return ingredient.estimatedCostInCents;
       }
-    }).map((cost) => cost * ingredientsData.ingredients.amount)
+    }).map((cost) => cost * ingredientsData.ingredients.amount).reduce((totalCosts, item) => {
+      return totalCosts + item
+    }, 0)
     return result;
   }
+
+  //this method determineCost - creates a new instance of ingredients class
+  //in order to access the ingredients array
+  //it filters through the ingredients array, and if the recipe id
+  //being passed into the parameter matches any id of 
 
 
   //need to get access to the ingredients of a specific recipe
