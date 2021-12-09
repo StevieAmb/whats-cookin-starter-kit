@@ -1,9 +1,7 @@
-import { beforeEach } from 'mocha';
-const chai = require('chai');
-const expect = chai.expect; 
-const RecipeBox = require('../src/classes/RecipeBox');
-const Recipe = require('../src/classes/Recipe');
-const Ingredient = require('../src/classes/Ingredient');
+import { expect } from 'chai';
+import RecipeBox from '../src/classes/RecipeBox';
+// import recipeData from '../src/data/recipes';
+import Recipe from '../src/classes/Recipe';
 
 describe('RecipeBox', () => {
   let recipeBox;
@@ -26,8 +24,8 @@ describe('RecipeBox', () => {
       expect(recipeBox).to.be.an.instanceOf(RecipeBox);
     });
 
-  //   it('Should ', () => {
-  //     expect().to.be.a();
+    it('Should should be able to take in recipe data', () => {
+      expect().to.be.a();
   // });
 
   // it('Should ', () => {
@@ -64,4 +62,5 @@ describe('RecipeBox', () => {
 
   // it('Should ', () => {
   //   expect().to.be.a();
-  });
+  })
+});
