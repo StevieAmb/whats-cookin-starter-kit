@@ -1,8 +1,27 @@
+const { recipeData } = require("../data/recipes");
+
 class RecipeBox {
   constructor(recipeData) {
     this.recipeData = recipeData;
   }
-  
+  storeTag(theUserInput) {
+    let matchingRecipesTags = [];
+    recipeData.forEach((recipe) => {
+      if(recipe.tags.includes(theUserInput)) {
+        matchingRecipesTags.push(recipe)
+        return matchingRecipesTags;
+      }
+    })
+  }
+  findRecipeName(theUserInput) {
+    let matchingRecipes = [];
+    recipeData.forEach((recipe) => {
+      if(recipe.name.includes(theUserInput)) {
+        matchingRecipes.push(recipe)
+        return
+      }
+    })
+  }
 };
 
 // export default RecipeBox;
@@ -20,9 +39,13 @@ module.exports = RecipeBox;
   //const recipeBox = new RecipeBox(recipe1, recipe2, recipe3)
   
 //Should be able to store recipes by one or more tag
-  //Iterate through the recipeData array, 
+  //given the tag 
+  //iterate through the recipeData for tags array
+  //iterate through the tags array 
+  //if tag is included in array
+  //push recipe into new array 
+  //return an that new array of recipes that include the tag 
   //If tag.includes 'string name of tag' 
   //Then return the whole object in new array 
-
 //Should be able to filter recipes based on name 
   //  
