@@ -12,7 +12,7 @@ class Recipe {
     this.tags = tags;
   }
 
-  determineIngredient(recipeId) {
+  determineIngredients(recipeId) {
     const ingredients = new Ingredients(); 
     ingredients.ingredients.filter(ingredient => {
       if (recipeId === ingredient.id) {
