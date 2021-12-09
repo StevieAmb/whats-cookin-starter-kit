@@ -1,6 +1,7 @@
 
 const RecipeBox = require('./RecipeBox');
 const Ingredient = require('./Ingredient');
+const { ids } = require('webpack');
 
 class Recipe {
   constructor(id, image, ingredients, instructions, name, tags) {
@@ -12,26 +13,39 @@ class Recipe {
     this.tags = tags;
   }
 
-  determineIngredients(recipeId) {
-    const ingredients = new Ingredients(); 
-    ingredients.ingredients.filter(ingredient => {
-      if (recipeId === ingredient.id) {
-        return ingredient;
-      }
-    })
+  determineIngredients(recipeData) {
+   let ingredientIds = recipeData.map(recipe => recipe.ingredients.filter(ingredient => ingredient.id)
+   return ingredientIds;
   }
+
+  determineIngredientsEvenMore() {
+  const ingredientsList = new IngredientsRepo();
+  let ingredientIds = this.determineIngredients()
+
+  const ingredientName = ingredientsList.ingredients.filter(ingredient => {
+    if(ingredientIds.includes(ingredient.id)) {
+      return ingredient.name;
+    }
+    return ingredientName;
+  })
+ 
+  }
+
+  //split this method
+
+  // input: the ids for the specific ingredient of a recipe
+  // output: the name of the specific ingredient based on the incoming id!
+
+  // take in a parameter that SHOULD be an array that has the ingredient ids
+  // instantiate a class of ingredients, 
+  // if the ingredients.id from instance INCLUDES any of the ids from the 
+  // parameter, return the NAME
 
   //Returns ingredients based on recipe id
   determineCost(recipeId) {
-    const ingredientsData = new Ingredients();
-    let result = ingredientsData.ingredients.filter((ingredient) => {
-      if (recipeId === ingredient.id) {
-        return ingredient.estimatedCostInCents;
-      }
-    }).map((cost) => cost * ingredientsData.ingredients.amount).reduce((totalCosts, item) => {
-      return totalCosts + item
-    }, 0)
-    return result;
+    const ingredient = new Ingredient();
+    let result = this.ingredients.map(ingredient => ingredient.amount)
+    .map((amount) => amount * ingredient.estimatedCostInCents
   }
 
   //this method determineCost - creates a new instance of ingredients class
