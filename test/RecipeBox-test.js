@@ -1,19 +1,22 @@
 import { expect } from 'chai';
 import RecipeBox from '../src/classes/RecipeBox';
-// import recipeData from '../src/data/recipes';
+import { recipeData } from '../src/data/recipes';
 import Recipe from '../src/classes/Recipe';
 
 describe('RecipeBox', () => {
-  let recipeBox;
-  let recipe1;
-  let recipe2;
-  let recipe3;
+  let recipe1,
+  recipe2,
+  recipe3,
+  recipesCollection,
+  recipeBox;
 
   beforeEach(function() {
-    recipe1 = new Recipe(1, "src1", [{ingred1: "ingred1"}, {ingred2: "ingred2"}, {ingred3: "ingred3"}], [{instruct1: "instruct1"}, {instruct2: "instruct2"}, {instruct3: "instruct3"}], "Spaghetti", ["pasta", "main"])
-    recipe2 = new Recipe(2, "src2", [{ingred1: "ingred1"}, {ingred2: "ingred2"}, {ingred3: "ingred3"}], [{instruct1: "instruct1"}, {instruct2: "instruct2"}, {instruct3: "instruct3"}], "Grilled Cheese", ["sandwich", "main"])
-    recipe3 = new Recipe(3, "src3", [{ingred1: "ingred1"}, {ingred2: "ingred2"}, {ingred3: "ingred3"}], [{instruct1: "instruct1"}, {instruct2: "instruct2"}, {instruct3: "instruct3"}], "CheeseCake", ["dessert", "sweet"])
-    recipeBox = new RecipeBox(recipe1, recipe2, recipe3)
+    recipe1 = new Recipe(recipeData[0])
+    recipe2 = new Recipe(recipeData[1])
+    recipe3 = new Recipe(recipeData[2])
+
+    recipesCollection = [recipe1, recipe2, recipe3]
+    recipeBox = new RecipeBox(recipesCollection)
   }); 
 
     it('Should be a function', () => {
@@ -25,8 +28,17 @@ describe('RecipeBox', () => {
     });
 
     it('Should should be able to take in recipe data', () => {
+      expect(recipeBox.recipeData).to.equal(recipesCollection);
+    });
+
+    it.only('Should be able to store recipes by one or more tag', () => {
+      expect(recipeBox.storeTag("snack")).to.deep.equal([recipe1]);
+      expect(recipeBox.storeTag("lunch")).to.equal();
+    });
+
+    it('Should be able to filter recipes based on name', () => {
       expect().to.be.a();
-  // });
+    });
 
   // it('Should ', () => {
   //   expect().to.be.a();
@@ -54,13 +66,5 @@ describe('RecipeBox', () => {
 
   // it('Should ', () => {
   //   expect().to.be.a();
-  // });
+  });
 
-  // it('Should ', () => {
-  //   expect().to.be.a();
-  // });
-
-  // it('Should ', () => {
-  //   expect().to.be.a();
-  })
-});
