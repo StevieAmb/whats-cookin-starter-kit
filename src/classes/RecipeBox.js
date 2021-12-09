@@ -9,23 +9,33 @@ class RecipeBox {
     recipeData.forEach((recipe) => {
       if(recipe.tags.includes(theUserInput)) {
         matchingRecipesTags.push(recipe)
-        return matchingRecipesTags;
       }
     })
+    return matchingRecipesTags;
   }
+  
   findRecipeName(theUserInput) {
     let matchingRecipes = [];
     recipeData.forEach((recipe) => {
       if(recipe.name.includes(theUserInput)) {
         matchingRecipes.push(recipe)
-        return
       }
     })
+    return matchingRecipes;
   }
-};
+  findRecipeByIngredient(theUserInput) {
+    let matchingIngredientRecipes = [];
+    ingredientData.forEach((ingredient) => {
+      if(ingredient.name.includes(theUserInput)) {
+        matchingRecipes.push(recipe)
+      }
+    })
+    return matchingIngredientRecipes;
+  };
+}
 
-// export default RecipeBox;
-module.exports = RecipeBox; 
+export default RecipeBox;
+// module.exports = RecipeBox; 
  
 
 //Should be able to take in recipe data

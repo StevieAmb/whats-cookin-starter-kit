@@ -4,7 +4,7 @@ import RecipeBox from '../src/classes/RecipeBox';
 import recipeData from '../src/data/recipes';
 import Recipe from '../src/classes/Recipe';
 
-describe.only('Recipe', () => {
+describe('Recipe', () => {
   let recipeBox;
   let recipe1;
   let recipe2;
