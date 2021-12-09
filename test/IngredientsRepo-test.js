@@ -1,19 +1,19 @@
 import { expect } from 'chai';
-import Users from '../src/classes/Users';
-import { usersData } from '../src/data/users'
+import IngredientsRepo from '../src/classes/IngredientsRepo';
+import ingredientsData from '../src/data/ingredients'
 
 describe('Recipe', () => {
-  let users;
-  beforeEach(() => {
+  let ingredientsRepo;
 
-    users = new Users(usersData);
-
+  beforeEach(() => {  
+    ingredientsRepo = [data.ingredientsData[0], data.ingredientsData[1], data.ingredientsData[2]];
+    
     it('Should be a function', () => {
-      expect(Users).to.be.a('function');
+      expect(IngredientsRepo).to.be.a('function');
     });
- 
-    it('Should ', () => {
-      expect().to.be.a();
+  
+    it('Should be an instance of IngredientsRepo ', () => {
+      expect().to.be.an.instanceOf(IngredientsRepo);
     });
   
     it('Should ', () => {
@@ -51,7 +51,7 @@ describe('Recipe', () => {
     it('Should ', () => {
       expect().to.be.a();
     });
-  
+    
     it('Should ', () => {
       expect().to.be.a();
     });
