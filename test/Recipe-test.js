@@ -1,9 +1,8 @@
 
-const chai = require('chai');
-const expect = chai.expect; 
-const RecipeBox = require('../src/classes/RecipeBox');
-const Recipe = require('../src/classes/Recipe');
-
+import { expect } from 'chai';
+import RecipeBox from '../src/classes/RecipeBox';
+// import recipeData from '../src/data/recipes';
+import Recipe from '../src/classes/Recipe';
 
 describe('Recipe', () => {
   let recipeBox;
