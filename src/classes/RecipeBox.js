@@ -9,10 +9,11 @@ class RecipeBox {
     recipeData.forEach((recipe) => {
       if(recipe.tags.includes(theUserInput)) {
         matchingRecipesTags.push(recipe)
-        return matchingRecipesTags;
       }
     })
+    return matchingRecipesTags;
   }
+  
   findRecipeName(theUserInput) {
     let matchingRecipes = [];
     recipeData.forEach((recipe) => {

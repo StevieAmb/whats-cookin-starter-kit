@@ -31,9 +31,9 @@ describe('RecipeBox', () => {
       expect(recipeBox.recipeData).to.equal(recipesCollection);
     });
 
-    it.only('Should be able to store recipes by one or more tag', () => {
+    it('Should be able to store recipes by one or more tag', () => {
       expect(recipeBox.storeTag("snack")).to.deep.equal([recipe1]);
-      expect(recipeBox.storeTag("lunch")).to.equal();
+      // expect(recipeBox.storeTag("lunch")).to.equal();
     });
 
     it('Should be able to filter recipes based on name', () => {
