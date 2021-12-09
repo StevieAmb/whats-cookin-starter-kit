@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Ingredient from '../src/classes/Ingredient';
-import ingredientsData from '../src/data/ingredients'
+import { ingredientsData } from '../src/data/ingredients'
 
 
 describe('Ingredient', () => {
@@ -20,7 +20,7 @@ let ingredient1, ingredient2, ingredient3, ingredientsRepo;
     });
   
     it('Should be an instance of Ingredient ', () => {
-      expect().to.be.an.instanceOf(Ingredient);
+      expect().to.be.an.instanceOf(Ingredient); 
     });
   
     it('Should ', () => {
