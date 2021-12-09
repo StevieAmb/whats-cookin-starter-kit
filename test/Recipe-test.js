@@ -1,15 +1,22 @@
-import { expect } from 'chai';
-import { beforeEach } from 'mocha';
-import Recipe from '../src/classes/Recipe';
+
+const chai = require('chai');
+const expect = chai.expect; 
+const RecipeBox = require('../src/classes/RecipeBox');
+const Recipe = require('../src/classes/Recipe');
+
 
 describe('Recipe', () => {
-const recipe;
-const ingredientsData;
+  let recipeBox;
+  let recipe1;
+  let recipe2;
+  let recipe3;
+
   beforeEach(() => {
-    recipe1 = new Recipe(1, "src1", [{"ingred1"}, {"ingred2"}, {"ingred3"}], [{"instruct1"}, {"instruct2"}, {"instruct3"}], "Spaghetti", ["pasta", "main"])
-    recipe2 = new Recipe(2, "src2", [{"ingred1"}, {"ingred2"}, {"ingred3"}], [{"instruct1"}, {"instruct2"}, {"instruct3"}], "Grilled Cheese", ["sandwich", "main"])
-    recipe3 = new Recipe(3, "src3", [{"ingred1"}, {"ingred2"}, {"ingred3"}], [{"instruct1"}, {"instruct2"}, {"instruct3"}], "CheeseCake", ["dessert", "sweet"])
-    ingredientsData1 = new Ingredients(1, "baking soda", 475);
+    recipe1 = new Recipe(1, "src1", [{ingred1: "ingred1"}, {ingred2: "ingred2"}, {ingred3: "ingred3"}], [{instruct1: "instruct1"}, {instruct2: "instruct2"}, {instruct3: "instruct3"}], "Spaghetti", ["pasta", "main"])
+    recipe2 = new Recipe(2, "src2", [{ingred1: "ingred1"}, {ingred2: "ingred2"}, {ingred3: "ingred3"}], [{instruct1: "instruct1"}, {instruct2: "instruct2"}, {instruct3: "instruct3"}], "Grilled Cheese", ["sandwich", "main"])
+    recipe3 = new Recipe(3, "src3", [{ingred1: "ingred1"}, {ingred2: "ingred2"}, {ingred3: "ingred3"}], [{instruct1: "instruct1"}, {instruct2: "instruct2"}, {instruct3: "instruct3"}], "CheeseCake", ["dessert", "sweet"])
+    recipeBox = new RecipeBox(recipe1, recipe2, recipe3)
+  });
 
     it('Should be a function', () => {
       expect(Recipe).to.be.a('function');
@@ -42,23 +49,19 @@ const ingredientsData;
     it('Should have tags', () => {
       expect(recipe.tags).to.equal(['pasta', 'brekkie']);
     });
-    recipe.determineCost(1);
-    console.log(result);
   
-    it('Should ', () => {
-      expect().to.be.a();
-    });
+    // it('Should ', () => {
+    //   expect().to.be.a();
+    // });
   
-    it('Should ', () => {
-      expect().to.be.a();
-    });
+    // it('Should ', () => {
+    //   expect().to.be.a();
+    // });
   
-    it('Should ', () => {
-      expect().to.be.a();
-    });
+    // it('Should ', () => {
+    //   expect().to.be.a();
+    // });
     
-    it('Should ', () => {
-      expect().to.be.a();
+    // it('Should ', () => {
+    //   expect().to.be.a();
     });
-  });
-});
