@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-// import { recipeData } from '../src/data/recipes';
+import { recipeData } from '../src/data/recipes';
 import Recipe from '../src/classes/Recipe';
 
 describe('Recipe', () => {
@@ -42,7 +42,6 @@ describe('Recipe', () => {
     });
     
     it('Should return the names of the ingredients in a recipe', () => {
-      console.log(myRecipe.findRecipeIngredientInfo());
       const expected = [
         'wheat flour',
         'bicarbonate of soda',
