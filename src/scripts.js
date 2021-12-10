@@ -60,7 +60,7 @@ const showAllRecipes = () => {
     <img src="${recipe.image}">
     `)  
     })
-    show([allRecipesView)])
+    show([allRecipesView])
     hide([mainPageView])
 }
 
