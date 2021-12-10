@@ -1,5 +1,4 @@
-import ingredientsData from '../data/ingredients';
-
+const { ingredientsData } = require("../data/ingredients");
 
 class Recipe {
   constructor(recipeData) {
