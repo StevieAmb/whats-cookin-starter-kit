@@ -1234,5 +1234,6 @@ const ingredientsData = [
     }
   ];
 
-  export default ingredientsData;
+  // export default ingredientsData;
+  module.exports = { ingredientsData };
 
