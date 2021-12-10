@@ -15,6 +15,7 @@ const favoritingButton = document.getElementById('favoritingButton');
 const recipeInfoButton1 = document.getElementById('recipeInfoButton1');
 const recipeInfoButton2 = document.getElementById('recipeInfoButton2');
 const recipeInfoButton3 = document.getElementById('recipeInfoButton3');
+const seeAllRecipesButton = document.getElementById('seeAllRecipesButton')
 
 //USER INPUT FIELD
 const userSearchBox = document.getElementById('userSearchBox');
@@ -25,7 +26,7 @@ const recipeResultsView = document.getElementById('recipeResultsView');
 const recipeResultsStatement = document.getElementById('recipeResultsStatement');
 const recipeInfoView = document.getElementById('recipeInfoView');
 const favoriteRecipesView = document.getElementById('favoriteRecipesView')
-const showAllRecipesView = document.getElementById('allRecipes');
+const allRecipesView = document.getElementById('allRecipesView');
 
 //RANDOM
 const randomRecipeImage = document.getElementById('randomRecipeImage')
@@ -54,13 +55,13 @@ const funct = () => {
 
 const showAllRecipes = () => {
     cookbook.forEach((recipe) => {
-    someSectionView.innerHTML += `
-    <section>
-    <button></button>
-    <whatever>${recipe.name}
-    <more whatever>${recipe.image}
-    `
+    showAllRecipesView.insertAdjacentHTML('afterbegin', `
+    <h1>${recipe.name}</h1>
+    <img src="${recipe.image}">
+    `)  
     })
+    show([allRecipesView)])
+    hide([mainPageView])
 }
 
 //create random recipe on page load 
@@ -80,9 +81,6 @@ const whateverName = () => {
 let getRandomIndex = (array => Math.floor(Math.random() * array.length));
 
 //HELPER FUNCTIONS
-
-
-
 const show = (elements) => {
     elements.forEach(element => element.classList.remove('hidden'));
 }
@@ -111,7 +109,8 @@ const showRecipeInfoCard = () => {
 }
 
 //EVENT LISTENERS
-    
+
+seeAllRecipesButton.addEventListener("on click", showAllRecipes)
 favoriteRecipesButton.addEventListener();
 homeButton.addEventListener();
 tryRecipeButton.addEventListener();
