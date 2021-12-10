@@ -10,13 +10,13 @@
 <body>
   <header>
     <h1>What's Cookin'</h1>
-    <input placeholder="search..." />
-    <button class="favorited-recipes-btn">Favorite Recipes</button>
-    <button class="home-btn hidden">Home</button>
+    <input placeholder="search..." id="userSearchBox" />
+    <button class="favorited-recipes-btn" id="favoriteRecipesButton">Favorite Recipes</button>
+    <button class="home-btn hidden" id="homeButton">Home</button>
   </header>
-  <article class="suggested-recipe-view">
-    <button class="try-this-recipe-btn">Try This Recipe</button>
-    <section>
+  <article class="suggested-recipe-view" id=>
+    <button class="try-this-recipe-btn" id="tryRecipeButton">Try This Recipe</button>
+    <section id="">
       <img class="suggested-recipe-image" src="./images/cookies.jpg" alt="food image">
       <h2>Recipe Title</h2>
       <h3>Recipe Instructions</h3>
@@ -33,10 +33,10 @@
         <li></li>
       </ol>
     </section>
-    <button class="favorite-button">favorite this recipe</button>
+    <button class="favorite-button" id="favoritingButton">favorite this recipe</button>
   </article>
-  <h1 class="hidden">Here are your results:</h1>
-  <div class="recipe-results hidden">
+  <h1 class="hidden" id="recipeResultsStatement">Here are your results:</h1>
+  <div class="recipe-results hidden" id="recipeResultsView">
     <article class="result-card">
       <img class="result-image" alt="recipe" src="./images/cookies.jpg">
       <h2>Recipe Title</h2>
@@ -50,7 +50,7 @@
       <h2>Recipe Title</h2>
     </article>
   </div>
-  <article class="recipe-information-view hidden">
+  <article class="recipe-information-view hidden" id="recipeInfoView">
     <h2>Recipe Title</h2>
     <img class="current-recipe-image" src="./images/cookies.jpg" alt="food-image">
     <h3>Recipe ingredients</h3>
@@ -81,26 +81,26 @@
     </ol>
     <h3 class=total-cost>Recipe Cost Total: <span>$$$$$</span></h3>
   </article>
-  <section class="favorite-recipes-view hidden">
+  <section class="favorite-recipes-view hidden" id="favoriteRecipesView">
     <article class="fav-recipe-card">
       <h2 class="fav-card-title">Recipe Title</h2>
       <div class="box-content">
         <h3>Cost: <span>$$$$</span></h3>
-        <button class="recipe-information-btn">Recipe Information</button>
+        <button class="recipe-information-btn" id="recipeInfoButton1">Recipe Information</button>
       </div>
     </article>
     <article class="fav-recipe-card">
       <h2 class="fav-card-title">Recipe Title</h2>
       <div class="box-content">
         <h3>Cost: <span>$$$$</span></h3>
-        <button class="recipe-information-btn">Recipe Information</button>
+        <button class="recipe-information-btn" id="recipeInfoButton2">Recipe Information</button>
       </div>
     </article>
     <article class="fav-recipe-card">
       <h2 class="fav-card-title">Recipe Title</h2>
       <div class="box-content">
         <h3>Cost: <span>$$$$</span></h3>
-        <button class="recipe-information-btn">Recipe Information</button>
+        <button class="recipe-information-btn" id="recipeInfoButton3">Recipe Information</button>
       </div>
     </article>
   </section>
