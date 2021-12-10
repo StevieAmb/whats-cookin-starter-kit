@@ -1,4 +1,5 @@
 const { recipeData } = require("../data/recipes");
+const { ingredientsData } = require("../data/ingredients");
 
 class RecipeBox {
   constructor(recipeData) {
@@ -23,19 +24,26 @@ class RecipeBox {
     })
     return matchingRecipes;
   }
-  findRecipeByIngredient(theUserInput) {
-    let matchingIngredientRecipes = [];
-    ingredientData.forEach((ingredient) => {
-      if(ingredient.name.includes(theUserInput)) {
-        matchingRecipes.push(recipe)
+  findIngredientById(theUserInput) {
+    let matchingIngredientId = null;
+    let recipeMatch = [];
+    ingredientsData.forEach((ingredient) => {
+      if(ingredient.name === theUserInput) {
+        matchingIngredientId = ingredient.id
       }
     })
-    return matchingIngredientRecipes;
-  };
+    recipeData.forEach((recipe) => {
+      recipe.ingredients.forEach((ingredient) => {
+        if(ingredient.id === matchingIngredientId) {
+          recipeMatch.push(recipe)
+        }
+      })
+    })
+    return recipeMatch;
+  }
 }
 
 export default RecipeBox;
-// module.exports = RecipeBox; 
  
 
 //Should be able to take in recipe data
@@ -48,7 +56,7 @@ export default RecipeBox;
   //const recipe3 = new Recipe(id, image, ingredients, instructions, name, tags)
   //const recipeBox = new RecipeBox(recipe1, recipe2, recipe3)
   
-//Should be able to store recipes by one or more tag
+//Should be able to store recipes by one or more tag/name
   //given the tag 
   //iterate through the recipeData for tags array
   //iterate through the tags array 
@@ -58,4 +66,9 @@ export default RecipeBox;
   //If tag.includes 'string name of tag' 
   //Then return the whole object in new array 
 //Should be able to filter recipes based on name 
-  //  
+  
+//should be able to filter recipes based on ingredients 
+//have a user input, filter through ingredientsData for ingredientsData.name
+//return the ingredientsData.id 
+//compare ingredientsData.id to recipesData.ingredients.id
+//if they match then push recipe into matchingIngredientsArray
