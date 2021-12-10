@@ -25,14 +25,15 @@ const recipeResultsView = document.getElementById('recipeResultsView');
 const recipeResultsStatement = document.getElementById('recipeResultsStatement');
 const recipeInfoView = document.getElementById('recipeInfoView');
 const favoriteRecipesView = document.getElementById('favoriteRecipesView')
+const showAllRecipesView = document.getElementById('allRecipes');
 
 //RANDOM
 const randomRecipeImage = document.getElementById('randomRecipeImage')
 
 
 
-//DATA MODEL
-const cookbook = new RecipeBox();
+//CLASS INSTANSTIATION
+const cookbook = new RecipeBox(recipeData);
 savedRecipes;
 
 
@@ -47,6 +48,19 @@ const funct = () => {
     hide([mainPageView]);
     show([recipeInfoView]);
     //iterate our array and if the title matches the main page view, load the entire object onto the recipe info view
+}
+
+//to show all recipes (have a hard stop at 20 recipes)
+
+const showAllRecipes = () => {
+    cookbook.forEach((recipe) => {
+    someSectionView.innerHTML += `
+    <section>
+    <button></button>
+    <whatever>${recipe.name}
+    <more whatever>${recipe.image}
+    `
+    })
 }
 
 //create random recipe on page load 
@@ -65,10 +79,13 @@ const whateverName = () => {
 
 let getRandomIndex = (array => Math.floor(Math.random() * array.length));
 
+//HELPER FUNCTIONS
+
+
+
 const show = (elements) => {
     elements.forEach(element => element.classList.remove('hidden'));
 }
-
 const hide = (elements) => {
     elements.forEach(element => element.classList.add('hidden'));
 }
