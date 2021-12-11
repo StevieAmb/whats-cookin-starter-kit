@@ -4,7 +4,9 @@ import './images/cookies.jpg';
 import RecipeBox from '../src/classes/RecipeBox';
 import Recipe from '../src/classes/Recipe';
 // import { ingredientsData } from '../src/data/ingredients';
-import { recipeData } from '../src/data/recipes';
+import {
+	recipeData
+} from '../src/data/recipes';
 
 
 console.log('Hello world');
@@ -46,33 +48,20 @@ let recipe = new Recipe(recipeData);
 
 //at try recipe button eventlistener, 'on click',
 // const function = () => {
-    //     hide([mainPageView]);
-    //     show([recipeInfoView]);
-    //     //iterate our array and if the title matches the main page view, load the entire object onto the recipe info view
-    // };
-    
-    //to show all recipes (have a hard stop at git);
+//     hide([mainPageView]);
+//     show([recipeInfoView]);
+//     //iterate our array and if the title matches the main page view, load the entire object onto the recipe info view
+// };
 
-    //refactor to .find()
-    //refactore line 68 so the ingredients are in bullet points 
- allRecipesView.addEventListener('click', event => {
-    for (var i = 0; i < cookbook.recipeData.length; i++) {
-        if (`${cookbook.recipeData[i].id}` === event.target.parentNode.id) {
-        showRecipeInfoCard();
-        recipe = new Recipe(cookbook.recipeData[i])
-        const recipeIngredients = recipe.findRecipeIngredientInfo();
-        const recipeInstructions = recipe.getRecipeInstructions();
-        recipeInfoView.innerHTML = ``
-        recipeInfoView.insertAdjacentHTML('afterbegin', `
-        <h2>${cookbook.recipeData[i].name}</h2>
-    <img class="current-recipe-image" src=${cookbook.recipeData[i].image} alt="food-image">
-    <h3>${recipeIngredients}</h3>
-    <p>${recipeInstructions}</p>
-        `)
-            console.log(cookbook.recipeData[i])
-        }
-      }
- })
+//to show all recipes (have a hard stop at git);
+const recipeTitle = document.getElementById('recipeTitle')
+const currentRecipeImage = document.getElementById('currentRecipeImage')
+const instructionsList = document.getElementById('instructionsList')
+const ingredientsList = document.getElementById('ingredientsList')
+const totalCost = document.getElementById('totalCost')
+//refactor to .find()
+//refactore line 68 so the ingredients are in bullet points 
+
 
 
 
@@ -81,57 +70,80 @@ let recipe = new Recipe(recipeData);
 //if the target id === event.target.parentNode.id
 
 
-    
-const showAllRecipes = () => {
-    cookbook.recipeData.forEach(recipe => {
-        allRecipesView.insertAdjacentHTML('afterbegin', `
-        <article class="recipes-views" id= ${recipe.id}>
-            <h1>${recipe.name}</h1>
-            <img src="${recipe.image}">
-        `)
-        })
-    show([allRecipesView])
-    hide([mainPageView, seeAllRecipesButton]) //hid "see all recipe button"
-    }
+allRecipesView.addEventListener('click', event => {
+	for (var i = 0; i < cookbook.recipeData.length; i++) {
+		if (`${cookbook.recipeData[i].id}` === event.target.parentNode.id) {
+			showRecipeInfoCard();
+			recipe = new Recipe(cookbook.recipeData[i])
+			const recipeIngredients = recipe.findRecipeIngredientInfo();
+			const recipeInstructions = recipe.getRecipeInstructions();
+      const recipeCostTotal = recipe.calculateRecipeCost();
+			recipeTitle.innerHTML = ``
+			recipeTitle.innerHTML = `${cookbook.recipeData[i].name}`
+			currentRecipeImage.src = `${cookbook.recipeData[i].image}`
+			currentRecipeImage.alt = `${cookbook.recipeData[i].name}`
+			recipeIngredients.forEach((ingredient) => {
+				ingredientsList.insertAdjacentHTML('beforeEnd', `
+				<li>${ingredient}</li>`)
+			})
+		recipeInstructions.forEach((instruction) => {
+				instructionsList.insertAdjacentHTML('beforeEnd', `
+			<li>${instruction}</li>`)
+			})
+      totalCost.innerText = `$${recipeCostTotal}`
+		}
+	}
+})
 
-     
-    // let getRandomIndex = (array => Math.floor(Math.random() * array.length));
-    
-    //HELPER FUNCTIONS
-    const show = (elements) => {
-        elements.forEach(element => element.classList.remove('hidden'));
-    }
-    const hide = (elements) => {
-        elements.forEach(element => element.classList.add('hidden'));
-    }
-    
-    // const showMainPage = () => {
-    //     show([]);
-    //     hide([]);
-    // }
-    
-    // const showRecipeSearchResults = () => {
+const showAllRecipes = () => {
+  cookbook.recipeData.forEach(recipe => {
+    allRecipesView.insertAdjacentHTML('afterbegin', `
+    <article class="recipes-views" id= ${recipe.id}>
+    <h1>${recipe.name}</h1>
+    <img src="${recipe.image}">
+    `)
+  })
+  show([allRecipesView])
+  hide([mainPageView, seeAllRecipesButton]) //hid "see all recipe button"
+}
+
+
+
+//HELPER FUNCTIONS
+const show = (elements) => {
+  elements.forEach(element => element.classList.remove('hidden'));
+}
+const hide = (elements) => {
+  elements.forEach(element => element.classList.add('hidden'));
+}
+
+// const showMainPage = () => {
+  //     show([]);
+  //     hide([]);
+  // }
+  
+  // const showRecipeSearchResults = () => {
     //     show([]);
     //     hide([]);
     // }
     
     // const showFavoriteRecipes = () => {
-    //     show([]);
-    //     hide([]);
-    // }
-    
-    const showRecipeInfoCard = () => {
+      //     show([]);
+      //     hide([]);
+      // }
+      
+      const showRecipeInfoCard = () => {
         show([recipeInfoView, seeAllRecipesButton]);
         hide([allRecipesView, mainPageView, recipeResultsView, favoriteRecipesView]);
-    }
-    
-    //EVENT LISTENERS
-    
-    seeAllRecipesButton.addEventListener("click", showAllRecipes)
-    // // favoriteRecipesButton.addEventListener();
-    // // homeButton.addEventListener();
-    // // tryRecipeButton.addEventListener();
-    // // favoritingButton.addEventListener();
-    // // recipeInfoButton1.addEventListener();
-    // // recipeInfoButton2.addEventListener();
-    // // recipeInfoButton3.addEventListener();
+      }
+      
+      //EVENT LISTENERS
+      
+      seeAllRecipesButton.addEventListener("click", showAllRecipes)
+      // // favoriteRecipesButton.addEventListener();
+      // // homeButton.addEventListener();
+      // // tryRecipeButton.addEventListener();
+      // // favoritingButton.addEventListener();
+      // // recipeInfoButton1.addEventListener();
+      // // recipeInfoButton2.addEventListener();
+      // // recipeInfoButton3.addEventListener();
