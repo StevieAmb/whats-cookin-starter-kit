@@ -6,8 +6,8 @@ Is this a fix or a feature?
 - [ ] Refactor
  
 Describe the feature - fix - refactor:
-How was this tested?
 
+How was this tested?
 - [ ] open index.html
 - [ ] localhost
 - [ ] terminal
