@@ -19,8 +19,11 @@ class Recipe {
   }
 
   getRecipeInstructions() {
-    return this.instructions;
-  }
+    const instructionByOrder = this.instructions.map((elem) => {
+     return elem.instruction
+  })
+  return instructionByOrder
+}
   
   calculateRecipeCost() {
     let totalCost;
