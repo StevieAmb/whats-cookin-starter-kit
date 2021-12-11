@@ -2,7 +2,7 @@ import './styles.css';
 // import apiCalls from './apiCalls';
 import './images/cookies.jpg';
 import RecipeBox from '../src/classes/RecipeBox';
-// import Recipe from '../src/classes/Recipe';
+import Recipe from '../src/classes/Recipe';
 // import { ingredientsData } from '../src/data/ingredients';
 import { recipeData } from '../src/data/recipes';
 
@@ -58,13 +58,14 @@ const recipe = new Recipe(recipeData);
     for (var i = 0; i < cookbook.recipeData.length; i++) {
         if (`${cookbook.recipeData[i].id}` === event.target.parentNode.id) {
         showRecipeInfoCard();
-        const recipeInstructions = recipe.findRecipeIngredientInfo();
+        const recipe1 = new Recipe(cookbook.recipeData[i])
+        const recipeIngredients = recipe1.findRecipeIngredientInfo();
         recipeInfoView.innerHTML = ``
         recipeInfoView.insertAdjacentHTML('afterbegin', `
         <h2>${cookbook.recipeData[i].name}</h2>
     <img class="current-recipe-image" src=${cookbook.recipeData[i].image} alt="food-image">
-    <h3>${cookbook.recipeData[i].ingredients}</h3>
-    <p>${recipeInstructions}</p>
+    <h3>${recipeIngredients}</h3>
+    <p></p>
         `)
             console.log(cookbook.recipeData[i])
         }
