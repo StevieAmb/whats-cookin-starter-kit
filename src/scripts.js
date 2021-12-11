@@ -24,19 +24,19 @@ const seeAllRecipesButton = document.getElementById('seeAllRecipesButton');
 
 //VIEWS
 const mainPageView = document.getElementById('mainPageView');
-// const recipeResultsView = document.getElementById('recipeResultsView');
+const recipeResultsView = document.getElementById('recipeResultsView');
 // const recipeResultsStatement = document.getElementById('recipeResultsStatement');
-// const recipeInfoView = document.getElementById('recipeInfoView');
-// const favoriteRecipesView = document.getElementById('favoriteRecipesView')
+const recipeInfoView = document.getElementById('recipeInfoView');
+const favoriteRecipesView = document.getElementById('favoriteRecipesView')
 const allRecipesView = document.getElementById('allRecipesView');
 
-//RANDOM
+//RANDOM.
 // const randomRecipeImage = document.getElementById('randomRecipeImage');
 
 
 //CLASS INSTANSTIATION
 const cookbook = new RecipeBox(recipeData);
-
+const recipe = new Recipe(recipeData);
 
 //FUNCTIONS
 
@@ -52,16 +52,53 @@ const cookbook = new RecipeBox(recipeData);
     // };
     
     //to show all recipes (have a hard stop at git);
+
+    //refactor to .find()
+ allRecipesView.addEventListener('click', event => {
+    for (var i = 0; i < cookbook.recipeData.length; i++) {
+        if (`${cookbook.recipeData[i].id}` === event.target.parentNode.id) {
+        showRecipeInfoCard();
+        const recipeInstructions = recipe.findRecipeIngredientInfo();
+        recipeInfoView.innerHTML = ``
+        recipeInfoView.insertAdjacentHTML('afterbegin', `
+        <h2>${cookbook.recipeData[i].name}</h2>
+    <img class="current-recipe-image" src=${cookbook.recipeData[i].image} alt="food-image">
+    <h3>${cookbook.recipeData[i].ingredients}</h3>
+    <p>${recipeInstructions}</p>
+        `)
+            console.log(cookbook.recipeData[i])
+        }
+      }
+ })
+
+
+
+//show recipeinfo card view
+//loop through the array of recipe data.link
+//if the target id === event.target.parentNode.id
+
+
+// const showInstructions = (event) {
+//     showRecipeInfoCard();
+
+// })
+// //     //pull out image
+// //     //pull out title
+// //     //pull out ingredient
+// //     //pull out instructions
+// //     //based on the recipe.id
+// // }
     
 const showAllRecipes = () => {
     cookbook.recipeData.forEach(recipe => {
         allRecipesView.insertAdjacentHTML('afterbegin', `
-        <h1>${recipe.name}</h1>
-        <img src="${recipe.image}">
+        <article class="recipes-views" id= ${recipe.id}>
+            <h1>${recipe.name}</h1>
+            <img src="${recipe.image}">
         `)
         })
     show([allRecipesView])
-    hide([mainPageView])
+    hide([mainPageView, seeAllRecipesButton]) //hid "see all recipe button"
 }
 
     //create random recipe on page load 
@@ -103,10 +140,10 @@ const showAllRecipes = () => {
     //     hide([]);
     // }
     
-    // const showRecipeInfoCard = () => {
-    //     show([]);
-    //     hide([]);
-    // }
+    const showRecipeInfoCard = () => {
+        show([recipeInfoView, seeAllRecipesButton]);
+        hide([allRecipesView, mainPageView, recipeResultsView, favoriteRecipesView]);
+    }
     
     //EVENT LISTENERS
     
