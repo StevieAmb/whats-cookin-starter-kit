@@ -2,44 +2,44 @@ const { recipeData } = require("../data/recipes");
 const { ingredientsData } = require("../data/ingredients");
 
 class RecipeBox {
-  constructor(recipeData) {
-    this.recipeData = recipeData;
+  constructor(recipesCollection) {
+    this.recipesCollection = recipesCollection;
+    this.matchingRecipesTags = [];
+    this.matchingRecipes = [];
+    this.recipeMatch = [];
   }
-  storeTag(theUserInput) {
-    let matchingRecipesTags = [];
-    recipeData.forEach((recipe) => {
-      if(recipe.tags.includes(theUserInput)) {
-        matchingRecipesTags.push(recipe)
+  storeByTag(theUserInput) {
+    this.recipesCollection.forEach((recipe) => {
+      if(recipe.tags.includes(theUserInput) && !this.matchingRecipesTags.includes(recipe)) {
+        this.matchingRecipesTags.push(recipe)
       }
     })
-    return matchingRecipesTags;
+    return this.matchingRecipesTags;
   }
-  
   findRecipeName(theUserInput) {
-    let matchingRecipes = [];
-    recipeData.forEach((recipe) => {
-      if(recipe.name.includes(theUserInput)) {
-        matchingRecipes.push(recipe)
+    this.recipesCollection.forEach((recipe) => {
+      let lowerCasedName = recipe.name.toLowerCase();
+      if(lowerCasedName.includes(theUserInput) && !this.matchingRecipesTags.includes(recipe)) {
+        this.matchingRecipes.push(recipe)
       }
     })
-    return matchingRecipes;
+    return this.matchingRecipes;
   }
   findIngredientById(theUserInput) {
     let matchingIngredientId = null;
-    let recipeMatch = [];
     ingredientsData.forEach((ingredient) => {
       if(ingredient.name === theUserInput) {
         matchingIngredientId = ingredient.id
       }
     })
-    recipeData.forEach((recipe) => {
+    this.recipesCollection.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
         if(ingredient.id === matchingIngredientId) {
-          recipeMatch.push(recipe)
+          this.recipeMatch.push(recipe)
         }
       })
     })
-    return recipeMatch;
+    return this.recipeMatch;
   }
 }
 
