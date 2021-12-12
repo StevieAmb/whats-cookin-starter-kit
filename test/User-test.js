@@ -70,12 +70,18 @@ describe('User', () => {
       user.addFavoriteRecipe(myRecipe2);
       user.addFavoriteRecipe(myRecipe3);
 
-      let filteredRecipe = user.filterFavoritesByIngredient('Chocolate');
+      // let filteredRecipe = user.filterFavoritesByIngredient('Chocolate');
 
-      expect(filteredRecipe).to.equal(myRecipe);
+      expect(user.filterFavoritesByIngredient('Chocolate')).to.deep.equal(user.recipeMatch);
     });
   
-    it.skip('Should be able to search favorite recipes by tag', () => {
-      expect().to.equal();
+    it('Should be able to search favorite recipes by tag', () => {
+      user.addFavoriteRecipe(myRecipe);
+      user.addFavoriteRecipe(myRecipe2);
+      user.addFavoriteRecipe(myRecipe3);
+
+      let filteredRecipe = user.filterFavoritesByTag('snack');
+
+      expect(filteredRecipe).to.deep.equal([myRecipe]);
     });  
 });
