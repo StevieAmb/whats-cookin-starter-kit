@@ -12,12 +12,19 @@
   <header>
     <h1>What's Cookin'</h1>
     <form>
+      <label for="name">Name</label>
+      <input type="radio" id="name" name="category" value="name">
+      <label for="tag">Tag</label>
+      <input type="radio" id="tag" name="category" value="tag">
+      <label for="ingredient">Ingredient</label>
+      <input type="radio" id="ingredient" name="category" value="ingredient">
+      
       <input type="text" placeholder="search..." id="userSearchBox" />
-      <select name="searchBy" id="searchBy">
+      <!-- <select name="searchBy" id="searchBy">
         <option id="options1" value="name">Name</option>
         <option id="options2" value="ingredient">Ingredient</option>
         <option id="options3" value="tag">Category</option>
-      </select>
+      </select> -->
       <button id="searchButton">Search</button>
     </form>
     <button class="favorited-recipes-btn" id="favoriteRecipesButton">Favorite Recipes</button>
