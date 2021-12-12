@@ -10,6 +10,7 @@ class User {
     this.pantry = human.pantry;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
+    this.recipeMatch = [];
   }
 
   addFavoriteRecipe(recipe) {
@@ -36,24 +37,30 @@ class User {
   filterFavoritesByIngredient(userInput) {
     let matchingIngredientId = null;
     ingredientsData.forEach((ingredient) => {
-      if(ingredient.name.userInput) {
-        matchingIngredientId = ingredient.id
+      if(ingredient.name === userInput) {
+        matchingIngredintId = ingredient.id
       }
     })
-    let recipesByIngredient = this.favoriteRecipes.filter((recipe) => {
+    this.favoriteRecipes.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
-        if(matchingIngredientId === ingredient.id) {
+        if(ingredient.id === matchingIngredientId) {
+          this.recipeMatch.push(recipe)
         }
       })
-      return recipe 
     })
-      return recipesByIngredient
+    return this.recipeMatch;
   }
 
   filterFavoritesByTag(userInput) {
-    this.favoriteRecipes.filter(recipe => recipe.tags.contains(userInput))
+    const recipesByTags = this.favoriteRecipes.filter((recipe) => {
+      if(recipe.tags.includes(userInput)) {
+        return recipe
+      }
+    }) 
+    return recipesByTags;
   }
-
+  
 };
+
 
 export default User;
