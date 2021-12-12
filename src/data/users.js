@@ -6480,6 +6480,4 @@ const usersData = [
     }
   ]
 
-  module.exports = {
-    usersData
-  }
+  module.exports = { usersData };
