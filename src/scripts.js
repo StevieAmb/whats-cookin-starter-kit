@@ -13,7 +13,7 @@ console.log('Hello world');
 
 //BUTTONS
 // const favoriteRecipesButton = document.getElementById('favoriteRecipesButton');
-// const homeButton = document.getElementById('homeButton');
+const homeButton = document.getElementById('homeButton');
 // const tryRecipeButton = document.getElementById('tryRecipeButton');
 // const favoritingButton = document.getElementById('favoritingButton');
 // const recipeInfoButton1 = document.getElementById('recipeInfoButton1');
@@ -107,6 +107,37 @@ const showAllRecipes = () => {
   hide([mainPageView, seeAllRecipesButton]) //hid "see all recipe button"
 }
 
+//filter by recipes tags 
+  //
+const searchButton = document.getElementById('searchButton')
+const option1 = document.getElementById('option1')
+const option2 = document.getElementById('option2')
+const option3 = document.getElementById('option3')
+
+const searchByInput = () => {
+  let chosenRecipes = [];
+  if (option1.innerText === 'Name') {
+    chosenRecipes = cookbook.findRecipeName(input.value);
+  } else if (option2.innerText === 'Ingredient')  {
+    chosenRecipes = cookbook.findIngredientById(input.value);
+  } else if (option3.innerText === 'Category') {
+    chosenRecipes = cookbook.storeTag(input.value);
+  }
+  return chosenRecipes;
+}
+
+const showSearchResults = () => {
+  showRecipeSearchResults();
+let searchedRecipeValues = searchByInput()
+searchedRecipeValues.forEach(searchedRecipe => {
+  recipeResultsView.insertAdjacentHTML('afterbegin', 
+       `<article class="result-card">
+        <img class="result-image" alt="${searchedRecipe.name}" src="${searchedRecipe.image}">
+        <h2>${searchedRecipe.name}</h2>
+      </article>`)
+})
+}
+
 
 
 //HELPER FUNCTIONS
@@ -122,10 +153,10 @@ const hide = (elements) => {
   //     hide([]);
   // }
   
-  // const showRecipeSearchResults = () => {
-    //     show([]);
-    //     hide([]);
-    // }
+  const showRecipeSearchResults = () => {
+        show([recipeResultsView, seeAllRecipesButton, homeButton]);
+        hide([mainPageView]);
+    }
     
     // const showFavoriteRecipes = () => {
       //     show([]);
@@ -133,13 +164,14 @@ const hide = (elements) => {
       // }
       
       const showRecipeInfoCard = () => {
-        show([recipeInfoView, seeAllRecipesButton]);
+        show([recipeInfoView, seeAllRecipesButton, homeButton]);
         hide([allRecipesView, mainPageView, recipeResultsView, favoriteRecipesView]);
       }
       
       //EVENT LISTENERS
       
       seeAllRecipesButton.addEventListener("click", showAllRecipes)
+      searchButton.addEventListener('click', showSearchResults)
       // // favoriteRecipesButton.addEventListener();
       // // homeButton.addEventListener();
       // // tryRecipeButton.addEventListener();

@@ -4,25 +4,25 @@ const { ingredientsData } = require("../data/ingredients");
 class RecipeBox {
   constructor(recipeData) {
     this.recipeData = recipeData;
+    this.matchingRecipesTags = [];
+    this.matchingRecipes = [];
   }
   storeTag(theUserInput) {
-    let matchingRecipesTags = [];
     recipeData.forEach((recipe) => {
       if(recipe.tags.includes(theUserInput)) {
-        matchingRecipesTags.push(recipe)
+        this.matchingRecipesTags.push(recipe)
       }
     })
-    return matchingRecipesTags;
+    return this.matchingRecipesTags;
   }
   
   findRecipeName(theUserInput) {
-    let matchingRecipes = [];
     recipeData.forEach((recipe) => {
       if(recipe.name.includes(theUserInput)) {
-        matchingRecipes.push(recipe)
+        this.matchingRecipes.push(recipe)
       }
     })
-    return matchingRecipes;
+    return this.matchingRecipes;
   }
   findIngredientById(theUserInput) {
     let matchingIngredientId = null;
