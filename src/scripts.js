@@ -21,6 +21,7 @@ const seeAllRecipesButton = document.getElementById('seeAllRecipesButton');
 const nameRadioButton = document.getElementById('name')
 const tagRadioButton = document.getElementById('tag')
 const ingredientRadioButton = document.getElementById('ingredient')
+const searchButton = document.getElementById('searchButton')
 
 
 
@@ -37,11 +38,6 @@ const favoriteRecipesView = document.getElementById('favoriteRecipesView');
 const filteredFavoriteRecipesView = document.getElementById('userFaveRecipeFilteredView');
 
 //RANDOM.
-const recipeTitle = document.getElementById('recipeTitle')
-const currentRecipeImage = document.getElementById('currentRecipeImage')
-const instructionsList = document.getElementById('instructionsList')
-const ingredientsList = document.getElementById('ingredientsList')
-const totalCost = document.getElementById('totalCost')
 const recipeTitle = document.getElementById('recipeTitle')
 const currentRecipeImage = document.getElementById('currentRecipeImage')
 const instructionsList = document.getElementById('instructionsList')
@@ -66,35 +62,52 @@ window.addEventListener('load', () => {
   console.log(newUser)
 });
 
+const favRecipeCards = document.getElementById('favRecipeCards')
 
-
-const showFavoritedRecipes = () => {
-  showFavoriteRecipes();
-  favoriteRecipesView.innerHTML = ``
+const displayFavoritedRecipes = () => {
+  showFavoriteRecipesView();
+  favRecipeCards.innerHTML = ``
   newUser.favoriteRecipes.forEach(recipe => {
-    favoriteRecipesView.insertAdjacentElement('afterBegin',
-    `<section class="favorite-recipes-view id=${recipe.id}>
-        <h1>${recipe.name}</h1>
-        <img src="${recipe.image}">`
-    )
+    favRecipeCards.insertAdjacentHTML('afterbegin', 
+    `<article class="fav-recipe-card" id="${recipe.id}">
+      <h2 class="fav-card-title">${recipe.name}</h2>
+      <img class="current-recipe-image" src="${recipe.image}">
+      <button class="recipe-information-btn" id="recipeInfoButton1">Recipe Information</button>`)
   })
 }
 
 //FUNCTIONS
 
 //THE DOOOOM!!!
-
-//goal: load up random image and title on main page,  
-
-//at try recipe button eventlistener, 'on click',
-// const function = () => {
-  //     hide([mainPageView]);
-  //     show([recipeInfoView]);
-  //     //iterate our array and if the title matches the main page view, load the entire object onto the recipe info view
-  // };
-  
-  //to show all recipes (have a hard stop at git);
-  
+favoriteRecipesView.addEventListener('click', event => {  
+  event.preventDefault();
+  for (var i = 0; i < newUser.favoriteRecipes.length; i++) {
+    if (`${newUser.favoriteRecipes[i].id}` === event.target.parentNode.id) {
+      showRecipeInfoCard();
+      recipe = new Recipe(newUser.favoriteRecipes[i])
+      currentRecipe = recipe;
+      const recipeIngredients = recipe.findRecipeIngredientInfo();
+      const recipeInstructions = recipe.getRecipeInstructions();
+      const recipeCostTotal = recipe.calculateRecipeCost();
+      recipeTitle.innerHTML = ``
+      recipeTitle.innerHTML = `${newUser.favoriteRecipes[i].name}`
+      currentRecipeImage.src = `${newUser.favoriteRecipes[i].image}`
+      currentRecipeImage.alt = `${newUser.favoriteRecipes[i].name}`
+       
+      ingredientsList.innerHTML = `` 
+      recipeIngredients.forEach((ingredient) => {
+        ingredientsList.insertAdjacentHTML('beforeEnd', `
+        <li>${ingredient}</li>`)
+      })
+      instructionsList.innerHTML = `` 
+      recipeInstructions.forEach((instruction) => {
+        instructionsList.insertAdjacentHTML('beforeEnd', `
+        <li>${instruction}</li>`)
+      })
+      totalCost.innerText = `$${recipeCostTotal}`
+    }  
+  }
+})
   
   allRecipesView.addEventListener('click', event => {   
     for (var i = 0; i < cookbook.recipesCollection.length; i++) {
@@ -109,10 +122,12 @@ const showFavoritedRecipes = () => {
         recipeTitle.innerHTML = `${cookbook.recipesCollection[i].name}`
         currentRecipeImage.src = `${cookbook.recipesCollection[i].image}`
         currentRecipeImage.alt = `${cookbook.recipesCollection[i].name}`
+        ingredientsList.innerHTML = ``  
         recipeIngredients.forEach((ingredient) => {
           ingredientsList.insertAdjacentHTML('beforeEnd', `
           <li>${ingredient}</li>`)
         })
+        instructionsList.innerHTML = ``
         recipeInstructions.forEach((instruction) => {
           instructionsList.insertAdjacentHTML('beforeEnd', `
           <li>${instruction}</li>`)
@@ -121,13 +136,6 @@ const showFavoritedRecipes = () => {
       }  
     }
   })
-
-  
-  //when we click for "favorite recipe button"
-  //we want it to push the recipe that is on the page
-  //into an array that is on the user's class
-  //we have to attach the favorite button to the recipe
-  //DOES THE BOTTON NEED TO BE COMING THROUGH THE DOM!?!
   
   const showAllRecipes = () => {
     cookbook.recipesCollection.forEach(recipe => {
@@ -138,18 +146,13 @@ const showFavoritedRecipes = () => {
       `)
     })
     show([allRecipesView])
-    hide([mainPageView, seeAllRecipesButton]) //hid "see all recipe button"
+    hide([mainPageView, seeAllRecipesButton]) 
   }
       
-      //changeview to favorite recipe view
-      //pull favorite recipes card onto the DOM
       
-      //filter by recipes tags 
-      //
-const searchButton = document.getElementById('searchButton')
 
 
-const searchByInput = () => {//I wonder if we can do radio buttons for this, instead, and then have it throw an error/disable search if they don't click a category before searching for something
+const searchByInput = () => {
   if (nameRadioButton.checked) {
     cookbook.matchingRecipes = [];
     cookbook.findRecipeName(userSearchBox.value)
@@ -183,6 +186,10 @@ const showSearchResults = (event) => {
 }
 
 
+const addFavorite = () => {
+  newUser.addFavoriteRecipe(currentRecipe)
+  console.log(newUser.favoriteRecipes)
+}
 
 
 
@@ -205,7 +212,7 @@ const hide = (elements) => {
     hide([mainPageView]);
   }
   
-  const showFavoriteRecipes = () => {
+  const showFavoriteRecipesView = () => {
         show([favoriteRecipesView]);
         hide([mainPageView, allRecipesView, recipeInfoView]);
     }
@@ -218,20 +225,12 @@ const hide = (elements) => {
     //EVENT LISTENERS
     
     
-    // favoritingButton.addEventListener('click', (event) => {
-    //   event.preventDefault();
-    //     // newUser.addFavoriteRecipe(favoritingButton.value)
-    //     console.log("hi")
-    // })
-    const addFavorite = () => {
-      newUser.addFavoriteRecipe(currentRecipe)
-      console.log(newUser.favoriteRecipes)
-    }
+
           
       favoritingButton.addEventListener('click', addFavorite)
       seeAllRecipesButton.addEventListener('click', showAllRecipes);
       searchButton.addEventListener('click', showSearchResults);
-      favoriteRecipesButton.addEventListener('click', showFavoritedRecipes);
+      favoriteRecipesButton.addEventListener('click', displayFavoritedRecipes);
       // // homeButton.addEventListener();
       // // tryRecipeButton.addEventListener();
       // // recipeInfoButton1.addEventListener();
