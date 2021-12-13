@@ -7,6 +7,7 @@ import Recipe from '../src/classes/Recipe';
 import {
 	recipeData
 } from '../src/data/recipes';
+import { ingredientsData } from './data/ingredients';
 
 
 console.log('Hello world');
@@ -24,11 +25,21 @@ const nameRadioButton = document.getElementById('name')
 const tagRadioButton = document.getElementById('tag')
 const ingredientRadioButton = document.getElementById('ingredient')
 
-//ON PAGE LOAD
-function getData() {
-  return Promise.all([fetchApiData('ingredients'), fetchApiData('recipes'), fetchApiData('users')]);
-}
+//CLASS INSTANSTIATION
+let cookbook;
+let recipe;
+let user;
+let ingredientsList
 
+//ON PAGE LOAD
+const getData = () => {
+  return Promise.all([fetchApiData('ingredients'), fetchApiData('recipes'), fetchApiData('users')])
+  .then((data) => {
+    user = new User(data[2].userData[Math.floor(Math.random() * data[2].userData.length)]);
+    cookbook = new RecipeBox(data[1].recipeData);
+    ingredientsList = data[0].ingredientsData;
+  })
+};
 
 
 //USER INPUT FIELD
@@ -46,9 +57,6 @@ const allRecipesView = document.getElementById('allRecipesView');
 // const randomRecipeImage = document.getElementById('randomRecipeImage');
 
 
-//CLASS INSTANSTIATION
-let cookbook = new RecipeBox(recipeData);
-let recipe = new Recipe(recipeData);
 
 //FUNCTIONS
 
