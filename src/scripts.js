@@ -28,14 +28,16 @@ const ingredientRadioButton = document.getElementById('ingredient')
 //CLASS INSTANSTIATION
 let cookbook;
 let recipe;
-let user;
-let ingredientsList
+let newUser;
+let ingredientsList;
 
 //ON PAGE LOAD
+
+
 const getData = () => {
   return Promise.all([fetchApiData('ingredients'), fetchApiData('recipes'), fetchApiData('users')])
   .then((data) => {
-    user = new User(data[2].userData[Math.floor(Math.random() * data[2].userData.length)]);
+    newUser = new User(data[2].userData[Math.floor(Math.random() * data[2].userData.length)]);
     cookbook = new RecipeBox(data[1].recipeData);
     ingredientsList = data[0].ingredientsData;
   })
