@@ -8,10 +8,6 @@ import { recipeData } from '../src/data/recipes';
 import { usersData } from '../src/data/users';
 import User from '../src/classes/User';
 
-
-
-console.log('Hello world');
-
 //BUTTONS
 const favoriteRecipesButton = document.getElementById('favoriteRecipesButton');
 const homeButton = document.getElementById('homeButton');
@@ -37,6 +33,7 @@ const favRecipesNavForm = document.getElementById('favRecipesNavForm');
 const userSearchBox2 = document.getElementById('userSearchBox2');
 
 //VIEWS
+const suggestedRecipe = document.getElementById('suggestedRecipe')
 const mainPageView = document.getElementById('mainPageView');
 const recipeResultsView = document.getElementById('recipeResultsView');
 // const recipeResultsStatement = document.getElementById('recipeResultsStatement');
@@ -45,7 +42,7 @@ const allRecipesView = document.getElementById('allRecipesView');
 const favoriteRecipesView = document.getElementById('favoriteRecipesView');
 // const filteredFavoriteRecipesView = document.getElementById('userFaveRecipeFilteredView');
 
-//RANDOM.
+//RANDOM
 const recipeTitle = document.getElementById('recipeTitle')
 const currentRecipeImage = document.getElementById('currentRecipeImage')
 const instructionsList = document.getElementById('instructionsList')
@@ -67,8 +64,19 @@ let randomUser = usersData[getRandomIndex(usersData)]
 
 window.addEventListener('load', () => {
   newUser = new User(randomUser);
-  console.log(newUser)
+  displayHomePage();
 });
+
+const displayHomePage = () => {
+  let randomRecipe = cookbook.recipesCollection[getRandomIndex(cookbook.recipesCollection)]
+  suggestedRecipe.innerHTML = ``;
+  suggestedRecipe.insertAdjacentHTML('beforeEnd', 
+  `<img class="suggested-recipe-image" src="${randomRecipe.image}" alt="food image" id="${randomRecipe.id}">
+  <h2>${randomRecipe.name}</h2>`)
+}
+
+
+
 
 const searchByFavoriteInput = () => {
   console.log('hello');
@@ -269,6 +277,7 @@ const showMainPage = () => {
   
 
 //EVENT LISTENERS
+
   homeButton.addEventListener('click', showMainPage);
   searchButton2.addEventListener('click', showSearchResults2);
   favoritingButton.addEventListener('click', addFavorite);
