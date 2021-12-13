@@ -190,6 +190,7 @@ allRecipesView.addEventListener('click', event => {
 })
 
 const showAllRecipes = () => {
+  allRecipesView.innerHTML = `;`
   cookbook.recipesCollection.forEach(recipe => {
     allRecipesView.insertAdjacentHTML('afterbegin', `
     <article class="recipes-views" id= ${recipe.id}>
@@ -261,18 +262,18 @@ const showMainPage = () => {
 
 const showRecipeSearchResults = () => {
   show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton]);
-  hide([mainPageView, favoriteRecipesView, recipeInfoView]);
+  hide([mainPageView, favoriteRecipesView, recipeInfoView, favRecipesNavForm]);
 }
 
 const showFavoriteRecipesView = () => {
   show([favoriteRecipesView, favRecipesNavForm, homeButton]);
-  hide([mainPageView,  favoriteRecipesButton, mainPageNavForm]);
+  hide([mainPageView,  favoriteRecipesButton, mainPageNavForm, recipeInfoView]);
   
 }
 
 const showRecipeInfoCard = () => {
   show([recipeInfoView, seeAllRecipesButton, homeButton]);
-  hide([allRecipesView, mainPageView, recipeResultsView]);
+  hide([allRecipesView, mainPageView, recipeResultsView, favRecipesNavForm]);
 }
 
 
