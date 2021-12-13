@@ -20,11 +20,6 @@
       <input type="radio" id="ingredient" name="category" value="ingredient">
       
       <input type="text" placeholder="search..." id="userSearchBox" />
-      <!-- <select name="searchBy" id="searchBy">
-        <option id="options1" value="name">Name</option>
-        <option id="options2" value="ingredient">Ingredient</option>
-        <option id="options3" value="tag">Category</option>
-      </select> -->
       <button id="searchButton">Search</button>
     </form>
     <button class="favorited-recipes-btn" id="favoriteRecipesButton">Favorite Recipes</button>
@@ -37,7 +32,7 @@
       <img class="suggested-recipe-image" src="./images/cookies.jpg" alt="food image" id="randomRecipeImage">
       <h2>Recipe Title</h2>
     </section>
-    <button class="favorite-button" id="favoritingButton">favorite this recipe</button>
+    <button class="favorite-button" id="favoritingButtonHP">favorite this recipe</button>
   </article>
   <h1 class="hidden" id="recipeResultsStatement">Here are your results:</h1>
   <section class="all-recipes-view hidden" id="allRecipesView">
@@ -57,7 +52,8 @@
     </article>
   </div>
   <article class="recipe-information-view hidden" id="recipeInfoView">
-    <h2 id="recipeTitle">Recipe Title</h2>
+    <h2 id="recipeTitle">Recipe Title</h2> 
+    <button class="favorite-button" id="favoritingButton">favorite this recipe</button>
     <img class="current-recipe-image" id= "currentRecipeImage" src="./images/cookies.jpg" alt="food-image">
     <h3>Recipe ingredients</h3>
     <ul id="ingredientsList">
@@ -68,27 +64,13 @@
     <h3 class="total-cost">Recipe Cost Total: <span id="totalCost">$$$$$</span></h3>
   </article>
   <section class="favorite-recipes-view hidden" id="favoriteRecipesView">
-    <article class="fav-recipe-card">
+    <article class="fav-recipe-card" id="favRecipeCards">
       <h2 class="fav-card-title">Recipe Title</h2>
-      <div class="box-content">
-        <h3>Cost: <span>$$$$</span></h3>
         <button class="recipe-information-btn" id="recipeInfoButton1">Recipe Information</button>
       </div>
     </article>
-    <article class="fav-recipe-card">
-      <h2 class="fav-card-title">Recipe Title</h2>
-      <div class="box-content">
-        <h3>Cost: <span>$$$$</span></h3>
-        <button class="recipe-information-btn" id="recipeInfoButton2">Recipe Information</button>
-      </div>
-    </article>
-    <article class="fav-recipe-card">
-      <h2 class="fav-card-title">Recipe Title</h2>
-      <div class="box-content">
-        <h3>Cost: <span>$$$$</span></h3>
-        <button class="recipe-information-btn" id="recipeInfoButton3">Recipe Information</button>
-      </div>
-    </article>
+  </section>
+  <section class="fave-recipes-filtered-view" id="userFaveRecipeFilteredView">
   </section>
   <script src="main.bundle.js"></script>
 </body>

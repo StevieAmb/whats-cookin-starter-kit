@@ -18,7 +18,11 @@ class User {
       this.favoriteRecipes.push(recipe)
     }
   }
-
+  removeFavoriteRecipe(recipe) {
+    if(!this.favoriteRecipes.includes(recipe)) {
+      this.favoriteRecipes.splice(1, recipe)
+    }
+  }
   addRecipeToCook(recipe) {
     if(!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe)
