@@ -11,17 +11,18 @@
 <body>
   <header>
     <h1>What's Cookin'</h1>
-    <form>
-      <label for="name">Name</label>
-      <input type="radio" id="name" name="category" value="name">
-      <label for="tag">Tag</label>
-      <input type="radio" id="tag" name="category" value="tag">
-      <label for="ingredient">Ingredient</label>
-      <input type="radio" id="ingredient" name="category" value="ingredient">
-      
-      <input type="text" placeholder="search..." id="userSearchBox" />
-      <button id="searchButton">Search</button>
-    </form>
+    <section class="category-form-view" id="mainPageNavForm">
+      <form>
+        <label for="name">Name</label>
+        <input type="radio" id="name" name="category" value="name">
+        <label for="tag">Tag</label>
+        <input type="radio" id="tag" name="category" value="tag">
+        <label for="ingredient">Ingredient</label>
+        <input type="radio" id="ingredient" name="category" value="ingredient">
+        <button id="searchButton">Search</button>
+        <input type="text" placeholder="search..." id="userSearchBox" />
+      </form>
+    </section>  
     <button class="favorited-recipes-btn" id="favoriteRecipesButton">Favorite Recipes</button>
     <button class="home-btn hidden" id="homeButton">Home</button>
     <button class="see-all-recipes" id="seeAllRecipesButton">See All Recipes</button>
@@ -64,6 +65,18 @@
     <h3 class="total-cost">Recipe Cost Total: <span id="totalCost">$$$$$</span></h3>
   </article>
   <section class="favorite-recipes-view hidden" id="favoriteRecipesView">
+    <nav class="favorite-form-view" id="favRecipesNavForm">
+      <form>
+        <label for="name2">Name</label>
+        <input type="checkbox" id="name2" name="category2" value="name">
+        <label for="tag2">Tag</label>
+        <input type="checkbox" id="tag2" name="category2" value="tag">
+        <label for="ingredient2">Ingredient</label>
+        <input type="checkbox" id="ingredient2" name="category2" value="ingredient">
+        <button id="searchButton2">Search</button>
+        <input type="text" placeholder="search in favorite recipes..." id="userSearchBox2" />
+      </form>
+    </nav> 
     <article class="fav-recipe-card" id="favRecipeCards">
       <h2 class="fav-card-title">Recipe Title</h2>
         <button class="recipe-information-btn" id="recipeInfoButton1">Recipe Information</button>
