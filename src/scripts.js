@@ -24,6 +24,11 @@ const nameRadioButton = document.getElementById('name')
 const tagRadioButton = document.getElementById('tag')
 const ingredientRadioButton = document.getElementById('ingredient')
 
+//ON PAGE LOAD
+function getData() {
+  return Promise.all([fetchApiData('ingredients'), fetchApiData('recipes'), fetchApiData('users')]);
+}
+
 
 
 //USER INPUT FIELD
