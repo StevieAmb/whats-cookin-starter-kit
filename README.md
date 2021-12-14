@@ -1,22 +1,62 @@
-# What's Cookin'? Starter Kit 
+# What's Cookin
+## Table of Contents
+- [Overview](#overview)
+- [Setup](#setup)
+- [Screentshots](#screenshots)
+- [Links](#links)
+- [Future Additions](#future-additions)
+- [Contributors](#contributors)
+- [Technologies](#technologies)
 
-The details of this project are outlined in the <a href="https://frontend.turing.edu/projects/What%27sCookin-PartOne.html" target="\__blank">project spec</a>.
 
-## Set Up 
+## Overview
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. All group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
-4. Run `npm start` and visit `localhost:8080`
-5. Make sure both members of your team are collaborators on the forked repo.
+This application is a group collaboration where we created a recipe tracking / meal planning application that allows users to view their favorite recipes and plan shopping trips around them. We got some of our inspiration from [New York Times Cooking](https://cooking.nytimes.com/). Users should view a list of recipes, favorite their own recipes, and choose recipes to cook. 
 
-## Testing 
+## Setup
+  
+- Clone this repository down to your local machine
+- Navigate into the `whats-cookin-starter-kit` directory
+- Run `npm install`
+- Ensure you have `mocha` and `chai` 
+- Run npm `start` 
+- Copy `http:localhost//` in your browser to run live preview 
+- Run `open index.html` in the terminal to test application
+   
+## Screenshots  
+Users view all recipes available online. 
+![home-view](https://media.giphy.com/media/TYckI9CgvMbJeIGhD8/giphy.gif)
+   
+Users can favorite a recipe and view it.  
+![favorite-recipe](https://media.giphy.com/media/zhQIY2o7jdefFessCX/giphy.gif)
 
-Mocha and chai are already set up, with a boilerplate test for you. 
+Users can click on a recipe in the list to see the directions and instructions. 
+![recipe-info](https://media.giphy.com/media/49H0oCUTNHzVD9hbxZ/giphy.gif)
 
-## Linting Your Code 
+Users can search through their favorites recipes for specific recipe names 
+![search-recipe](https://media.giphy.com/media/zhQIY2o7jdefFessCX/giphy.gif)
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+## Links  
+Checkout the Turing spec sheet [here](https://frontend.turing.edu/projects/whats-cookin-part-one.html)
+Checkout the our GitHub Repo [here](https://github.com/StevieAmb/whats-cookin-starter-kit)
 
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+## Future Additions
+- Add CSS styling for better UI / UX 
+- Add Grocery List for the User to know which ingredient they will need.   
 
+## Contributors  
+[Stevie Ambroise](https://github.com/StevieAmb)
+[Lynn Nguyen](https://github.com/Alynn022)  
+[Lindsay Schnell](https://github.com/lschnell8)
+
+   
+## Technologies
+HTML  
+
+CSS
+
+JavaScript
+
+Fetch API 
+
+Webpack
