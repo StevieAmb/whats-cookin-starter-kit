@@ -16,10 +16,11 @@ class RecipeBox {
     })
     return this.matchingRecipesTags;
   }
+  
   findRecipeName(theUserInput) {
     this.recipesCollection.forEach((recipe) => {
       let lowerCasedName = recipe.name.toLowerCase();
-      if(lowerCasedName.includes(theUserInput) && !this.matchingRecipesTags.includes(recipe)) {
+      if(lowerCasedName.includes(theUserInput) && !this.matchingRecipes.includes(recipe)) {
         this.matchingRecipes.push(recipe)
       }
     })
