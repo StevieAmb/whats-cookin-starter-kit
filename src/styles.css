@@ -121,6 +121,10 @@ ol {
   align-items: center;
 }
 
+.change-button-color {
+  background-color: red;
+}
+
 .hidden {
   display: none;
 }

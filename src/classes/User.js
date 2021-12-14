@@ -11,14 +11,21 @@ class User {
     this.favoriteRecipes = [];
     this.recipesToCook = [];
     this.recipeMatch = [];
+    this.matchingRecipes = [];
+    this.matchingRecipesTags = [];
   }
 
+  
   addFavoriteRecipe(recipe) {
     if(!this.favoriteRecipes.includes(recipe)) {
       this.favoriteRecipes.push(recipe)
     }
   }
-
+  removeFavoriteRecipe(recipe) {
+    if(!this.favoriteRecipes.includes(recipe)) {
+      this.favoriteRecipes.splice(1, recipe)
+    }
+  }
   addRecipeToCook(recipe) {
     if(!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe)
@@ -26,12 +33,13 @@ class User {
   }
 
   filterFavoritesByName(userInput) {
-    let recipesByName = this.favoriteRecipes.filter((recipe) => {
-      if(recipe.name.includes(userInput)) {
-        return recipe
+    this.favoriteRecipes.forEach((recipe) => {
+      let lowerCasedName = recipe.name.toLowerCase();
+      if(lowerCasedName.includes(userInput) && !this.matchingRecipes.includes(recipe)) {
+        this.matchingRecipes.push(recipe)
       }
     })
-    return recipesByName;
+    return this.matchingRecipes;
   }
 
   filterFavoritesByIngredient(userInput) {
@@ -52,14 +60,13 @@ class User {
   }
 
   filterFavoritesByTag(userInput) {
-    const recipesByTags = this.favoriteRecipes.filter((recipe) => {
+    this.favoriteRecipes.forEach((recipe) => {
       if(recipe.tags.includes(userInput)) {
-        return recipe
+        this.matchingRecipesTags.push(recipe)
       }
-    }) 
-    return recipesByTags;
+    })
+    return this.matchingRecipesTags;
   }
-  
 };
 
 
