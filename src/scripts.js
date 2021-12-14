@@ -74,7 +74,6 @@ const displayHomePage = () => {
   `<img class="suggested-recipe-image" src="${randomRecipe.image}" alt="food image" id="${randomRecipe.id}">
   <h2>${randomRecipe.name}</h2>`)
   tryRecipeButton.value = `${randomRecipe.id}`
-  console.log(tryRecipeButton.value)
 }
 
 
@@ -82,34 +81,40 @@ const displayHomePage = () => {
 const searchByFavoriteInput = () => {
   console.log('hello');
   if (nameRadioButton2.checked) {
-    let recipeByName = newUsers.filterFavoritesByName(userSearchBox2.value)
+    console.log("itworking")
+    let recipeByName = newUser.filterFavoritesByName(userSearchBox2.value)
     return recipeByName;
   } else if (tagRadioButton2.checked)  {
-    let recipeByTags = newUsers.filterFavoritesByTag(userSearchBox2.value);
-    return recipeByTags;
+    let recipeByTags = newUser.filterFavoritesByTag(userSearchBox2.value);
+    console.log(newUser.matchingRecipesTags)
+    return newUser.matchingRecipesTags;
   } else if (ingredientRadioButton2.checked) {
-    newUsers.recipeMatch = [];
-    newUsers.filterFavoritesByIngredient(userSearchBox2.value);
-    return newUsers.recipeMatch;
+    newUser.recipeMatch = [];
+    newUser.filterFavoritesByIngredient(userSearchBox2.value);
+    return newUser.recipeMatch;
   } else if (!tagRadioButton2.checked && !nameRadioButton2.checked && !ingredientRadioButton2) {
     userSearchBox2.disabled;
   }
 }
 
-const showSearchResults2 = (event) => {
+const searchFavoriteResults = () => {
+  console.log("meep")
   event.preventDefault();
   showRecipeSearchResults();
   recipeResultsView.innerHTML = ``
-  let searchedRecipeValues = searchByFavoriteInput();
-  searchedRecipeValues.map(searchedRecipe => {
+  let searchedRecipeValues2 = searchByFavoriteInput();
+  console.log(searchedRecipeValues2)
+  searchedRecipeValues2.map(searchedRecipe2 => {
     
     recipeResultsView.insertAdjacentHTML('afterbegin', 
     `<article class="result-card">
-    <img class="result-image" alt="${searchedRecipe.name}" src="${searchedRecipe.image}">
-    <h2>${searchedRecipe.name}</h2>
+    <img class="result-image" alt="${searchedRecipe2.name}" src="${searchedRecipe2.image}">
+    <h2>${searchedRecipe2.name}</h2>
     </article>`)
   })
 }
+
+
 
 
 //hide the original form of our top nav bar in the favorites view
@@ -132,7 +137,6 @@ const displayFavoritedRecipes = () => {
 
 //THE DOOOOM!!!
 favoriteRecipesView.addEventListener('click', event => {  
-  event.preventDefault();
   for (var i = 0; i < newUser.favoriteRecipes.length; i++) {
     if (`${newUser.favoriteRecipes[i].id}` === event.target.parentNode.id) {
       showRecipeInfoCard();
@@ -240,8 +244,8 @@ const showSearchResults = (event) => {
 
 
 const addFavorite = () => {
+  addOrRemoveElement(favoritingButton, 'change-button-color')
   newUser.addFavoriteRecipe(currentRecipe)
-  console.log(newUser.favoriteRecipes)
 }
 
 
@@ -261,7 +265,7 @@ const showMainPage = () => {
 }
 
 const showRecipeSearchResults = () => {
-  show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton]);
+  show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm]);
   hide([mainPageView, favoriteRecipesView, recipeInfoView, favRecipesNavForm]);
 }
 
@@ -275,6 +279,14 @@ const showRecipeInfoCard = () => {
   show([recipeInfoView, seeAllRecipesButton, homeButton]);
   hide([allRecipesView, mainPageView, recipeResultsView, favRecipesNavForm]);
 }
+
+const addOrRemoveElement = (element, design) => {
+  if(!element.classList.contains(design)) {
+    element.classList.add(design) 
+  } else {
+    element.classList.remove(design)
+  }
+};
 
 
 tryRecipeButton.addEventListener('click', () => {
@@ -303,16 +315,16 @@ tryRecipeButton.addEventListener('click', () => {
         <li>${instruction}</li>`)
       })
       totalCost.innerText = `$${recipeCostTotal}`
-      }  
-    }
-  })
+    }  
+  }
+})
 
 
 //EVENT LISTENERS
 
 homeButton.addEventListener('click', showMainPage);
-searchButton2.addEventListener('click', showSearchResults2);
 favoritingButton.addEventListener('click', addFavorite);
 seeAllRecipesButton.addEventListener('click', showAllRecipes);
 searchButton.addEventListener('click', showSearchResults);
 favoriteRecipesButton.addEventListener('click', displayFavoritedRecipes);
+searchButton2.addEventListener('click', searchFavoriteResults)
