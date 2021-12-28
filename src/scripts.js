@@ -65,6 +65,14 @@ let randomRecipe;
 //ON PAGE LOAD
 
 //FUNCTIONS
+const getRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.length);
+}
+
+const getData = () => {
+  return Promise.all([fetchApiData('ingredients'), fetchApiData('recipes'), fetchApiData('users')])
+};
+
 const loadPage = () => {
   getData()
   .then((data) => {
@@ -77,14 +85,6 @@ const loadPage = () => {
     groceryStore = data[0].ingredientsData;
     displayHomePage();
   })
-};
-
-const getRandomIndex = (array) => {
-  return Math.floor(Math.random() * array.length);
-}
-
-const getData = () => {
-  return Promise.all([fetchApiData('ingredients'), fetchApiData('recipes'), fetchApiData('users')])
 };
 
 const displayHomePage = () => {

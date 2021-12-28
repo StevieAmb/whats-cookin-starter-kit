@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { recipeData } from '../src/data/recipes';
 import Recipe from '../src/classes/Recipe';
 
-describe.skip('Recipe', () => {
+describe('Recipe', () => {
   let myRecipe;
   
   beforeEach(() => {
@@ -60,14 +60,13 @@ describe.skip('Recipe', () => {
 
       expect(actual).to.deep.equal(expected);
     });
-    
 
-    it('Should have instructions', () => {
-      expect(myRecipe.getRecipeInstructions()).to.deep.equal(recipeData[0].instructions);
-    });
-  
     it('Should return recipe instructions ', () => {
-      expect(myRecipe.getRecipeInstructions()).to.equal(recipeData[0].instructions)
+      let collectInstructions = recipeData[0].instructions.reduce((instructionBox, elem) => {
+        instructionBox.push(elem.instruction)
+        return instructionBox;
+      }, [])    
+      expect(myRecipe.getRecipeInstructions()).to.deep.equal(collectInstructions)
     });
   
     it('Should calculate total recipe cost ', () => {

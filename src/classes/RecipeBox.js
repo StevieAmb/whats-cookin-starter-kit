@@ -26,6 +26,7 @@ class RecipeBox {
     })
     return this.matchingRecipes;
   }
+
   findIngredientById(theUserInput) {
     let matchingIngredientId = null;
     ingredientsData.forEach((ingredient) => {

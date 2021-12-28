@@ -33,9 +33,10 @@ class User {
   }
 
   filterFavoritesByName(userInput) {
+    let lowerCasedUserInput = userInput.toLowerCase();
     this.favoriteRecipes.forEach((recipe) => {
       let lowerCasedName = recipe.name.toLowerCase();
-      if(lowerCasedName.includes(userInput) && !this.matchingRecipes.includes(recipe)) {
+      if(lowerCasedName.includes(lowerCasedUserInput)) {
         this.matchingRecipes.push(recipe)
       }
     })
