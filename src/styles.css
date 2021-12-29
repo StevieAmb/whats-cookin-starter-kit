@@ -71,6 +71,7 @@ input {
 
 .recipe-results {
   display: flex;
+  flex-direction: column;
 }
 
 .try-this-recipe-btn {
