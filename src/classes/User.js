@@ -22,8 +22,8 @@ class User {
     }
   }
   removeFavoriteRecipe(recipe) {
-    if(!this.favoriteRecipes.includes(recipe)) {
-      this.favoriteRecipes.splice(1, recipe)
+    if(this.favoriteRecipes.includes(recipe)) {
+      this.favoriteRecipes.splice(recipe, 1)
     }
   }
   addRecipeToCook(recipe) {
@@ -31,7 +31,11 @@ class User {
       this.recipesToCook.push(recipe)
     }
   }
-
+  removeRecipeToCook(recipe) {
+    if(this.recipesToCook.includes(recipe)) {
+      this.recipesToCook.splice(recipe, 1)
+    }
+  }
   filterFavoritesByName(userInput) {
     let lowerCasedUserInput = userInput.toLowerCase();
     this.favoriteRecipes.forEach((recipe) => {
