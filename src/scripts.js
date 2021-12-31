@@ -166,6 +166,7 @@ const showRecipeInformation = (event)  => {
       showRecipeInfoCard();
       recipe = new Recipe(cookbook.recipesCollection[i])
       currentRecipe = recipe;
+      // checkIfFavorited();
       const recipeIngredients = recipe.findRecipeIngredientInfo();
       const recipeInstructions = recipe.getRecipeInstructions();
       const recipeCostTotal = recipe.calculateRecipeCost();
@@ -186,7 +187,9 @@ const showRecipeInformation = (event)  => {
       totalCost.innerText = `$${recipeCostTotal}`
     }  
   }
-}
+} 
+
+
 
 const showAllRecipes = () => {
   allRecipesView.innerHTML = ``
@@ -197,17 +200,14 @@ const showAllRecipes = () => {
     <img src="${recipe.image}">
     `)
   })
-  show([allRecipesView, homeButton, favoriteRecipesButton])
-  hide([mainPageView, seeAllRecipesButton]) 
+  showRecipeInformationView();
 }
+
 
 const searchByFavoriteInput = () => {
   if (nameRadioButton2.checked) {
     let recipeByName = newUser.filterFavoritesByName(userSearchBox2.value)
     return recipeByName;
-  } else if (tagRadioButton2.checked)  {
-    let recipeByTags = newUser.filterFavoritesByTag(userSearchBox2.value);
-    return newUser.matchingRecipesTags;
   } else if (ingredientRadioButton2.checked) {
     newUser.recipeMatch = [];
     newUser.filterFavoritesByIngredient(userSearchBox2.value);
@@ -238,20 +238,22 @@ favoriteRecipesView.addEventListener('click', event => {
       showRecipeInfoCard();
       recipe = new Recipe(newUser.favoriteRecipes[i])
       currentRecipe = recipe;
+      // favoritingButton.innerText = `Favorited`
       const recipeIngredients = recipe.findRecipeIngredientInfo();
       const recipeInstructions = recipe.getRecipeInstructions();
       const recipeCostTotal = recipe.calculateRecipeCost();
+
       recipeTitle.innerHTML = ``;
       recipeTitle.innerHTML = `${newUser.favoriteRecipes[i].name}`
       currentRecipeImage.src = `${newUser.favoriteRecipes[i].image}`
       currentRecipeImage.alt = `${newUser.favoriteRecipes[i].name}`
       
-      ingredientsList.innerHTML = `` 
+      ingredientsList.innerHTML = ``
       recipeIngredients.forEach((ingredient) => {
         ingredientsList.insertAdjacentHTML('beforeEnd', `
         <li>${ingredient}</li>`)
       })
-      instructionsList.innerHTML = `` 
+      instructionsList.innerHTML = ``
       recipeInstructions.forEach((instruction) => {
         instructionsList.insertAdjacentHTML('beforeEnd', `
         <li>${instruction}</li>`)
@@ -261,8 +263,17 @@ favoriteRecipesView.addEventListener('click', event => {
   }
 })
 
-//goal: when we click the favorite button, it'll indicate to the user that the recipe has been favorited
-  //changing the innerHTML text to show "favorited"
+// const checkIfFavorited = (event) => {
+//   console.log('purple')
+//   if(event.target.isFavorited === true) {
+//     console.log('here')
+//     favoritingButton.innerText = `Favorited`
+//   }
+// }
+
+//goal: when the recipe.isfavorite = true, the favorite button will say `favorited`
+  // input: boolean value of isFavorited
+  // output: button that says 'Favorited'
     
 const displayFavoritedRecipes = () => {
   showFavoriteRecipesView();
@@ -293,97 +304,118 @@ const displayFavoritedRecipes = () => {
   }
   
   const showSearchResults = (event) => {
+    console.log('showSearchResults', event.target.id)
     event.preventDefault();
     showRecipeSearchResults();
     recipeResultsView.innerHTML = ``
     let searchedRecipeValues = searchByInput();
     searchedRecipeValues.forEach((searchedRecipe) => {
-      
       recipeResultsView.insertAdjacentHTML('afterBegin', 
-      `<article class="result-card" id="${searchedRecipe.id}">
+      `<article class="result-card ${searchedRecipe.isFavorite}" id="${searchedRecipe.id}">
       <img class="result-image" alt="${searchedRecipe.name}" src="${searchedRecipe.image}">
       <h2>${searchedRecipe.name}</h2>
       </article>`)
     })
   }
   
+  
 
+  
 
+const toggleFavorite = () => {
+  favoritingButton.innerText = `Favorite this recipe`
+}
   
   
-  
-  //HELPER FUNCTIONS
-  const addFavorite = () => {
+
+//HELPER FUNCTIONS
+const addFavorite = () => {
+  toggleFavorite();
+  if (currentRecipe.isFavorited) {
+    console.log('spliced')
+    newUser.removeFavoriteRecipe(currentRecipe)
+    favoritingButton.innerText = `Favorite This Recipe`
+  } else if (!currentRecipe.isFavorited) {
+    console.log('shift')
     newUser.addFavoriteRecipe(currentRecipe)
-    currentRecipe.isFavorited === true 
-    favoritingButton.innerHTML = `Favorited`
-    console.log(currentRecipe)
+    favoritingButton.innerText = `Unfavorite this`
   }
+}
 
-  const show = (elements) => {
-    elements.forEach(element => element.classList.remove('hidden'));
-  }
+const show = (elements) => {
+  elements.forEach(element => element.classList.remove('hidden'));
+}
 
-  const hide = (elements) => {
-    elements.forEach(element => element.classList.add('hidden'));
-  }
-  
-  const showMainPage = () => {
-    show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton]);
-    hide([favoriteRecipesView, recipeInfoView, recipeResultsView, favRecipesNavForm]);
-  }
-  
-  const showRecipeSearchResults = () => {
-    show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm]);
-    hide([mainPageView, favoriteRecipesView, recipeInfoView, favRecipesNavForm, allRecipesView]);
-  }
-  
-  const showFavoriteRecipesView = () => {
-    show([favoriteRecipesView, favRecipesNavForm, homeButton]);
-    hide([mainPageView,  favoriteRecipesButton, mainPageNavForm, recipeInfoView]);
-  }
-  
-  const showRecipeInfoCard = () => {
-    show([recipeInfoView, seeAllRecipesButton, homeButton]);
-    hide([allRecipesView, mainPageView, recipeResultsView, favRecipesNavForm]);
-  }
-  
-  const showRecipesToCookView = () => {
-    show([recipesToCookView, homeButton]);
-    hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, favRecipesNavForm]);
-  }
-  
+const hide = (elements) => {
+  elements.forEach(element => element.classList.add('hidden'));
+}
+
+const showMainPage = () => {
+  displayHomePage();
+  toggleFavorite();
+  show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton]);
+  hide([favoriteRecipesView, recipeInfoView, recipeResultsView, favRecipesNavForm, allRecipesView]);
+}
+
+const showRecipeSearchResults = () => {
+  toggleFavorite();
+  show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm]);
+  hide([mainPageView, favoriteRecipesView, recipeInfoView, favRecipesNavForm, allRecipesView]);
+}
+
+const showFavoriteRecipesView = () => {
+  toggleFavorite();
+  show([favoriteRecipesView, favRecipesNavForm, homeButton]);
+  hide([mainPageView,  favoriteRecipesButton, mainPageNavForm, recipeInfoView, allRecipesView]);
+}
+
+const showRecipeInfoCard = () => {
+  toggleFavorite();
+  show([recipeInfoView, seeAllRecipesButton, homeButton]);
+  hide([allRecipesView, mainPageView, recipeResultsView, favRecipesNavForm, favoriteRecipesView]);
+}
+
+const showRecipesToCookView = () => {
+  show([recipesToCookView, homeButton]);
+  hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, favRecipesNavForm]);
+}
+
+const showRecipeInformationView = () => {
+  show([allRecipesView, homeButton, favoriteRecipesButton])
+  hide([mainPageView, seeAllRecipesButton, favoriteRecipesView]) 
+}
+
 tryRecipeButton.addEventListener('click', () => {
-  showRecipeInfoCard();
-  for (var i = 0; i < cookbook.recipesCollection.length; i++) {
-    if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
-      recipe = new Recipe(cookbook.recipesCollection[i])
-      let currentRecipe = recipe;
-      const recipeIngredients = recipe.findRecipeIngredientInfo();
-      const recipeInstructions = recipe.getRecipeInstructions();
-      const recipeCostTotal = recipe.calculateRecipeCost();
-      recipeTitle.innerHTML = ``
-      recipeTitle.innerHTML = `${cookbook.recipesCollection[i].name}`
-      currentRecipeImage.src = `${cookbook.recipesCollection[i].image}`
-      currentRecipeImage.alt = `${cookbook.recipesCollection[i].name}`
-      ingredientsList.innerHTML = ``  
-      recipeIngredients.forEach((ingredient) => {
-        ingredientsList.insertAdjacentHTML('beforeEnd', `
-        <li>${ingredient}</li>`)
-      })
-      instructionsList.innerHTML = ``
-      recipeInstructions.forEach((instruction) => {
-        instructionsList.insertAdjacentHTML('beforeEnd', `
-        <li>${instruction}</li>`)
-      })
-      totalCost.innerText = `$${recipeCostTotal}`
-    }  
-  }
+showRecipeInfoCard();
+for (var i = 0; i < cookbook.recipesCollection.length; i++) {
+  if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
+    recipe = new Recipe(cookbook.recipesCollection[i])
+    currentRecipe = recipe;
+    const recipeIngredients = recipe.findRecipeIngredientInfo();
+    const recipeInstructions = recipe.getRecipeInstructions();
+    const recipeCostTotal = recipe.calculateRecipeCost();
+    recipeTitle.innerHTML = ``
+    recipeTitle.innerHTML = `${cookbook.recipesCollection[i].name}`
+    currentRecipeImage.src = `${cookbook.recipesCollection[i].image}`
+    currentRecipeImage.alt = `${cookbook.recipesCollection[i].name}`
+    ingredientsList.innerHTML = ``  
+    recipeIngredients.forEach((ingredient) => {
+      ingredientsList.insertAdjacentHTML('beforeEnd', `
+      <li>${ingredient}</li>`)
+    })
+    instructionsList.innerHTML = ``
+    recipeInstructions.forEach((instruction) => {
+      instructionsList.insertAdjacentHTML('beforeEnd', `
+      <li>${instruction}</li>`)
+    })
+    totalCost.innerText = `$${recipeCostTotal}`
+  }  
+}
 })
-    
-    
-    
-    
+  
+  
+  
+  
 //EVENT LISTENERS
 window.addEventListener('load', loadPage);
 homeButton.addEventListener('click', showMainPage);
@@ -396,4 +428,4 @@ dropDownButton.addEventListener('click', showDropDown)
 myDropdown.addEventListener('click', searchByTags)
 allRecipesView.addEventListener('click', showRecipeInformation)
 recipeResultsView.addEventListener('click', showRecipeInformation)
-    
+  
