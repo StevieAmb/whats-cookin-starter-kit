@@ -8,6 +8,7 @@ class Recipe {
     this.instructions = recipeData.instructions;
     this.name = recipeData.name;
     this.tags = recipeData.tags;
+    this.isFavorited = false
   }
 
   findRecipeIngredientInfo() {
