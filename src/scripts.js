@@ -53,6 +53,13 @@ let currentRecipe;
 let groceryStore;
 
 
+//recipes to cook
+//event listener, push recipes into an array, user class
+//then iterate through array, and display on the DOM
+//through each iteration (onto the new recipes to cook view)
+
+
+
 //FUNCTIONS
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length);
