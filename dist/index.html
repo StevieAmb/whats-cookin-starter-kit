@@ -12,7 +12,9 @@
     <div class="dropdown">
       <button id="dropDownButton" class="dropbtn">Search By Tags</button>
       <div id="myDropdown" class="dropdown-content">
-        <a href="#tags">Tags</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
     <h1>What's Cookin'</h1>
@@ -42,12 +44,20 @@
   <h1 class="hidden" id="recipeResultsStatement">Here are your results:</h1>
   <section class="all-recipes-view hidden" id="allRecipesView">
   </section>
-  <section class="recipe-results hidden" id="recipeResultsView">
+  <div class="recipe-results hidden" id="recipeResultsView">
     <article class="result-card">
       <img class="result-image" alt="recipe" src="./images/cookies.jpg">
       <h2>Recipe Title</h2>
     </article>
-  </section>
+    <article class="result-card">
+      <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+      <h2>Recipe Title</h2>
+    </article>
+    <article class="result-card">
+      <img class="result-image" alt="recipe" src="./images/cookies.jpg">
+      <h2>Recipe Title</h2>
+    </article>
+  </div>
   <article class="recipe-information-view hidden" id="recipeInfoView">
     <h2 id="recipeTitle">Recipe Title</h2> 
     <button class="favorite-button" id="favoritingButton">favorite this recipe</button>
@@ -66,6 +76,8 @@
     <form>
       <label for="name2">Name</label>
       <input type="radio" id="name2" name="category2" value="name">
+      <label for="tag2">Tag</label>
+      <input type="radio" id="tag2" name="category2" value="tag">
       <label for="ingredient2">Ingredient</label>
       <input type="radio" id="ingredient2" name="category2" value="ingredient">
       <button id="searchButton2">Search</button>
@@ -78,5 +90,5 @@
   </section>
   <section class="fave-recipes-filtered-view" id="userFaveRecipeFilteredView">
   </section>
-</body>
+<script src="main.bundle.js"></script></body>
 </html>

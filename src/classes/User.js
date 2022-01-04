@@ -19,11 +19,13 @@ class User {
   addFavoriteRecipe(recipe) {
     if(!this.favoriteRecipes.includes(recipe)) {
       this.favoriteRecipes.push(recipe)
+      recipe.isFavorited = true 
     }
   }
   removeFavoriteRecipe(recipe) {
-    if(!this.favoriteRecipes.includes(recipe)) {
-      this.favoriteRecipes.splice(1, recipe)
+    if(this.favoriteRecipes.includes(recipe)) {
+      this.favoriteRecipes.splice(recipe, 1)
+      recipe.isFavorited = false
     }
   }
   addRecipeToCook(recipe) {
@@ -31,11 +33,16 @@ class User {
       this.recipesToCook.push(recipe)
     }
   }
-
+  removeRecipeToCook(recipe) {
+    if(this.recipesToCook.includes(recipe)) {
+      this.recipesToCook.splice(recipe, 1)
+    }
+  }
   filterFavoritesByName(userInput) {
+    let lowerCasedUserInput = userInput.toLowerCase();
     this.favoriteRecipes.forEach((recipe) => {
       let lowerCasedName = recipe.name.toLowerCase();
-      if(lowerCasedName.includes(userInput) && !this.matchingRecipes.includes(recipe)) {
+      if(lowerCasedName.includes(lowerCasedUserInput)) {
         this.matchingRecipes.push(recipe)
       }
     })

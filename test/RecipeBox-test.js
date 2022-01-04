@@ -40,7 +40,6 @@ describe('RecipeBox', () => {
     it('Should be able to store recipes by one or more tag', () => {
       
       expect(recipeBox.storeByTag("snack")).to.deep.equal(recipeBox.matchingRecipesTags);
-
       expect(recipeBox.storeByTag("lunch")).to.deep.equal(recipeBox.matchingRecipesTags);
       expect(recipeBox.storeByTag("sauce")).to.deep.equal(recipeBox.matchingRecipesTags);
     });
@@ -53,8 +52,6 @@ describe('RecipeBox', () => {
 
   it('Should be able to search by ingredients ', () => {
     expect(recipeBox.findIngredientById('wheat flour')).to.deep.equal(recipeBox.recipeMatch);
-    console.log(recipeBox.recipeMatch)
-    console.log(recipeBox.findIngredientById('wheat flour'))
     expect(recipeBox.findIngredientById('apple')).to.deep.equal(recipeBox.recipeMatch);
   });
   });
