@@ -9,25 +9,22 @@
 
 <body>
   <header>
+    <h1>What's Cookin'</h1>
     <div class="dropdown">
-      <button id="dropDownButton" class="dropbtn">Search By Tags</button>
-      <div id="myDropdown" class="dropdown-content">
+      <button class="dropbtn" id="dropDownButton">Search By Tags</button>
+      <div class="dropdown-content" id="myDropdown">
         <a href="#tags">Tags</a>
       </div>
     </div>
-    <h1>What's Cookin'</h1>
-    <section class="category-form-view" id="mainPageNavForm">
-      <form>
+      <form class="category-form-view" id="mainPageNavForm">
         <label for="name">Name</label>
         <input type="radio" id="name" name="category" value="name">
-        <!-- <label for="tag">Tag</label>
-        <input type="radio" id="tag" name="category" value="tag"> -->
         <label for="ingredient">Ingredient</label>
         <input type="radio" id="ingredient" name="category" value="ingredient">
         <input type="text" placeholder="search..." id="userSearchBox" />
         <button id="searchButton">Search</button>
+        <button class="hidden" id="searchButton2">Search</button>
       </form>
-    </section>  
     <button class="favorited-recipes-btn" id="favoriteRecipesButton">Favorite Recipes</button>
     <button class="home-btn hidden" id="homeButton">Home</button>
     <button class="see-all-recipes" id="seeAllRecipesButton">See All Recipes</button>
@@ -39,7 +36,6 @@
       <h2>Recipe Title</h2>
     </section>
   </article>
-  <h1 class="hidden" id="recipeResultsStatement">Here are your results:</h1>
   <section class="all-recipes-view hidden" id="allRecipesView">
   </section>
   <section class="recipe-results hidden" id="recipeResultsView">
@@ -61,16 +57,6 @@
     <h3 class="total-cost">Recipe Cost Total: <span id="totalCost">$$$$$</span></h3>
   </article>
   <section class="favorite-recipes-view hidden" id="favoriteRecipesView">
-    <nav class="favorite-form-view" id="favRecipesNavForm">
-    </nav> 
-    <form>
-      <label for="name2">Name</label>
-      <input type="radio" id="name2" name="category2" value="name">
-      <label for="ingredient2">Ingredient</label>
-      <input type="radio" id="ingredient2" name="category2" value="ingredient">
-      <button id="searchButton2">Search</button>
-      <input type="text" placeholder="search in favorite recipes..." id="userSearchBox2" />
-    </form>
     <article class="fav-recipe-card" id="favRecipeCards">
       <h2 class="fav-card-title">Recipe Title</h2>
       <button class="recipe-information-btn" id="recipeInfoButton1">Recipe Information</button>
