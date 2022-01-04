@@ -52,8 +52,8 @@ class User {
   filterFavoritesByIngredient(userInput) {
     let matchingIngredientId = null;
     ingredientsData.forEach((ingredient) => {
-      if(ingredient.name === userInput) {
-        matchingIngredintId = ingredient.id
+      if (ingredient.name === userInput) {
+        matchingIngredientId = ingredient.id
       }
     })
     this.favoriteRecipes.forEach((recipe) => {
