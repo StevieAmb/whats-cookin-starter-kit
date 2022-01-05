@@ -120,7 +120,7 @@ const showRecipeToCook = () => {   //connected to EL for button on NAV
   })
 }
 
-//SEARCH BY TAG FUNCTIONALITY
+//USER SEARCH BY TAG FUNCTIONALITY
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -296,7 +296,7 @@ const displayFavoritedRecipes = () => {
     )
   })
 }
-  
+//USER SEARCH BY NAME OR INGREDIENT FUNCTIONALITY
 const searchByInput = () => {
   if (nameRadioButton.checked) {
     cookbook.matchingRecipes = [];
@@ -305,10 +305,11 @@ const searchByInput = () => {
   } else if (ingredientRadioButton.checked) {
     cookbook.recipeMatch = [];
     cookbook.findIngredientById(userSearchBox.value);
+    console.log(cookbook.recipeMatch)
     return cookbook.recipeMatch;
   } else if (!nameRadioButton.checked && !ingredientRadioButton.checked) {
-    alert("ERROR: Please Select Name or Ingredient to Search")
-    userSearchBox.disabled;
+    alert("ERROR: Please Select Name or Ingredient to Search");
+    userSearchBox.disabled = true;
     showMainPage();
   }
 }
@@ -327,7 +328,6 @@ const showSearchResults = (event) => {
   })
 }
   
-//HELPER FUNCTIONS
 const addFavorite = () => { //attached to EL - button
   newUser.addFavoriteRecipe(currentRecipe);
   console.log(newUser.favoriteRecipes);
@@ -349,11 +349,12 @@ const addOrRemoveFavoriteButton = () => { //attached to EL on page load
     show([unfavoritingButton])
     hide([favoritingButton])
   } else if (!recipe.isFavorited) {
-      hide([unfavoritingButton])
-      show([favoritingButton])
+    hide([unfavoritingButton])
+    show([favoritingButton])
   }
 }
 
+//HELPER FUNCTIONS
 const show = (elements) => {
   elements.forEach(element => element.classList.remove('hidden'));
 }
@@ -365,19 +366,19 @@ const hide = (elements) => {
 const showMainPage = () => {
   displayHomePage();
   addOrRemoveFavoriteButton();
-  show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton]);
+  show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton, searchButton]);
   hide([favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView]);
 }
 
 const showRecipeSearchResults = () => {
   addOrRemoveFavoriteButton();
-  show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm]);
+  show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm, searchButton]);
   hide([mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView]);
 }
 
 const showFavoriteRecipesView = () => {
   addOrRemoveFavoriteButton();
-  show([favoriteRecipesView, searchButton2, homeButton]);
+  show([favoriteRecipesView, searchButton2, homeButton,searchButton]);
   hide([mainPageView, favoriteRecipesButton, recipeInfoView, allRecipesView, recipeResultsView, searchButton]);
 }
 
