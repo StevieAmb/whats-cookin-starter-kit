@@ -24,18 +24,23 @@ class User {
   }
   removeFavoriteRecipe(recipe) {
     if(this.favoriteRecipes.includes(recipe)) {
-      this.favoriteRecipes.splice(recipe, 1)
+      let indexOfRecipe = this.favoriteRecipes.indexOf(recipe) 
+      console.log(indexOfRecipe)
+      this.favoriteRecipes.splice(indexOfRecipe, 1)
       recipe.isFavorited = false
     }
   }
   addRecipeToCook(recipe) {
     if(!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe)
+      recipe.addedToCook = true;
     }
   }
   removeRecipeToCook(recipe) {
     if(this.recipesToCook.includes(recipe)) {
-      this.recipesToCook.splice(recipe, 1)
+      let indexOfRecipe = this.recipesToCook.indexOf(recipe)
+      this.recipesToCook.splice(indexOfRecipe, 1)
+      recipe.addedToCook = false;
     }
   }
   filterFavoritesByName(userInput) {

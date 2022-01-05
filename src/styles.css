@@ -43,6 +43,7 @@ input {
 }
 
 .home-btn, 
+.recipes-to-cook,
 .favorited-recipes-btn,
 .see-all-recipes {
   height: 5vh;
@@ -51,6 +52,9 @@ input {
   margin: 0 1rem 0 0;
 }
 
+.add-recipe-to-cook-button,
+.remove-recipe-to-cook-button,
+.unfavorite-button,
 .favorite-button {
   align-self: flex-end;
   height: 5vh;
