@@ -94,7 +94,7 @@ const userAddRecipeToCook = () => { //attached to EL - button
 }
 const userRemoveRecipeToCook = () => {  //attached to EL - button
   newUser.removeRecipeToCook(currentRecipe);
-  console.log(newUser.addedToCook);
+  console.log(newUser.recipesToCook);
   hide([removeRecipeToCookButton])
   show([addRecipeToCookButton])
 }
@@ -176,6 +176,14 @@ const searchByTags = (event) => {
     }
   })
 }  
+//input: recipe data file, in order to access the unit for the ingredients
+//output: the amounts and the units next to the ingredient name in the recipe info card
+
+//we already have access to the ingredient name based on the id from the recipe data
+//we need to stay IN the recipe data, but pull out the amount and the unit needed. 
+//iterate through recipeData (recipeData.forEach(recipe => {
+//   recipe.ingredients.amount recipe.ingredients.unit
+// }))
 
 const showRecipeInformation = (event)  => {
   event.preventDefault();
@@ -186,7 +194,7 @@ const showRecipeInformation = (event)  => {
       showRecipeInfoCard();
       recipe = new Recipe(cookbook.recipesCollection[i])
       currentRecipe = recipe;
-      // checkIfFavorited();
+  
       const recipeIngredients = recipe.findRecipeIngredientInfo();
       const recipeInstructions = recipe.getRecipeInstructions();
       const recipeCostTotal = recipe.calculateRecipeCost();
@@ -377,15 +385,14 @@ const showRecipeSearchResults = () => {
 }
 
 const showFavoriteRecipesView = () => {
-  addOrRemoveFavoriteButton();
+  // addOrRemoveFavoriteButton();
   show([favoriteRecipesView, searchButton2, homeButton,searchButton]);
   hide([mainPageView, favoriteRecipesButton, recipeInfoView, allRecipesView, recipeResultsView, searchButton]);
 }
 
 const showRecipeInfoCard = () => {
-  addOrRemoveFavoriteButton(); 
   show([recipeInfoView, seeAllRecipesButton, homeButton, favoriteRecipesButton]);
-  hide([allRecipesView, mainPageView, recipeResultsView, searchButton2, favoriteRecipesView]);
+  hide([allRecipesView, mainPageView, recipeResultsView, searchButton2, favoriteRecipesView, recipesToCookView]);
 }
 
 const showRecipesToCookView = () => {
@@ -397,11 +404,12 @@ const showRecipeInformationView = () => {
   addOrRemoveFavoriteButton();
   addOrRemoveRecipeToCookButton();
   show([allRecipesView, homeButton, favoriteRecipesButton])
-  hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView])
+  hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView])
 } 
 
 tryRecipeButton.addEventListener('click', () => {
   showRecipeInfoCard();
+  addOrRemoveRecipeToCookButton();
   for (var i = 0; i < cookbook.recipesCollection.length; i++) {
     if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
       recipe = new Recipe(cookbook.recipesCollection[i])
