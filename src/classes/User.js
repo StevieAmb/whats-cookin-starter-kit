@@ -25,7 +25,6 @@ class User {
   removeFavoriteRecipe(recipe) {
     if(this.favoriteRecipes.includes(recipe)) {
       let indexOfRecipe = this.favoriteRecipes.indexOf(recipe) 
-      console.log(indexOfRecipe)
       this.favoriteRecipes.splice(indexOfRecipe, 1)
       recipe.isFavorited = false
     }

@@ -44,7 +44,7 @@ describe('User', () => {
       expect(user.favoriteRecipes.length).to.equal(1);
     });
 
-    it.only('Should be able to remove a favorite recipe', () => {
+    it('Should be able to remove a favorite recipe', () => {
       user.addFavoriteRecipe(myRecipe);
       expect(user.favoriteRecipes.length).to.equal(1);
 
