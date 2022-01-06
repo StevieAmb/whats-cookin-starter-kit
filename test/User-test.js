@@ -88,8 +88,6 @@ describe('User', () => {
       user.addFavoriteRecipe(myRecipe2);
       user.addFavoriteRecipe(myRecipe3);
 
-      // let filteredRecipe = user.filterFavoritesByIngredient('Chocolate');
-
       expect(user.filterFavoritesByIngredient('Chocolate')).to.deep.equal(user.recipeMatch);
     });
   
