@@ -26,17 +26,6 @@ class User {
     })
     return nameOfUserIngredients;
   }
-
-
-  // showPantryIngredientInfo() {
-  //   const recipeIngredients = this.ingredients.map(recipeIngredient => {
-  //     const ingredientAmt = recipeIngredient.quantity.amount;
-  //     const ingredientUnit = recipeIngredient.quantity.unit;
-  //     const ingredientNames = ingredientsData.find(ingredientItem => ingredientItem.id === recipeIngredient.id);
-  //     return `${ingredientAmt} ${ingredientUnit} ${ingredientNames.name}`;
-  //   });
-  //   return recipeIngredients;
-  // }
   
   addFavoriteRecipe(recipe) {
     if(!this.favoriteRecipes.includes(recipe)) {
