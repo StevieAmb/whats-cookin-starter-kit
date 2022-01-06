@@ -192,37 +192,33 @@ window.onclick = function (event) {
   }
 };
 
-const displayRecommendedRecipeInfo = () => {
+const displayRecommendedRecipeInfo = (event) => {
   showRecipeInfoCard();
   addOrRemoveRecipeToCookButton();
-      cookbook.recipesCollection.forEach(oneRecipe => {
-        console.log(oneRecipe.id)
-        console.log(event.target.parentNode.id)
-        if(event.target.parentNode.id === `${oneRecipe.id}`) {
-          showRecipeInfoCard();
-          recipe = new Recipe(oneRecipe)
-          currentRecipe = recipe;
-          // checkIfFavorited();
-          const recipeIngredients = recipe.findRecipeIngredientInfo();
-          const recipeInstructions = recipe.getRecipeInstructions();
-          const recipeCostTotal = recipe.calculateRecipeCost();
-          recipeTitle.innerHTML = ``
-          recipeTitle.innerHTML = `${oneRecipe.name}`
-          currentRecipeImage.src = `${oneRecipe.image}`
-          currentRecipeImage.alt = `${oneRecipe.name}`
-          ingredientsList.innerHTML = ``  
-          recipeIngredients.forEach((ingredient) => {
-            ingredientsList.insertAdjacentHTML('beforeEnd', `
-            <li>${ingredient} </li>`)
-          })
-          instructionsList.innerHTML = ``
-          recipeInstructions.forEach((instruction) => {
-            instructionsList.insertAdjacentHTML('beforeEnd', `
-            <li>${instruction}</li>`)
-          })
-          totalCost.innerText = `$${recipeCostTotal}`
-        }
+  for (var i = 0; i < cookbook.recipesCollection.length; i++) {
+    if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
+      recipe = new Recipe(cookbook.recipesCollection[i])
+  
+      const recipeIngredients = recipe.findRecipeIngredientInfo();
+      const recipeInstructions = recipe.getRecipeInstructions();
+      const recipeCostTotal = recipe.calculateRecipeCost();
+      recipeTitle.innerHTML = ``
+      recipeTitle.innerHTML = `${cookbook.recipesCollection[i].name}`
+      currentRecipeImage.src = `${cookbook.recipesCollection[i].image}`
+      currentRecipeImage.alt = `${cookbook.recipesCollection[i].name}`
+      ingredientsList.innerHTML = ``  
+      recipeIngredients.forEach((ingredient) => {
+        ingredientsList.insertAdjacentHTML('beforeEnd', `
+        <li>${ingredient}</li>`)
       })
+      instructionsList.innerHTML = ``
+      recipeInstructions.forEach((instruction) => {
+        instructionsList.insertAdjacentHTML('beforeEnd', `
+        <li>${instruction}</li>`)
+      })
+      totalCost.innerText = `$${recipeCostTotal}`
+    }
+  }
 } 
 
 const showAllRecipes = () => {
@@ -241,22 +237,24 @@ const showRecipeInformation = (event) => {
   event.preventDefault();
   addOrRemoveFavoriteButton();
   addOrRemoveRecipeToCookButton();
-  for (var i = 0; i < cookbook.recipesCollection.length; i++) {
-    if (`${cookbook.recipesCollection[i].id}` === event.target.parentNode.id) {
+  cookbook.recipesCollection.forEach(oneRecipe => {
+    console.log(oneRecipe.id)
+    console.log(event.target.parentNode.id)
+    if(event.target.parentNode.id === `${oneRecipe.id}`) {
       showRecipeInfoCard();
-      recipe = new Recipe(cookbook.recipesCollection[i])
+      recipe = new Recipe(oneRecipe)
 
       const recipeIngredients = recipe.findRecipeIngredientInfo();
       const recipeInstructions = recipe.getRecipeInstructions();
       const recipeCostTotal = recipe.calculateRecipeCost();
       recipeTitle.innerHTML = ``
-      recipeTitle.innerHTML = `${cookbook.recipesCollection[i].name}`
-      currentRecipeImage.src = `${cookbook.recipesCollection[i].image}`
-      currentRecipeImage.alt = `${cookbook.recipesCollection[i].name}`
-      ingredientsList.innerHTML = ``
+      recipeTitle.innerHTML = `${oneRecipe.name}`
+      currentRecipeImage.src = `${oneRecipe.image}`
+      currentRecipeImage.alt = `${oneRecipe.name}`
+      ingredientsList.innerHTML = ``  
       recipeIngredients.forEach((ingredient) => {
         ingredientsList.insertAdjacentHTML('beforeEnd', `
-        <li>${ingredient}</li>`)
+        <li>${ingredient} </li>`)
       })
       instructionsList.innerHTML = ``
       recipeInstructions.forEach((instruction) => {
@@ -265,8 +263,8 @@ const showRecipeInformation = (event) => {
       })
       totalCost.innerText = `$${recipeCostTotal}`
     }
-  }
-};
+  })
+}
 
 const showSearchResults = (event) => {
   event.preventDefault();
@@ -309,7 +307,6 @@ const displaySelectedFavoriteRecipe = (event) => {
     if (`${newUser.favoriteRecipes[i].id}` === event.target.parentNode.id) {
       showRecipeInfoCard();
       recipe = new Recipe(newUser.favoriteRecipes[i])
-      // favoritingButton.innerText = `Favorited`
       const recipeIngredients = recipe.findRecipeIngredientInfo();
       const recipeInstructions = recipe.getRecipeInstructions();
       const recipeCostTotal = recipe.calculateRecipeCost();
@@ -413,17 +410,17 @@ const showRecipeSearchResults = () => {
 const showFavoriteRecipesView = () => {
   // addOrRemoveFavoriteButton();
   show([favoriteRecipesView, searchButton2, homeButton, searchButton]);
-  hide([mainPageView, favoriteRecipesButton, recipeInfoView, allRecipesView, recipeResultsView, searchButton]);
+  hide([mainPageView, favoriteRecipesButton, recipeInfoView, allRecipesView, recipeResultsView, searchButton, recipesToCookView]);
 };
 
 const showRecipeInfoCard = () => {
-  show([recipeInfoView, seeAllRecipesButton, homeButton, favoriteRecipesButton]);
+  show([recipeInfoView, seeAllRecipesButton, homeButton, favoriteRecipesButton, searchButton]);
   hide([allRecipesView, mainPageView, recipeResultsView, searchButton2, favoriteRecipesView, recipesToCookView]);
 };
 
 const showRecipesToCookView = () => {
-  show([recipesToCookView, homeButton, favoriteRecipesButton]);
-  hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, searchButton2]);
+  show([recipesToCookView, homeButton, favoriteRecipesButton, searchButton]);
+  hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, searchButton2, favoriteRecipesView]);
 };
 
 const showRecipeInformationView = () => {
