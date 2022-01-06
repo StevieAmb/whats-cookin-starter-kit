@@ -1,3 +1,5 @@
+import { usersData } from "../data/users";
+
 // const { recipeData } = require("../data/recipes");
 const { ingredientsData } = require("../data/ingredients");
 // import Recipe from '../src/classes/Recipe';
@@ -11,6 +13,18 @@ class User {
     this.favoriteRecipes = [];
     this.recipesToCook = [];
     this.recipeMatch = [];
+  }
+ 
+  showPantryIngredientInfo() {
+    let nameOfUserIngredients = [];
+    ingredientsData.forEach(ingredient => {
+      this.pantry.forEach(userIngredient => {
+        if(ingredient.id === userIngredient.ingredient) {
+          nameOfUserIngredients.push(`${userIngredient.amount} ${ingredient.name}`)
+        }
+      })
+    })
+    return nameOfUserIngredients;
   }
   
   addFavoriteRecipe(recipe) {
