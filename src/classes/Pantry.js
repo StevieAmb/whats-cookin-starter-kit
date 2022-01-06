@@ -15,6 +15,8 @@ class Pantry {
     }, [])
     return userIngredientsAmt
   }
+  //user ingredients amount is an array of the amount of each ingredient the user
+  //has if it matches the ingredients in the recipe
 
   determineIfEnoughIngredientsForRecipe(recipe) {
     let userIngredientAmt = determineAmountOfIngredientsUserHas();
