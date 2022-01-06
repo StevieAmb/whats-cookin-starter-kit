@@ -11,10 +11,7 @@ class User {
     this.favoriteRecipes = [];
     this.recipesToCook = [];
     this.recipeMatch = [];
-    this.matchingRecipes = [];
-    this.matchingRecipesTags = [];
   }
-
   
   addFavoriteRecipe(recipe) {
     if(!this.favoriteRecipes.includes(recipe)) {
@@ -22,6 +19,7 @@ class User {
       recipe.isFavorited = true 
     }
   }
+
   removeFavoriteRecipe(recipe) {
     if(this.favoriteRecipes.includes(recipe)) {
       let indexOfRecipe = this.favoriteRecipes.indexOf(recipe) 
@@ -29,12 +27,14 @@ class User {
       recipe.isFavorited = false
     }
   }
+
   addRecipeToCook(recipe) {
     if(!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe)
       recipe.addedToCook = true;
     }
   }
+
   removeRecipeToCook(recipe) {
     if(this.recipesToCook.includes(recipe)) {
       let indexOfRecipe = this.recipesToCook.indexOf(recipe)
@@ -42,15 +42,15 @@ class User {
       recipe.addedToCook = false;
     }
   }
+
   filterFavoritesByName(userInput) {
     let lowerCasedUserInput = userInput.toLowerCase();
-    this.favoriteRecipes.forEach((recipe) => {
+    return this.favoriteRecipes.filter((recipe) => {
       let lowerCasedName = recipe.name.toLowerCase();
-      if(lowerCasedName.includes(lowerCasedUserInput)) {
-        this.matchingRecipes.push(recipe)
+      if (lowerCasedName.includes(lowerCasedUserInput)) {
+        return recipe
       }
     })
-    return this.matchingRecipes;
   }
 
   filterFavoritesByIngredient(userInput) {
@@ -62,7 +62,7 @@ class User {
     })
     this.favoriteRecipes.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
-        if(ingredient.id === matchingIngredientId) {
+        if (ingredient.id === matchingIngredientId) {
           this.recipeMatch.push(recipe)
         }
       })
@@ -71,13 +71,9 @@ class User {
   }
 
   filterFavoritesByTag(userInput) {
-    this.favoriteRecipes.forEach((recipe) => {
-      if(recipe.tags.includes(userInput)) {
-        this.matchingRecipesTags.push(recipe)
-      }
-    })
-    return this.matchingRecipesTags;
+    return this.favoriteRecipes.filter((recipe) => recipe.tags.includes(userInput))
   }
+
 };
 
 
