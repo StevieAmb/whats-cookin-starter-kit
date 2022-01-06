@@ -9,19 +9,23 @@ class RecipeBox {
     this.recipeMatch = [];
   }
   storeByTag(theUserInput) {
-    this.recipesCollection.forEach((recipe) => {
-      if(recipe.tags.includes(theUserInput) && !this.matchingRecipesTags.includes(recipe)) {
-        this.matchingRecipesTags.push(recipe)
+    let lowerCaseInput = theUserInput.toLowerCase();
+
+    this.matchingRecipesTags = this.recipesCollection.filter((recipe) => {
+      if (recipe.tags.includes(lowerCaseInput) && !this.matchingRecipesTags.includes(recipe)) {
+        return recipe
       }
     })
     return this.matchingRecipesTags;
   }
   
   findRecipeName(theUserInput) {
-    this.recipesCollection.forEach((recipe) => {
+    let lowerCaseInput = theUserInput.toLowerCase();
+
+    this.matchingRecipes = this.recipesCollection.filter((recipe) => {
       let lowerCasedName = recipe.name.toLowerCase();
-      if(lowerCasedName.includes(theUserInput) && !this.matchingRecipes.includes(recipe)) {
-        this.matchingRecipes.push(recipe)
+      if (lowerCasedName.includes(lowerCaseInput) && !this.matchingRecipes.includes(recipe)) {
+        return recipe
       }
     })
     return this.matchingRecipes;
@@ -30,20 +34,21 @@ class RecipeBox {
   findIngredientById(theUserInput) {
     let matchingIngredientId = null;
     ingredientsData.forEach((ingredient) => {
-      if(ingredient.name === theUserInput) {
+      if (ingredient.name === theUserInput) {
         matchingIngredientId = ingredient.id
       }
     })
     this.recipesCollection.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
-        if(ingredient.id === matchingIngredientId) {
+        if (ingredient.id === matchingIngredientId) {
           this.recipeMatch.push(recipe)
         }
       })
     })
     return this.recipeMatch;
   }
-}
+
+};
 
 export default RecipeBox;
  
