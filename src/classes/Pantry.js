@@ -1,18 +1,35 @@
-import { usersData } from '../src/data/users'
+const { userData } = require("../data/users");
 
-class Pantry{
+class Pantry {
   constructor(user) {
     this.shelf = user.pantry;
   }
 
-  determineIfHasEnoughIngredients(recipe) {
-    let userIngredients = this.shelf.reduce((allUserIngredientIds, userIngredient) => {
+  determineAmountOfIngredientsUserHas(recipe) {
+    let userIngredientsAmt = this.shelf.reduce((allUserIngredientAmt, userIngredient) => {
       recipe.ingredients.forEach(recipeIngredient => {
         if (recipeIngredient.id === userIngredient.ingredient)
-          allUserIngredientIds.push(userIngredient.ingredient)
+          allUserIngredientAmt.push(userIngredient.amount)
       })
-      return allUserIngredientIds;
+      return allUserIngredientAmt;
     }, [])
-    return userIngredients
+    return userIngredientsAmt
+  }
+
+  determineIfEnoughIngredientsForRecipe(recipe) {
+    let userIngredientAmt = determineAmountOfIngredientsUserHas();
+    let userMessage = "";
+    userIngredientAmt.forEach(amount => {
+      recipe.ingredients.forEach(ingredient => {
+        if(amount < ingredient.quantity.amount) {
+          userMessage = "You don't have enough ingredients to cook this recipe"
+        } else {
+          userMessage = "Let's get cookin', good lookin";
+        }
+      })
+    })
   }
 }
+
+
+export default Pantry;
