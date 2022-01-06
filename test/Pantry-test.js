@@ -28,7 +28,7 @@ describe.only('Recipe', () => {
       expect(pantry.shelf).to.equal(usersData[0].pantry);
     })
 
-    
+    it('Should be able to tell us if we have enough ingredients to cook a recipe')
 
 
 
