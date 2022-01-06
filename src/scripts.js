@@ -195,30 +195,35 @@ window.onclick = function (event) {
 const displayRecommendedRecipeInfo = () => {
   showRecipeInfoCard();
   addOrRemoveRecipeToCookButton();
-  for (var i = 0; i < cookbook.recipesCollection.length; i++) {
-    if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
-      recipe = new Recipe(cookbook.recipesCollection[i])
-      const recipeIngredients = recipe.findRecipeIngredientInfo();
-      const recipeInstructions = recipe.getRecipeInstructions();
-      const recipeCostTotal = recipe.calculateRecipeCost();
-      recipeTitle.innerHTML = ``
-      recipeTitle.innerHTML = `${cookbook.recipesCollection[i].name}`
-      currentRecipeImage.src = `${cookbook.recipesCollection[i].image}`
-      currentRecipeImage.alt = `${cookbook.recipesCollection[i].name}`
-      ingredientsList.innerHTML = ``
-      recipeIngredients.forEach((ingredient) => {
-        ingredientsList.insertAdjacentHTML('beforeEnd', `
-        <li>${ingredient}</li>`)
+      cookbook.recipesCollection.forEach(oneRecipe => {
+        console.log(oneRecipe.id)
+        console.log(event.target.parentNode.id)
+        if(event.target.parentNode.id === `${oneRecipe.id}`) {
+          showRecipeInfoCard();
+          recipe = new Recipe(oneRecipe)
+          currentRecipe = recipe;
+          // checkIfFavorited();
+          const recipeIngredients = recipe.findRecipeIngredientInfo();
+          const recipeInstructions = recipe.getRecipeInstructions();
+          const recipeCostTotal = recipe.calculateRecipeCost();
+          recipeTitle.innerHTML = ``
+          recipeTitle.innerHTML = `${oneRecipe.name}`
+          currentRecipeImage.src = `${oneRecipe.image}`
+          currentRecipeImage.alt = `${oneRecipe.name}`
+          ingredientsList.innerHTML = ``  
+          recipeIngredients.forEach((ingredient) => {
+            ingredientsList.insertAdjacentHTML('beforeEnd', `
+            <li>${ingredient} </li>`)
+          })
+          instructionsList.innerHTML = ``
+          recipeInstructions.forEach((instruction) => {
+            instructionsList.insertAdjacentHTML('beforeEnd', `
+            <li>${instruction}</li>`)
+          })
+          totalCost.innerText = `$${recipeCostTotal}`
+        }
       })
-      instructionsList.innerHTML = ``
-      recipeInstructions.forEach((instruction) => {
-        instructionsList.insertAdjacentHTML('beforeEnd', `
-        <li>${instruction}</li>`)
-      })
-      totalCost.innerText = `$${recipeCostTotal}`
-    }
-  }
-};
+} 
 
 const showAllRecipes = () => {
   allRecipesView.innerHTML = ``
