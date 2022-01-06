@@ -6,9 +6,9 @@ import Recipe from '../src/classes/Recipe';
 import Pantry from '../src/classes/Pantry';
 
 describe.only('Recipe', () => {
-  let myRecipe;
   let user;
   let pantry;
+  let myRecipe;
   
   beforeEach(() => {
     user = new User(usersData[0])
@@ -28,8 +28,11 @@ describe.only('Recipe', () => {
       expect(pantry.shelf).to.equal(usersData[0].pantry);
     })
 
-    it('Should be able to tell us if we have enough ingredients to cook a recipe')
-
+    it('Should be able to tell us if we have enough ingredients to cook a recipe', () => {
+      let message = pantry.determineIfEnoughIngredientsForRecipe(myRecipe);
+  
+      expect(message).to.equal("You don't have enough ingredients to cook this recipe")
+    })
 
 
 
