@@ -151,6 +151,8 @@ const sortTags = () => {
   return result
 };
 
+//pertaining to 
+
 const userAddRecipeToCook = () => { //attached to EL - button
   newUser.addRecipeToCook(recipe);
   show([removeRecipeToCookButton])
@@ -341,6 +343,7 @@ const displaySelectedFavoriteRecipe = (event) => {
 const userPantryName = document.getElementById('userPantryName')
 
 const displayUserPantry = () => {
+  newUser = newUser(userData[0]);
   let userPantryIngredients = newUser.showPantryIngredientInfo();
   userPantryName.innerText = `${newUser.name}'s Pantry`
   userPantryIngredients.forEach((ingredient) => {
