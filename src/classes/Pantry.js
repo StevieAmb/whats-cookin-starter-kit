@@ -1,3 +1,4 @@
+const { ingredientsData } = require("../data/ingredients");
 const { userData } = require("../data/users");
 
 class Pantry {
@@ -5,46 +6,44 @@ class Pantry {
     this.shelf = user.pantry;
   }
 
-  // determineAmountOfIngredientsUserHas(recipe) {
-  //   let userIngredientsAmt = this.shelf.reduce((allUserIngredientAmt, userIngredient) => {
-  //     recipe.ingredients.forEach(recipeIngredient => {
-  //       if (recipeIngredient.id === userIngredient.ingredient)
-  //         allUserIngredientAmt.push(userIngredient.amount)
-  //     })
-  //     return allUserIngredientAmt;
-  //   }, [])
-  //   return userIngredientsAmt
-  // }
-
-  determineAmountOfIngredientsUserHas() {
-    let userIngredientAmt = this.shelf.map(ingredient => {
-      return ingredient.amount 
-    })
-    return userIngredientAmt;
-  }
-  //user ingredients amount is an array of the amount of each ingredient the user
-  //has if it matches the ingredients in the recipe
-
-  determineIfEnoughIngredientsForRecipe(recipe) {
-    let userIngredientAmt = this.determineAmountOfIngredientsUserHas(recipe);
-    let userMessage = "";
-    console.log(userIngredientAmt);
-    userIngredientAmt.forEach(amount => {
-      recipe.ingredients.forEach(ingredient => {
-        if(amount < ingredient.quantity.amount || !userIngredientAmt.includes(ingredient.quantity.amount)) {
-          userMessage = "You don't have enough ingredients to cook this recipe"
-        } else {
-          userMessage = "Let's get cookin', good lookin";
+  showPantryIngredientInfo() {
+    let nameOfUserIngredients = [];
+    ingredientsData.forEach(ingredient => {
+      this.shelf.forEach(userIngredient => {
+        if(ingredient.id === userIngredient.ingredient) {
+          nameOfUserIngredients.push({id: `${userIngredient.ingredient}`, amount: `${userIngredient.amount}`, name: `${ingredient.name}`})
         }
       })
     })
-    return userMessage
+    return nameOfUserIngredients;
+  }
+
+  determineIfEnoughIngredientsForRecipe(recipe) {
+    let userIngredientAmt = this.showPantryIngredientInfo();
+    console.log(userIngredientAmt);
+    for(var i = 0; i < recipe.ingredients.length; i++) {
+      let match = false 
+      for(var j = 0; j < userIngredientAmt.length; j++) {
+        if (recipe.ingredients[i].id === parseInt(userIngredientAmt[j].id)) {
+          console.log('one')
+          match = true
+        }
+        if ((recipe.ingredients[i].id === parseInt(userIngredientAmt[j].id)) && (userIngredientAmt[j].amount < recipe.ingredients[i].quantity.amount)) {
+          console.log('two')
+          return "You don't have enough ingredients to cook this recipe";
+         
+        }
+      }
+      if (match === false) {
+        console.log('three')
+        console.log('id', recipe.ingredients[i].id)
+       return "You don't have enough ingredients to cook this recipe";
+      
+      }
+    } 
+    return "Let's get cookin', good lookin!"
   }
 }
-
-//Have the user's pantry added to the recipe info card. 
-  //Add to cook button only appears if the user has enough ingredients 
-  //
 
 
 export default Pantry;
