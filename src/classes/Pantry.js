@@ -42,5 +42,9 @@ class Pantry {
   }
 }
 
+//Have the user's pantry added to the recipe info card. 
+  //Add to cook button only appears if the user has enough ingredients 
+  //
+
 
 export default Pantry;
