@@ -103,7 +103,7 @@ const searchByTags = (event) => {
       searchedRecipeTag.forEach((elem) => {
         recipeResultsView.insertAdjacentHTML('afterBegin',
         `<article class="result-card" id="${elem.id}">
-        <img class="result-image" alt="${elem.name}" src="${elem.image}">
+        <img class="result-image" alt="${elem.name}" src="${elem.image}" tabindex= "0">
         <h2>${elem.name}</h2>
         </article>`)
       })
@@ -133,7 +133,7 @@ const searchFavoriteResults = (event) => {
     
     recipeResultsView.insertAdjacentHTML('afterbegin',
     `<article class="result-card">
-    <img class="result-image" alt="${searchedRecipe2.name}" src="${searchedRecipe2.image}">
+    <img class="result-image" alt="${searchedRecipe2.name}" src="${searchedRecipe2.image}" tabindex= "0">
     <h2>${searchedRecipe2.name}</h2>
     </article>`)
   })
@@ -235,7 +235,7 @@ const showAllRecipes = () => {
     allRecipesView.insertAdjacentHTML('afterbegin', `
     <article class="recipes-views" id= ${recipe.id}>
     <h1>${recipe.name}</h1>
-    <img src="${recipe.image}">
+    <img src="${recipe.image}" tabindex= "0">
     `)
   })
   showRecipeInformationView();
@@ -304,7 +304,7 @@ const displayFavoritedRecipes = () => {
     favoriteRecipesView.insertAdjacentHTML('afterBegin',
     `<article class="fav-recipe-card" id="${recipe.id}">
     <h2 class="fav-card-title">${recipe.name}</h2>
-    <img class="current-recipe-image" src="${recipe.image}">`
+    <img class="current-recipe-image" src="${recipe.image}" tabindex= "0">`
     )
   })
 };
@@ -343,7 +343,7 @@ const displaySelectedFavoriteRecipe = (event) => {
 const userPantryName = document.getElementById('userPantryName')
 
 const displayUserPantry = () => {
-  newUser = newUser(userData[0]);
+  // newUser = newUser(userData[0]);
   let userPantryIngredients = newUser.showPantryIngredientInfo();
   userPantryName.innerText = `${newUser.name}'s Pantry`
   userPantryIngredients.forEach((ingredient) => {
@@ -369,7 +369,7 @@ const showRecipeToCook = () => {   //connected to EL for button on NAV
   newUser.recipesToCook.forEach(recipe => {
     recipesToCookView.insertAdjacentHTML('afterbegin',
       `<article class="result-card" id="${recipe.id}">
-    <img class="result-image" alt="${recipe.name}" src="${recipe.image}">
+    <img class="result-image" alt="${recipe.name}" src="${recipe.image}" tabindex= "0">
     <h2>${recipe.name}</h2>
     </article>`)
   })
@@ -470,6 +470,12 @@ searchButton2.addEventListener('click', searchFavoriteResults);
 dropDownButton.addEventListener('click', showDropDown);
 myDropdown.addEventListener('click', searchByTags);
 allRecipesView.addEventListener('click', showRecipeInformation);
+allRecipesView.addEventListener("keyup", function(e) {
+  if (e.keyCode === 13) {
+     allRecipesView.removeEventListener(e);
+      showRecipeInformation();
+  }
+});
 recipeResultsView.addEventListener('click', showRecipeInformation);
 tryRecipeButton.addEventListener('click', displayRecommendedRecipeInfo);
 favoriteRecipesView.addEventListener('click', displaySelectedFavoriteRecipe);
