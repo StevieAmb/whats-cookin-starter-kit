@@ -14,7 +14,7 @@ body, html {
   height: 100vh;
   width: 100vw;
   overscroll-behavior: none;
-  background-image: url("/Users/lynnnguyen/whats-cookin-starter-kit/src/whatscookin.jpg");
+  background-image: url("whatscookin.jpg");
   background-size: cover;
   height: 100%;
   background-repeat: no-repeat;
