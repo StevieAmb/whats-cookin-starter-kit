@@ -1,10 +1,5 @@
-const {
-  ingredientsData
-} = require("../data/ingredients");
-const {
-  userData
-} = require("../data/users");
-
+const { ingredientsData } = require("../data/ingredients");
+const { userData } = require("../data/users");
 
 class Pantry {
   constructor(user) {
@@ -34,7 +29,6 @@ class Pantry {
     })
     return ingredientsNeeded
   }
-
   findAmountNeeded(recipe) {
     let recipeIngredients = recipe.findRecipeIngredientInfo();
     const newShelf = recipeIngredients.map(recipeIngredient => {
@@ -50,23 +44,6 @@ class Pantry {
     })
     return newShelf.filter(ingredient => ingredient.amountNeeded)
   }
-
 };
-
-//
-
-// let userNeededIngredients = notEnoughorMismatchedIngredients.reduce((neededIngredients, ingredient) => {
-//   recipeInfo.ingredients.forEach(recipeIngredient => {
-//     if (recipeIngredient.name === ingredient.name) {
-//       neededIngredients.push({ amountNeeded: recipeIngredient.quantity.amount - ingredient.amount, ingredientName: ingredient.name })
-//     }
-//   })
-//   return neededIngredients;
-// }, [])
-// return userNeededIngredients;
-
-//Create a method that iterates through the needed ingredients returned from determineIfEnoughIngredientsForRecipe
-//Also iterate through the recipe ingredients and compare the amounts 
-//Return the amount of each missing ingredient needed
 
 export default Pantry;

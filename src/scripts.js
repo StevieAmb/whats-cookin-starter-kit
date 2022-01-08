@@ -25,7 +25,7 @@ const unfavoritingButton = document.getElementById('unfavoritingButton');
 const recipesToCookButton = document.getElementById('recipesToCookButton');
 const addRecipeToCookButton = document.getElementById('addRecipeToCookButton');
 const removeRecipeToCookButton = document.getElementById('removeRecipeToCookButton');
-const userPantryButton = document.getElementById('seeUserPantryButton')
+
 
 
 //USER INPUT FIELD
@@ -40,7 +40,7 @@ const recipeInfoView = document.getElementById('recipeInfoView');
 const allRecipesView = document.getElementById('allRecipesView');
 const favoriteRecipesView = document.getElementById('favoriteRecipesView');
 const recipesToCookView = document.getElementById('recipesToCookView');
-const usersPantryView = document.getElementById('userPantryView')
+
 
 //RANDOM
 const recipeTitle = document.getElementById('recipeTitle');
@@ -85,7 +85,6 @@ const searchByInput = () => {
   } else if (ingredientRadioButton.checked) {
     cookbook.recipeMatch = [];
     cookbook.findIngredientById(userSearchBox.value);
-    // console.log(cookbook.recipeMatch)
     return cookbook.recipeMatch;
   } 
 };
@@ -152,9 +151,10 @@ const sortTags = () => {
   return result
 };
 
+//pertaining to 
+
 const userAddRecipeToCook = () => { //attached to EL - button
   newUser.addRecipeToCook(recipe);
-  // console.log(newUser.recipesToCook);
   show([removeRecipeToCookButton])
   hide([addRecipeToCookButton])
 };
@@ -199,8 +199,10 @@ window.onclick = function (event) {
 };
 
 const displayRecommendedRecipeInfo = (event) => {
+  event.preventDefault();
   showRecipeInfoCard();
   addOrRemoveRecipeToCookButton();
+  displayUserPantry();
   for (var i = 0; i < cookbook.recipesCollection.length; i++) {
     if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
       recipe = new Recipe(cookbook.recipesCollection[i])
@@ -270,6 +272,7 @@ const showRecipeInformation = (event) => {
       totalCost.innerText = `$${recipeCostTotal}`
     }
   })
+  displayUserPantry();
 }
 
 const showSearchResults = (event) => {
@@ -337,13 +340,17 @@ const displaySelectedFavoriteRecipe = (event) => {
   }
 };
 
+const userPantryName = document.getElementById('userPantryName')
+
 const displayUserPantry = () => {
-  showUserPantryView();
+  newUser = newUser(userData[0]);
   let userPantryIngredients = newUser.showPantryIngredientInfo();
-  userPantryIngredients.forEach((instruction) => {
-    usersPantryView.insertAdjacentHTML('beforeEnd', `
-    <li>${instruction}</li>`)
+  userPantryName.innerText = `${newUser.name}'s Pantry`
+  userPantryIngredients.forEach((ingredient) => {
+    userPantryName.insertAdjacentHTML('beforeEnd', `
+    <li>${ingredient}</li>`)
   })
+  
 }
 
 
@@ -414,42 +421,37 @@ const showMainPage = () => {
   displayHomePage();
   addOrRemoveFavoriteButton();
   show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton, searchButton]);
-  hide([usersPantryView, favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView]);
+  hide([favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView]);
 };
 
 const showRecipeSearchResults = () => {
   addOrRemoveFavoriteButton();
   show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm, searchButton]);
-  hide([usersPantryView, mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView]);
+  hide([ mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView]);
 };
 
 const showFavoriteRecipesView = () => {
-  // addOrRemoveFavoriteButton();
+
   show([favoriteRecipesView, searchButton2, homeButton, searchButton]);
-  hide([usersPantryView, mainPageView, favoriteRecipesButton, recipeInfoView, allRecipesView, recipeResultsView, searchButton, recipesToCookView]);
+  hide([mainPageView, favoriteRecipesButton, recipeInfoView, allRecipesView, recipeResultsView, searchButton, recipesToCookView, dropDownButton]);
 };
 
 const showRecipeInfoCard = () => {
   show([recipeInfoView, seeAllRecipesButton, homeButton, favoriteRecipesButton, searchButton]);
-  hide([usersPantryView, allRecipesView, mainPageView, recipeResultsView, searchButton2, favoriteRecipesView, recipesToCookView]);
+  hide([allRecipesView, mainPageView, recipeResultsView, searchButton2, favoriteRecipesView, recipesToCookView]);
 };
 
 const showRecipesToCookView = () => {
   show([recipesToCookView, homeButton, favoriteRecipesButton, searchButton]);
-  hide([usersPantryView, mainPageView, recipeInfoView, allRecipesView, recipeResultsView, searchButton2, favoriteRecipesView]);
+  hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, searchButton2, favoriteRecipesView]);
 };
 
 const showRecipeInformationView = () => {
   addOrRemoveFavoriteButton();
   addOrRemoveRecipeToCookButton();
   show([allRecipesView, homeButton, favoriteRecipesButton])
-  hide([usersPantryView, mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView])
+  hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView])
 };
-
-const showUserPantryView = () => {
-  show([usersPantryView, homeButton, seeAllRecipesButton, favoriteRecipesButton, searchButton])
-  hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, searchButton2, recipesToCookView, favoriteRecipesView])
-}
 
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length);
@@ -475,4 +477,3 @@ addRecipeToCookButton.addEventListener('click', userAddRecipeToCook);
 removeRecipeToCookButton.addEventListener('click', userRemoveRecipeToCook);
 recipesToCookButton.addEventListener('click', showRecipeToCook);
 recipesToCookView.addEventListener('click', showRecipeInformation);
-userPantryButton.addEventListener('click', displayUserPantry);
