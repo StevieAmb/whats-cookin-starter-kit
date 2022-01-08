@@ -1,14 +1,24 @@
 /* @import './node_modules/normalize.css/normalize.css'; */
 
 * {
-  font-family: 'Open sans', sans-serif;
+  font-family: 'Mochiy Pop P One', sans-serif;
+  font-size: 16px;
+  border-radius: 5px;
 }
+
+$primary-color: #396204; 
+$border-color: #4B9933;
 
 body, html {
   margin: 0;
   height: 100vh;
   width: 100vw;
   overscroll-behavior: none;
+  background-image: url("/Users/lynnnguyen/whats-cookin-starter-kit/src/whatscookin.jpg");
+  background-size: cover;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 header {
@@ -16,12 +26,15 @@ header {
   justify-content: space-between;
   height: 15vh;
   align-items: center;
-  background-color: goldenrod;
+  background-color: $primary-color;
 } 
 
 h1 {
   height: fit-content;
   margin: 0 0 0 1rem;
+  border-style:solid;
+  border-color: $border-color;
+  background-color:#e8f1f2;
 }
 
 .category-form-view {
@@ -45,10 +58,10 @@ input {
 .home-btn, 
 .recipes-to-cook,
 .favorited-recipes-btn,
-.see-all-recipes {
-  height: 5vh;
+.see-all-recipes,
+.see-user-pantry-button {
+  height: 10vh;
   width: 10vw;
-  border-radius: 3px;
   margin: 0 1rem 0 0;
 }
 
@@ -57,9 +70,15 @@ input {
 .unfavorite-button,
 .favorite-button {
   align-self: flex-end;
-  height: 5vh;
+  height: 12vh;
   width: 10vw;
-  border-radius: 3px;
+}
+
+.favorite-button:hover,
+.unfavorite-button:hover,
+.add-recipe-to-cook-button:hover,
+.remove-recipe-to-cook-button:hover {
+  background-color: #FADADD;
 }
 
 .suggested-recipe-view {
@@ -68,7 +87,13 @@ input {
   height: 60vh;
   align-items: center;
   margin: 10%;
-  background: #3498DB;
+  background: #52A838;
+}
+
+img {
+  border-style:solid;
+  border-color: $border-color;
+
 }
 
 .suggested-recipe-image {
@@ -83,11 +108,15 @@ input {
   bottom: 3vh;
   right: 2vw;
   align-self: flex-start;
-  background-color: mediumaquamarine;
+  background-color: #e8f1f2;
 }
 
-h2 {
+h2,
+h3 {
   margin: 0;
+  background-color: #e8f1f2;
+  width: 30em;
+  
 }
 
 .all-recipes-view,
@@ -117,10 +146,14 @@ h2 {
 h3 {
   margin: 0;
   width: fit-content;
+  border-color: $border-color
 }
 
-ol {
+ol,
+ul {
   width: 47em;
+  background-color: #e8f1f2;
+  border-color: $border-color
 }
 
 .total-cost {
@@ -134,18 +167,32 @@ ol {
   align-items: center;
 }
 
-/* dropdown CSS  */
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: .5em;
-  font-size: 1.35em;
-  border: none;
-  cursor: pointer;
+.search-button,
+.search-button2 {
+  background-color: #e8f1f2;
 }
 
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
+/* dropdown CSS  */
+.dropbtn {
+  background-color: #e8f1f2;
+  padding: .5em;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  /* border-radius: 8px; */
+}
+
+.dropbtn:hover, 
+.dropbtn:focus,
+.search-button:hover,
+.search-button2:hover,
+.home-btn:hover, 
+.recipes-to-cook:hover,
+.favorited-recipes-btn:hover,
+.see-all-recipes:hover,
+.see-user-pantry-button:hover,
+.try-this-recipe-btn:hover  {
+  background-color: #5AB83D;
 }
 
 .dropdown {
