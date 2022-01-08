@@ -20,13 +20,11 @@ class Recipe {
         if (ingredientItem.id === recipeIngredient.id) {
           recipeIngredient.name = ingredientItem.name;
         }
-      });
+      })
       return recipeIngredient
-      // { id: `${ingredientItem.id}`, amount: `${ingredientAmt}`, unit: `${ingredientUnit}`, name: `${ingredientName.name}` };
-    });
+    })
     return recipeIngredients;
-  }
-  //refactor to add the name property to the recipe ingredient objects. Then we can use this to consolidate and simplify the logic in the pantry class (pass through an array of ingredients? For the recipe it would be this.ingredients and for other ingredients such as ones returned from determineIfEnoughIngredientsForRecipe in the Pantry class assign a method invocation to a variable and pass it through) 
+  } 
 
   getRecipeInstructions() {
     const instructionByOrder = this.instructions.map((elem) => {
