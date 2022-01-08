@@ -14,13 +14,17 @@ class Recipe {
 
   findRecipeIngredientInfo() {
     const recipeIngredients = this.ingredients.map(recipeIngredient => {
-      const ingredientAmt = recipeIngredient.quantity.amount;
-      const ingredientUnit = recipeIngredient.quantity.unit;
-      const ingredientNames = ingredientsData.find(ingredientItem => ingredientItem.id === recipeIngredient.id);
-      return `${ingredientAmt} ${ingredientUnit} ${ingredientNames.name}`;
-    });
+      // const ingredientAmt = recipeIngredient.quantity.amount;
+      // const ingredientUnit = recipeIngredient.quantity.unit;
+      ingredientsData.find(ingredientItem => {
+        if (ingredientItem.id === recipeIngredient.id) {
+          recipeIngredient.name = ingredientItem.name;
+        }
+      })
+      return recipeIngredient
+    })
     return recipeIngredients;
-  }
+  } 
 
   getRecipeInstructions() {
     const instructionByOrder = this.instructions.map((elem) => {

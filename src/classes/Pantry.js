@@ -7,63 +7,43 @@ class Pantry {
   }
 
   showPantryIngredientInfo() {
-    let nameOfUserIngredients = [];
-    ingredientsData.forEach(ingredient => {
-      this.shelf.forEach(userIngredient => {
-        if(ingredient.id === userIngredient.ingredient) {
-          nameOfUserIngredients.push({id: `${userIngredient.ingredient}`, amount: `${userIngredient.amount}`, name: `${ingredient.name}`})
+    this.shelf.map(userIngredient => {
+      ingredientsData.forEach(ingredient => {
+        if (ingredient.id === userIngredient.ingredient) {
+          userIngredient.name = ingredient.name
         }
       })
     })
-    return nameOfUserIngredients;
+    return this.shelf
   }
-
+  //Could we use the findRecipeIngredientInfo method from the Recipe class to instead of repeating the logic here?
   determineIfEnoughIngredientsForRecipe(recipe) {
-    let userIngredientAmt = this.showPantryIngredientInfo();
-    for(var i = 0; i < recipe.ingredients.length; i++) {
-      let match = false 
-      for(var j = 0; j < userIngredientAmt.length; j++) {
-        if (recipe.ingredients[i].id === parseInt(userIngredientAmt[j].id)) {
-          match = true
-        }
-        if ((recipe.ingredients[i].id === parseInt(userIngredientAmt[j].id)) && (userIngredientAmt[j].amount < recipe.ingredients[i].quantity.amount)) {
-          return "You don't have enough ingredients to cook this recipe";
-        }
+    let pantryIngredients = this.showPantryIngredientInfo();
+    let recipeIngredients = recipe.findRecipeIngredientInfo();
+    const ingredientsNeeded = recipeIngredients.filter(ingredient => {
+      const enoughIngredients = pantryIngredients.every(item => ingredient.id === item.id && item.amount >= parseInt(ingredient.quantity.amount));
+      if (!enoughIngredients) {
+        return ingredient
+        //returns an array of recipe ingredient objects that are missing from the pantry or less than the amount needed to make the recipe
       }
-      if (match === false) {
-       return "You don't have enough ingredients to cook this recipe";
-      
-      }
-    } 
-    return "Let's get cookin', good lookin!"
+    })
+    return ingredientsNeeded
   }
-}
-
-// determineIfEnoughIngredientsForRecipe(recipe) {
-//   let userIngredientAmt = this.showPantryIngredientInfo(); 
-//   recipe.ingredients.forEach((recipeIngredient) => {
-//     let match = false 
-//     userIngredientAmt.forEach((pantryIngredient) => {
-//       if (recipeIngredient.id === parseInt(pantryIngredient.id)) {
-//         console.log('one')
-//         match = true
-//       }
-//       if ((recipeIngredient.id === parseInt(pantryIngredient.id)) && (pantryIngredient.amount < recipeIngredient.quantity.amount)) {
-//         console.log('two', pantryIngredient.amount)
-//         console.log('twohalf', recipeIngredient.quantity.amount)
-//         return "You don't have enough ingredients to cook this recipe";
-//       }
-//     })
-//     if (match === false) {
-//       console.log('three')
-//       return "You don't have enough ingredients to cook this recipe";
-//   }
-//    })
-//    console.log('four')
-//    return "Let's get cookin', good lookin!"
-//   }
-// }
-
-
+  findAmountNeeded(recipe) {
+    let recipeIngredients = recipe.findRecipeIngredientInfo();
+    const newShelf = recipeIngredients.map(recipeIngredient => {
+      this.shelf.forEach(pantryIngredient => {
+        if (recipeIngredient.id === pantryIngredient.ingredient) {
+          recipeIngredient.amountNeeded = pantryIngredient.amount + (parseInt(recipeIngredient.quantity.amount) - pantryIngredient.amount)
+        }
+        if (recipeIngredient.id !== pantryIngredient.ingredient) {
+          recipeIngredient.amountNeeded = recipeIngredient.quantity.amount
+        }
+      })
+        return recipeIngredient
+    })
+    return newShelf.filter(ingredient => ingredient.amountNeeded)
+  }
+};
 
 export default Pantry;

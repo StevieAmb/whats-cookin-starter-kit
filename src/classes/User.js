@@ -14,18 +14,6 @@ class User {
     this.recipesToCook = [];
     this.recipeMatch = [];
   }
- 
-  showPantryIngredientInfo() {
-    let nameOfUserIngredients = [];
-    ingredientsData.forEach(ingredient => {
-      this.pantry.forEach(userIngredient => {
-        if(ingredient.id === userIngredient.ingredient) {
-          nameOfUserIngredients.push(`${userIngredient.amount} ${ingredient.name}`)
-        }
-      })
-    })
-    return nameOfUserIngredients;
-  }
   
   addFavoriteRecipe(recipe) {
     if(!this.favoriteRecipes.includes(recipe)) {

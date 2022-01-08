@@ -217,8 +217,8 @@ const displayRecommendedRecipeInfo = (event) => {
       ingredientsList.innerHTML = ``  
       recipeIngredients.forEach((ingredient) => {
         ingredientsList.insertAdjacentHTML('beforeEnd', `
-        <li>${ingredient}</li>`)
-      })
+        <li> ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name} </li>`)
+        })
       instructionsList.innerHTML = ``
       recipeInstructions.forEach((instruction) => {
         instructionsList.insertAdjacentHTML('beforeEnd', `
@@ -262,7 +262,7 @@ const showRecipeInformation = (event) => {
       ingredientsList.innerHTML = ``  
       recipeIngredients.forEach((ingredient) => {
         ingredientsList.insertAdjacentHTML('beforeEnd', `
-        <li>${ingredient} </li>`)
+        <li>${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}</li>`)
       })
       instructionsList.innerHTML = ``
       recipeInstructions.forEach((instruction) => {
