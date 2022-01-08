@@ -17,7 +17,6 @@ class Pantry {
     return this.shelf
   }
   //Could we use the findRecipeIngredientInfo method from the Recipe class to instead of repeating the logic here?
-
   determineIfEnoughIngredientsForRecipe(recipe) {
     let pantryIngredients = this.showPantryIngredientInfo();
     let recipeIngredients = recipe.findRecipeIngredientInfo();
@@ -30,7 +29,6 @@ class Pantry {
     })
     return ingredientsNeeded
   }
-
   findAmountNeeded(recipe) {
     let recipeIngredients = recipe.findRecipeIngredientInfo();
     const newShelf = recipeIngredients.map(recipeIngredient => {
@@ -42,11 +40,10 @@ class Pantry {
           recipeIngredient.amountNeeded = recipeIngredient.quantity.amount
         }
       })
-      return recipeIngredient
+        return recipeIngredient
     })
     return newShelf.filter(ingredient => ingredient.amountNeeded)
   }
-
   cookRecipe(recipe) {
     return this.shelf.reduce((acc, pantryIngredient) => {
       recipe.ingredients.forEach(recipeIngredient => {
@@ -75,7 +72,7 @@ class Pantry {
 
   makeShoppingList(ingredientId) {
     ingredientsData.reduce((acc, ingredient) => {
-      
+
     }, [])
   }
 
@@ -84,9 +81,9 @@ class Pantry {
     this.shelf.reduce((acc, pantryItem) => {
 
     }, [])
-    
-  }
 
+  }
+  
 };
 
 export default Pantry;
