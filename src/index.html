@@ -50,6 +50,7 @@
     <button class="unfavorite-button hidden" id="unfavoritingButton">unfavorite this recipe</button>
     <button class="add-recipe-to-cook-button" id="addRecipeToCookButton">Add Recipe To Cook</button>
     <button class="remove-recipe-to-cook-button" id="removeRecipeToCookButton">Remove Recipe To Cook</button>
+    <button class="go-shopping" id="goShopping">Go Shopping</button>
     <h2 id="recipeTitle">Recipe Title</h2> 
     <img class="current-recipe-image" id= "currentRecipeImage" src="./images/cookies.jpg" alt="food-image">
     <h3>Recipe ingredients</h3>
@@ -73,6 +74,16 @@
   <section class="fave-recipes-filtered-view" id="userFaveRecipeFilteredView">
   </section>
   <section class="recipes-to-cook" id="recipesToCookView">
+  </section>
+  <section class="user-shopping-view" id="userShoppingView">
+    <form>
+      <label for="amt">Amount Needed:</label><br>
+      <input type="text" id="amt" name="amt" required><br>
+      <label for="ingredient">Ingredient Needed:</label><br>
+      <input type="text" id="ingredient" name="ingredient" required>
+      <input type="submit" id="shoppingSubmitButton" value="Get Your Things!">
+    </form>
+    <p class="error-message" id="errorMessage">Error Messages</p>
   </section>
 </body>
 </html>

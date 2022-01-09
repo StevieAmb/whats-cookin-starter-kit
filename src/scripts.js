@@ -23,12 +23,17 @@ const unfavoritingButton = document.getElementById('unfavoritingButton');
 const recipesToCookButton = document.getElementById('recipesToCookButton');
 const addRecipeToCookButton = document.getElementById('addRecipeToCookButton');
 const removeRecipeToCookButton = document.getElementById('removeRecipeToCookButton');
-
+const goShoppingButton = document.getElementById('goShopping');
+const shoppingSubmitButton = document.getElementById('shoppingSubmitButton')
 
 
 //USER INPUT FIELD
 const userSearchBox = document.getElementById('userSearchBox');
 const mainPageNavForm = document.getElementById('mainPageNavForm');
+//USER INPUT FIELDS - POST
+const userAmountNeeded = document.getElementById('amt');
+const userIngredientIdNeeded = document.getElementById('ingredient');
+
 
 //VIEWS
 const suggestedRecipe = document.getElementById('suggestedRecipe');
@@ -38,6 +43,7 @@ const recipeInfoView = document.getElementById('recipeInfoView');
 const allRecipesView = document.getElementById('allRecipesView');
 const favoriteRecipesView = document.getElementById('favoriteRecipesView');
 const recipesToCookView = document.getElementById('recipesToCookView');
+const userShoppingView = document.getElementById('userShoppingView');
 
 
 //RANDOM
@@ -46,6 +52,7 @@ const currentRecipeImage = document.getElementById('currentRecipeImage');
 const instructionsList = document.getElementById('instructionsList');
 const ingredientsList = document.getElementById('ingredientsList');
 const totalCost = document.getElementById('totalCost');
+const errorHandlingLine = document.getElementById('errorMessage')
 
 
 //CLASS INSTANSTIATION
@@ -55,23 +62,55 @@ let newUser;
 let groceryStore;
 
 //EXECUTION FUNCTIONS
+
+
+const addIngredientsToPantry = () => {
+  fetch('http://localhost:3001/api/v1/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        userId: newUser.id,
+        ingredientID: userIngredientIdNeeded.value,
+        ingredientModification: userAmountNeeded.value
+      })
+    })
+    .then(response => displayUserErrorMessage(response))
+    .catch(err => {
+        displayServerErrorMessage(err)
+      });
+    }
+    
+    // const displayUserErrorMessage = (response) => {
+      //   if (!response.ok) {
+
+        //     errorHandlingLine.innerText = 'Please fill out all fields!';
+        //   } else {
+          //     return response.json();
+          //   }
+          // }
+          
+          // const displayServerErrorMessage = (err) => {
+            //   errorHandlingLine.innerText = err.message;
+            // }
+
+                
 const loadPage = () => {
   suggestedRecipe.innerHTML = '';
   getData()
-    .then((data) => {
-      let randomUser = data[2].usersData[getRandomIndex(data[2].usersData)];
-      newUser = new User(randomUser);
-      cookbook = new RecipeBox(data[1].recipeData);
-      recipe = new Recipe(data[1].recipeData);
-      groceryStore = data[0].ingredientsData;
-      displayHomePage();
-    })
+  .then((data) => {
+    let randomUser = data[2][getRandomIndex(data[2])];
+    newUser = new User(randomUser);
+    cookbook = new RecipeBox(data[1]);
+    recipe = new Recipe(data[1]);
+    groceryStore = data[0];
+    displayHomePage();
+  })
 };
-
+                
 const getData = () => {
   return Promise.all([fetchApiData('ingredients'), fetchApiData('recipes'), fetchApiData('users')])
 };
-
+                
 //USER STORY EXPERIENCE
 
 
@@ -452,12 +491,19 @@ const showRecipeInformationView = () => {
   hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView])
 };
 
+const showShoppingCart = () => {
+  show([userShoppingView, homeButton, ])
+  hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView, favoriteRecipesButton])
+}
+
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length);
 };
   
   
 //EVENT LISTENERS
+// const shoppingSubmitButton.addEventListener('click', addIngredientsToPantry)
+
 window.addEventListener('load', loadPage);
 unfavoritingButton.addEventListener('click', removeFavoriteRecipe);
 favoritingButton.addEventListener('click', addFavorite);

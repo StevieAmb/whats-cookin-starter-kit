@@ -61,6 +61,7 @@ input {
 
 label {
   font-family: $button-font;
+  color: white;
 
 }
 
@@ -134,8 +135,6 @@ img {
 .favorited-recipes-btn:focus,
 .see-all-recipes:hover,
 .see-all-recipes:focus,
-.see-user-pantry-button:hover,
-.see-user-pantry-button:focus,
 .try-this-recipe-btn:hover,
 .try-this-recipe-btn:focus {
   background-color: #81B47E;
@@ -169,7 +168,7 @@ h3 {
 .recipe-results {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: row;
 }
 
 .recipes-views,
