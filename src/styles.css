@@ -132,6 +132,7 @@ img {
   border-style:solid;
   border-color: $border-color;
   border-width: 15px;
+  width: 25em;
 }
 
 .suggested-recipe-image {
@@ -195,6 +196,7 @@ h3 {
 .recipe-results {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .recipes-views,
