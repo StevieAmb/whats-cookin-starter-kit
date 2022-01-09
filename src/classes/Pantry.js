@@ -70,19 +70,19 @@ class Pantry {
     // })
   }
 
-  makeShoppingList(ingredientId) {
-    ingredientsData.reduce((acc, ingredient) => {
+  // makeShoppingList(ingredientId) {
+  //   ingredientsData.reduce((acc, ingredient) => {
 
-    }, [])
-  }
+  //   }, [])
+  // }
 
-  shopForIngredients() {
-    let shoppingList = this.makeShoppingList();
-    this.shelf.reduce((acc, pantryItem) => {
+  // shopForIngredients() {
+  //   let shoppingList = this.makeShoppingList();
+  //   this.shelf.reduce((acc, pantryItem) => {
 
-    }, [])
+  //   }, [])
 
-  }
+  // }
   
 };
 
