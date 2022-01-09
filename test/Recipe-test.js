@@ -41,115 +41,104 @@ describe('Recipe', () => {
       expect(myRecipe.tags).to.deep.equal(recipeData[0].tags);
     });
     
-    it('Should return the names of the ingredients in a recipe', () => {
-      const expected = [{
-          id: 20081,
-          quantity: {
-            amount: 1.5,
-            unit: 'c'
-          },
-          name: 'wheat flour',
-          amountNeeded: 1.5
+  it('Should return the names of the ingredients in a recipe', () => {
+    const expected = [{
+        id: 20081,
+        quantity: {
+          amount: 1.5,
+          unit: 'c'
         },
-        {
-          id: 18372,
-          quantity: {
-            amount: 0.5,
-            unit: 'tsp'
-          },
-          name: 'bicarbonate of soda',
-          amountNeeded: 0.5
+        name: 'wheat flour'
+      },
+      {
+        id: 18372,
+        quantity: {
+          amount: 0.5,
+          unit: 'tsp'
         },
-        {
-          id: 1123,
-          quantity: {
-            amount: 1,
-            unit: 'large'
-          },
-          name: 'eggs',
-          amountNeeded: 1
+        name: 'bicarbonate of soda'
+      },
+      {
+        id: 1123,
+        quantity: {
+          amount: 1,
+          unit: 'large'
         },
-        {
-          id: 19335,
-          quantity: {
-            amount: 0.5,
-            unit: 'c'
-          },
-          name: 'sucrose',
-          amountNeeded: 0.5
+        name: 'eggs'
+      },
+      {
+        id: 19335,
+        quantity: {
+          amount: 0.5,
+          unit: 'c'
         },
-        {
-          id: 19206,
-          quantity: {
-            amount: 3,
-            unit: 'Tbsp'
-          },
-          name: 'instant vanilla pudding',
-          amountNeeded: 3
+        name: 'sucrose'
+      },
+      {
+        id: 19206,
+        quantity: {
+          amount: 3,
+          unit: 'Tbsp'
         },
-        {
-          id: 19334,
-          quantity: {
-            amount: 0.5,
-            unit: 'c'
-          },
-          name: 'brown sugar',
-          amountNeeded: 0.5
+        name: 'instant vanilla pudding'
+      },
+      {
+        id: 19334,
+        quantity: {
+          amount: 0.5,
+          unit: 'c'
         },
-        {
-          id: 2047,
-          quantity: {
-            amount: 0.5,
-            unit: 'tsp'
-          },
-          name: 'salt',
-          amountNeeded: 0.5
+        name: 'brown sugar'
+      },
+      {
+        id: 2047,
+        quantity: {
+          amount: 0.5,
+          unit: 'tsp'
         },
-        {
-          id: 1012047,
-          quantity: {
-            amount: 24,
-            unit: 'servings'
-          },
-          name: 'fine sea salt',
-          amountNeeded: 24
+        name: 'salt'
+      },
+      {
+        id: 1012047,
+        quantity: {
+          amount: 24,
+          unit: 'servings'
         },
-        {
-          id: 10019903,
-          quantity: {
-            amount: 2,
-            unit: 'c'
-          },
-          name: 'semi sweet chips',
-          amountNeeded: 2
+        name: 'fine sea salt'
+      },
+      {
+        id: 10019903,
+        quantity: {
+          amount: 2,
+          unit: 'c'
         },
-        {
-          id: 1145,
-          quantity: {
-            amount: 0.5,
-            unit: 'c'
-          },
-          name: 'unsalted butter',
-          amountNeeded: 0.5
+        name: 'semi sweet chips'
+      },
+      {
+        id: 1145,
+        quantity: {
+          amount: 0.5,
+          unit: 'c'
         },
-        {
-          id: 2050,
-          quantity: {
-            amount: 0.5,
-            unit: 'tsp'
-          },
-          name: 'vanilla',
-          amountNeeded: 0.5
-        }
-      ]
+        name: 'unsalted butter'
+      },
+      {
+        id: 2050,
+        quantity: {
+          amount: 0.5,
+          unit: 'tsp'
+        },
+        name: 'vanilla'
+      }
+    ]
+  
+  const actual = myRecipe.findRecipeIngredientInfo();
+  
+  expect(actual).to.deep.equal(expected);
+});
 
-      const actual = myRecipe.findRecipeIngredientInfo();
-
-      expect(actual).to.deep.equal(expected);
-    });
-
-    it('Should return recipe instructions ', () => {
-      let collectInstructions = recipeData[0].instructions.reduce((instructionBox, elem) => {
+it('Should return recipe instructions ', () => {
+  let collectInstructions = recipeData[0].instructions.reduce((instructionBox, elem) => {
         instructionBox.push(elem.instruction)
         return instructionBox;
       }, [])    
