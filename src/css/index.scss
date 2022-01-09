@@ -2,12 +2,6 @@
 @import './_reset.scss';
 
 
-* {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  border-radius: 3px;
-}
-
 body, html {
   margin: 0;
   height: 100vh;
@@ -35,6 +29,7 @@ h1 {
   border-color: $border-color;
   border-width: 5px;
   background-color: $text-bg-color;
+  @include header-options()
 }
 
 .title {
@@ -166,6 +161,7 @@ h3 {
   margin: 0;
   background-color: $text-bg-color;
   width: 30em;
+  @include header-options()
 }
 
 .all-recipes-view,
@@ -196,7 +192,8 @@ h3 {
 h3 {
   margin: 0;
   width: fit-content;
-  border-color: $border-color
+  border-color: $border-color;
+  @include header-options()
 }
 
 ol,

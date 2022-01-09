@@ -5,6 +5,7 @@ import Recipe from './classes/Recipe';
 import User from './classes/User';
 import { usersData } from './data/users';
 import './css/index.scss';
+import './css/_variables.scss';
 
 //BUTTONS
 const favoriteRecipesButton = document.getElementById('favoriteRecipesButton');
@@ -419,13 +420,13 @@ const showMainPage = () => {
   displayHomePage();
   addOrRemoveFavoriteButton();
   show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton, searchButton]);
-  hide([favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView]);
+  hide([favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView, recipesToCookView]);
 };
 
 const showRecipeSearchResults = () => {
   addOrRemoveFavoriteButton();
   show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm, searchButton]);
-  hide([ mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView]);
+  hide([ mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView, recipesToCookView]);
 };
 
 const showFavoriteRecipesView = () => {
@@ -467,12 +468,7 @@ searchButton.addEventListener('click', showSearchResults);
 searchButton2.addEventListener('click', searchFavoriteResults);
 dropDownButton.addEventListener('click', showDropDown);
 myDropdown.addEventListener('click', searchByTags);
-allRecipesView.addEventListener('click', showRecipeInformation);
-allRecipesView.addEventListener("keyup", function(e) {
-  if (e.keyCode === 13) {
-    allRecipesView.addEventListener('click', showRecipeInformation);
-  }
-});
+allRecipesView.addEventListener('click', showRecipeInformation); 
 recipeResultsView.addEventListener('click', showRecipeInformation);
 tryRecipeButton.addEventListener('click', displayRecommendedRecipeInfo);
 favoriteRecipesView.addEventListener('click', displaySelectedFavoriteRecipe);
