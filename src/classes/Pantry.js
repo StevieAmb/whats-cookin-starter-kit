@@ -25,24 +25,29 @@ class Pantry {
     return recipeIngredients.reduce((acc, ingredient) => {
       let pantryItemStatus = pantryIngredients.some((item) => (item.name === ingredient.name && item.amount >= parseInt(ingredient.quantity.amount)))
       if (!acc.includes(ingredient) && !pantryItemStatus) {
+        pantryIngredients.forEach(item => {
+          if(item.name)
+        })
+        ingredient.amountNeeded = item.amount - (parseInt(ingredient.quantity.amount)
         acc.push(ingredient)
       }
       return acc
     }, []);
   }
-  findAmountNeeded(recipe) {
-    console.log(recipe.findRecipeIngredientInfo())
-    let ingredientsNeeded = this.determineIfEnoughIngredientsForRecipe();
-    let theIngredients = recipe.findRecipeIngredientInfo();
-    console.log('NEED', ingredientsNeeded, 'EXIST', theIngredients)
-    const newShelf = ingredientsNeeded.map(neededIngredient => {
-      theIngredients.forEach(theIngredient => {
-        if (theIngredient.id === neededIngredient.amount) {
-          console.log('hi')
-        }
-      })
-    })
-  }
+  // findAmountNeeded(recipe) {
+  //   // console.log('THIS ONE', recipe.findRecipeIngredientInfo())
+  //   let theIngredients = recipe.findRecipeIngredientInfo();
+  //   let ingredientsNeeded = this.determineIfEnoughIngredientsForRecipe(recipe);
+  //   console.log('NEED', ingredientsNeeded, 'EXIST', theIngredients)
+  //   const newShelf = ingredientsNeeded.map(neededIngredient => {
+  //     theIngredients.forEach(theIngredient => {
+  //       if (theIngredient.id === neededIngredient.id) {
+  //         neededIngredient.amountNeeded = 
+  //         console.log('hi')
+  //       }
+  //     })
+  //   })
+  // }
 };
 
 
