@@ -80,7 +80,8 @@ describe('Recipe', () => {
           amount: 3,
           unit: 'Tbsp'
         },
-        name: 'instant vanilla pudding'
+        name: 'instant vanilla pudding',
+        amountNeeded: 1
       },
       {
         id: 19334,
@@ -88,7 +89,8 @@ describe('Recipe', () => {
           amount: 0.5,
           unit: 'c'
         },
-        name: 'brown sugar'
+        name: 'brown sugar',
+        amountNeeded: 0.5
       },
       {
         id: 2047,
@@ -104,7 +106,8 @@ describe('Recipe', () => {
           amount: 24,
           unit: 'servings'
         },
-        name: 'fine sea salt'
+        name: 'fine sea salt',
+        amountNeeded: 24
       },
       {
         id: 10019903,
@@ -112,7 +115,8 @@ describe('Recipe', () => {
           amount: 2,
           unit: 'c'
         },
-        name: 'semi sweet chips'
+        name: 'semi sweet chips',
+        amountNeeded: 2
       },
       {
         id: 1145,
