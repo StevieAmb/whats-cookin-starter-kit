@@ -1,13 +1,10 @@
-import './styles.css';
 import { fetchApiData } from './apiCalls';
 import './images/cookies.jpg';
 import RecipeBox from './classes/RecipeBox';
 import Recipe from './classes/Recipe';
-// import { ingredientsData } from '../src/data/ingredients';
-// import { recipeData } from '../src/data/recipes';
-// import { usersData } from '../src/data/users';
 import User from './classes/User';
 import { usersData } from './data/users';
+import './css/index.scss';
 
 //BUTTONS
 const favoriteRecipesButton = document.getElementById('favoriteRecipesButton');
@@ -174,6 +171,8 @@ const displayHomePage = () => {
   `<img class="suggested-recipe-image" src="${randomRecipe.image}" alt="food image" id="${randomRecipe.id}">
   <h2>${randomRecipe.name}</h2>`)
   tryRecipeButton.value = `${randomRecipe.id}`
+  console.log('tryBtnValue', tryRecipeButton.value)
+  console.log('recipeId', randomRecipe.id)
 };
 
 const showDropDown = () => {
@@ -350,7 +349,6 @@ const displayUserPantry = () => {
     userPantryName.insertAdjacentHTML('beforeEnd', `
     <li>${ingredient}</li>`)
   })
-  
 }
 
 
@@ -472,8 +470,7 @@ myDropdown.addEventListener('click', searchByTags);
 allRecipesView.addEventListener('click', showRecipeInformation);
 allRecipesView.addEventListener("keyup", function(e) {
   if (e.keyCode === 13) {
-     allRecipesView.removeEventListener(e);
-      showRecipeInformation();
+    allRecipesView.addEventListener('click', showRecipeInformation);
   }
 });
 recipeResultsView.addEventListener('click', showRecipeInformation);
