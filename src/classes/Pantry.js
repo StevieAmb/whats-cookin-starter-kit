@@ -94,8 +94,15 @@ class Pantry {
       recipe.ingredients.forEach(recipeIngredient => {
         if (pantryIngredient.ingredient === recipeIngredient.id) {
           pantryIngredient.amount = pantryIngredient.amount - recipeIngredient.quantity.amount
+          
         }
-        if (pantryIngredient.amount) {
+        if (pantryIngredient.amount < 0) {
+          // let index = pantryIngredient.indexof();
+          this.shelf.splice(index, 1)
+        }
+        // console.log(pantryIngredient.name, pantryIngredient.amount, pantryIngredient.amount > 0 && !acc.includes(pantryIngredient))
+        if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount > 0)) {
+          console.log((!acc.includes(pantryIngredient)) && (pantryIngredient.amount > 0))
           acc.push(pantryIngredient)
           this.shelf = acc
         }
@@ -106,11 +113,7 @@ class Pantry {
 
   makeShoppingList(ingredientNames) {
     return ingredientNames.forEach(name => {
-      ingredientsData.map(ingredient => {
-        if (ingredient.name === name) {
-          return ingredient
-        }
-      })
+      ingredientsData.filter(ingredient => ingredient.name === name)
     })
   }
   //maybe move this to the User class and establist a property that holds a shopping list
