@@ -4,31 +4,32 @@ const { ingredientsData } = require("../data/ingredients");
 class RecipeBox {
   constructor(recipesCollection) {
     this.recipesCollection = recipesCollection;
-    this.matchingRecipesTags = [];
-    this.matchingRecipes = [];
+    // this.matchingRecipesTags = [];
+    // this.matchingRecipes = [];
     this.recipeMatch = [];
   }
+
   storeByTag(theUserInput) {
     let lowerCaseInput = theUserInput.toLowerCase();
 
-    this.matchingRecipesTags = this.recipesCollection.filter((recipe) => {
-      if (recipe.tags.includes(lowerCaseInput) && !this.matchingRecipesTags.includes(recipe)) {
+    return this.recipesCollection.filter((recipe) => {
+      if (recipe.tags.includes(lowerCaseInput)) {
         return recipe
       }
     })
-    return this.matchingRecipesTags;
+    // return this.matchingRecipesTags;
   }
-  
+
   findRecipeName(theUserInput) {
     let lowerCaseInput = theUserInput.toLowerCase();
 
-    this.matchingRecipes = this.recipesCollection.filter((recipe) => {
+    return this.recipesCollection.filter((recipe) => {
       let lowerCasedName = recipe.name.toLowerCase();
-      if (lowerCasedName.includes(lowerCaseInput) && !this.matchingRecipes.includes(recipe)) {
+
+      if (lowerCasedName.includes(lowerCaseInput)) {
         return recipe
       }
     })
-    return this.matchingRecipes;
   }
 
   findIngredientById(theUserInput) {
@@ -45,9 +46,9 @@ class RecipeBox {
         }
       })
     })
+    // console.log('FILTER-ID', this.recipeMatch)
     return this.recipeMatch;
   }
-
 };
 
 export default RecipeBox;
