@@ -26,21 +26,22 @@ class Recipe {
   getRecipeInstructions() {
     return this.instructions.map((elem) => {
      return elem.instruction
-  })
-}
+    })
+  }
   
   calculateRecipeCost() {
     let totalCost;
-       const total = this.ingredients.reduce((acc, recipeIngredient) => {
-         let foundID = ingredientsData.find(elem => {
-           return elem.id === recipeIngredient.id
-         });
-         totalCost = (recipeIngredient.quantity.amount * foundID.estimatedCostInCents) / 100;
-         acc += totalCost;
+    const total = this.ingredients.reduce((acc, recipeIngredient) => {
+      let foundID = ingredientsData.find(elem => {
+        return elem.id === recipeIngredient.id
+      });
+      totalCost = (recipeIngredient.quantity.amount * foundID.estimatedCostInCents) / 100;
+      acc += totalCost;
         return acc;
    }, 0);
     return total.toFixed(2);
   }
+
 };
 
 export default Recipe;
