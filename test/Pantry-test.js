@@ -31,6 +31,13 @@ describe('Pantry', () => {
             "amount": 0.5,
             "unit": "tsp"
           }
+        },
+        {
+          "id": 1230,
+          "quantity": {
+            "amount": 2,
+            "unit": "c"
+          }
         }
       ],
       "instructions": [{
@@ -146,22 +153,39 @@ describe('Pantry', () => {
   });  
 
   it('Should be able to use pantry items to cook a recipe', () => {
-    pantry.cookRecipe(myRecipe)
-    console.log(pantry.shelf)
-    // expect(neededIngredients).to.equal([]);
-    // expect(neededIngredients2).to.equal();
+    let cookedRecipe = pantry.cookRecipe(myRecipe1)
+    expect(cookedRecipe).to.equal(pantry.shelf);
   });
 
-  it.skip('Should be able to find ingredients to shop for', () => {
-    let ingredientNames = ['wheat flour', 'fine sea salt', 'oreos', 'fine sea salt']
+  it('Should be able to find ingredients to shop for', () => {
+    let ingredientNames = ['wheat flour', 'fine sea salt', 'extra virgin olive oil', 'fine sea salt']
     let groceries = pantry.makeShoppingList(ingredientNames);
-    console.log('shopping list', groceries)
-    expect(groceries).to.equal();
+    expect(groceries).to.deep.equal([{
+            id: 20081,
+            name: 'wheat flour',
+            estimatedCostInCents: 142
+          },
+          {
+            id: 1012047,
+            name: 'fine sea salt',
+            estimatedCostInCents: 528
+          },
+          {
+            id: 1034053,
+            name: 'extra virgin olive oil',
+            estimatedCostInCents: 305
+          },
+          {
+            id: 1012047,
+            name: 'fine sea salt',
+            estimatedCostInCents: 528
+          }
+        ]);
   });
 
-  it.skip('Should be able to shop for ingredients and add them to the pantry', () => {
+  it('Should be able to shop for ingredients and add them to the pantry', () => {
     // console.log('og pantry', pantry.shelf)
-    let ingredientNames = ['wheat flour', 'fine sea salt', 'oreos', 'fine sea salt']
+    let ingredientNames = ['wheat flour', 'fine sea salt', 'extra virgin olive oil', 'fine sea salt']
     pantry.makeShoppingList(ingredientNames);
     let updatedPantry = pantry.shopForIngredients(ingredientNames);
     // console.log('after shopping', pantry.shelf)
