@@ -53,45 +53,44 @@ class Pantry {
           pantryIngredient.amount = pantryIngredient.amount - recipeIngredient.quantity.amount
 
         }
-        // else if (pantryIngredient.amount <= 0) {
-        //   let index = this.shelf.indexOf(pantryIngredient);
-        //   this.shelf.splice(index, 1)
-        // }
-        // console.log(pantryIngredient.name, pantryIngredient.amount, pantryIngredient.amount > 0 && !acc.includes(pantryIngredient))
-        else if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount > 0)) {
-          // console.log((!acc.includes(pantryIngredient)) && (pantryIngredient.amount > 0))
-          acc.push(pantryIngredient)
-          this.shelf = acc
-        }
       })
-      return this.shelf
+      if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount !== 0)) {
+        acc.push(pantryIngredient)
+        this.shelf = acc
+      }
+        return acc
     }, [])
   }
 
-  // makeShoppingList(ingredientNames) {
-  //   return ingredientNames.forEach(name => {
-  //     ingredientsData.filter(ingredient => ingredient.name === name)
-  //   })
-  // }
-  // //maybe move this to the User class and establist a property that holds a shopping list
+  makeShoppingList(ingredientNames) {
+    return ingredientNames.map(name => {
+    ingredientsData.forEach(ingredient => {
+        if (ingredient.name === name) {
+          name = ingredient
+        }
+      })
+      return name
+    })  
+  }
+  
+  shopForIngredients(ingredientNames) {
+    let groceries = this.makeShoppingList(ingredientNames);
+    // console.log('working', groceries)
+    this.shelf.reduce((acc, pantryItem) => {
+      groceries.forEach(listItem => {
+        if (!acc.includes(pantryItem) && pantryItem.ingredient === listItem.id) {
+          pantryItem.amount++
+          acc.push(pantryItem)
+        } else if (!acc.includes(listItem)) {
+          acc.push(listItem)
+        }
+      })
+      this.shelf = acc
+      // console.log(this.shelf)
+      return acc
+    }, [])
+  }
 
-  // shopForIngredients(ingredientNames) {
-  //   let groceries = this.makeShoppingList(ingredientNames);
-  //   // console.log('working', groceries)
-  //   this.shelf.reduce((acc, pantryItem) => {
-  //     groceries.forEach(item => {
-  //       if (pantryItem.name === item.name) {
-  //         pantryItem.amount++
-  //         acc.push(pantryItem)
-  //       } else if (!pantryItem) {
-  //         acc.push(item)
-  //       }
-  //     })
-  //     this.shelf = acc
-  //     // console.log(this.shelf)
-  //     return acc
-  //   }, [])
-  // }
 };
 
 export default Pantry;
