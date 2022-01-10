@@ -88,7 +88,7 @@ describe('User', () => {
       user.addFavoriteRecipe(myRecipe2);
       user.addFavoriteRecipe(myRecipe3);
 
-      expect(user.filterFavoritesByIngredient('Chocolate')).to.deep.equal(user.recipeMatch);
+      expect(user.filterFavoritesByIngredient('Chocolate')).to.deep.equal([myRecipe]);
     });
   
     it('Should be able to search favorite recipes by tag', () => {
