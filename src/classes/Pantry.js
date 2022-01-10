@@ -73,23 +73,27 @@ class Pantry {
     })  
   }
   
-  shopForIngredients(ingredientNames) {
-    let groceries = this.makeShoppingList(ingredientNames);
-    // console.log('working', groceries)
-    this.shelf.reduce((acc, pantryItem) => {
-      groceries.forEach(listItem => {
-        if (!acc.includes(pantryItem) && pantryItem.ingredient === listItem.id) {
-          pantryItem.amount++
-          acc.push(pantryItem)
-        } else if (!acc.includes(listItem)) {
-          acc.push(listItem)
-        }
-      })
-      this.shelf = acc
-      // console.log(this.shelf)
-      return acc
-    }, [])
-  }
+  // shopForIngredients(ingredientNames) {
+  //   let groceries = this.makeShoppingList(ingredientNames);
+  //   this.shelf.reduce((acc, pantryItem) => {
+  //     groceries.forEach(listItem => {
+  //       if (!acc.includes(listItem)) {
+  //         listItem = {
+  //           ingredient: listItem.id,
+  //           amount: 1,
+  //           name: listItem.name
+  //         }
+  //         acc.push(listItem)
+  //       }
+  //       if (!acc.includes(pantryItem) && pantryItem.ingredient === listItem.id) {
+  //         pantryItem.amount++
+  //         acc.push(pantryItem)
+  //       }
+  //     })
+  //       this.shelf = acc
+  //     return acc
+  //   }, [])
+  // }
 
 };
 
