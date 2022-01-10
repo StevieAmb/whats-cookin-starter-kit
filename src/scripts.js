@@ -123,13 +123,9 @@ const getData = () => {
 
 const searchByInput = () => {
   if (nameRadioButton.checked) {
-    cookbook.matchingRecipes = [];
-    cookbook.findRecipeName(userSearchBox.value)
-    return cookbook.matchingRecipes;
+   return cookbook.findRecipeName(userSearchBox.value)
   } else if (ingredientRadioButton.checked) {
-    cookbook.recipeMatch = [];
-    cookbook.findIngredientById(userSearchBox.value);
-    return cookbook.recipeMatch;
+   return cookbook.findIngredientById(userSearchBox.value);
   } 
 };
 
@@ -156,15 +152,12 @@ const searchByTags = (event) => {
 };
 
 const searchByFavoriteInput = () => {
+  console.log('userValue', userSearchBox.value)
   if (nameRadioButton.checked) {
-    let recipeByName = newUser.filterFavoritesByName(userSearchBox.value)
-    return recipeByName;
+    return newUser.filterFavoritesByName(userSearchBox.value)
   } else if (ingredientRadioButton.checked) {
-    newUser.recipeMatch = [];
-    newUser.filterFavoritesByIngredient(userSearchBox.value);
-    return newUser.recipeMatch;
-  } else if (!nameRadioButton.checked && !ingredientRadioButton) {
-    userSearchBox.disabled;
+    console.log('favoritesByInput', newUser.filterFavoritesByIngredient(userSearchBox.value))
+    return newUser.filterFavoritesByIngredient(userSearchBox.value);
   }
 };
 
@@ -386,7 +379,7 @@ const displaySelectedFavoriteRecipe = (event) => {
       ingredientsList.innerHTML = ``
       recipeIngredients.forEach((ingredient) => {
         ingredientsList.insertAdjacentHTML('beforeEnd', `
-        <li>${ingredient}</li>`)
+        <li>${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}</li>`)
       })
       instructionsList.innerHTML = ``
       recipeInstructions.forEach((instruction) => {
