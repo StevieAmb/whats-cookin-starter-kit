@@ -53,16 +53,18 @@ class User {
   filterFavoritesByIngredient(userInput) {
     return this.favoriteRecipes.reduce((acc, recipe) => {
       const matchingIngredient = ingredientsData.find((ingredient) => {
-        if (userInput === ingredient.name) {
+        if (ingredient.name.includes(userInput)) {
+          return ingredient
         }
-        return ingredient
       });
       recipe.ingredients.filter((ingredient) => {
         if (ingredient.id === matchingIngredient.id) {
+          console.log('two')
           acc.push(recipe)
         }
         return recipe
       })
+      console.log('acc', acc)
       return acc
     }, [])
   }
