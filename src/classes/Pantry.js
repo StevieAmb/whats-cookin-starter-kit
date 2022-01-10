@@ -1,5 +1,7 @@
-const { ingredientsData } = require("../data/ingredients");
-const { userData } = require("../data/users");
+const {
+  ingredientsData
+} = require("../data/ingredients");
+// const { userData } = require("../data/users");
 
 class Pantry {
   constructor(user) {
@@ -16,34 +18,83 @@ class Pantry {
     })
     return this.shelf
   }
-  //Could we use the findRecipeIngredientInfo method from the Recipe class to instead of repeating the logic here?
+
   determineIfEnoughIngredientsForRecipe(recipe) {
     let pantryIngredients = this.showPantryIngredientInfo();
     let recipeIngredients = recipe.findRecipeIngredientInfo();
-    const ingredientsNeeded = recipeIngredients.filter(ingredient => {
-      const enoughIngredients = pantryIngredients.every(item => ingredient.id === item.id && item.amount >= parseInt(ingredient.quantity.amount));
-      if (!enoughIngredients) {
-        return ingredient
-        //returns an array of recipe ingredient objects that are missing from the pantry or less than the amount needed to make the recipe
+    return recipeIngredients.reduce((acc, ingredient) => {
+      let pantryItemStatus = pantryIngredients.some((item) => (item.name === ingredient.name && item.amount >= parseInt(ingredient.quantity.amount)))
+      if (!acc.includes(ingredient) && !pantryItemStatus) {
+        acc.push(ingredient)
       }
-    })
-    return ingredientsNeeded
+      return acc
+    }, []);
   }
+
   findAmountNeeded(recipe) {
-    let recipeIngredients = recipe.findRecipeIngredientInfo();
-    const newShelf = recipeIngredients.map(recipeIngredient => {
-      this.shelf.forEach(pantryIngredient => {
-        if (recipeIngredient.id === pantryIngredient.ingredient) {
-          recipeIngredient.amountNeeded = pantryIngredient.amount + (parseInt(recipeIngredient.quantity.amount) - pantryIngredient.amount)
-        }
-        if (recipeIngredient.id !== pantryIngredient.ingredient) {
-          recipeIngredient.amountNeeded = recipeIngredient.quantity.amount
+    let ingredientsNeeded = this.determineIfEnoughIngredientsForRecipe(recipe);
+    return ingredientsNeeded.map(neededIngredient => {
+      this.shelf.forEach(item => {
+        if (item.name === neededIngredient.name) {
+          neededIngredient.amountNeeded = (parseInt(neededIngredient.quantity.amount) - item.amount)       
         }
       })
-        return recipeIngredient
+        if (!neededIngredient.amountNeeded) {
+          neededIngredient.amountNeeded = neededIngredient.quantity.amount
+        }
+      return neededIngredient
     })
-    return newShelf.filter(ingredient => ingredient.amountNeeded)
   }
+
+  cookRecipe(recipe) {
+    return this.shelf.reduce((acc, pantryIngredient) => {
+      recipe.ingredients.forEach(recipeIngredient => {
+        if (pantryIngredient.ingredient === recipeIngredient.id) {
+          pantryIngredient.amount = pantryIngredient.amount - recipeIngredient.quantity.amount
+
+        }
+      })
+      if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount !== 0)) {
+        acc.push(pantryIngredient)
+        this.shelf = acc
+      }
+        return acc
+    }, [])
+  }
+
+  makeShoppingList(ingredientNames) {
+    return ingredientNames.map(name => {
+    ingredientsData.forEach(ingredient => {
+        if (ingredient.name === name) {
+          name = ingredient
+        }
+      })
+      return name
+    })  
+  }
+  
+  // shopForIngredients(ingredientNames) {
+  //   let groceries = this.makeShoppingList(ingredientNames);
+  //   this.shelf.reduce((acc, pantryItem) => {
+  //     groceries.forEach(listItem => {
+  //       if (!acc.includes(listItem)) {
+  //         listItem = {
+  //           ingredient: listItem.id,
+  //           amount: 1,
+  //           name: listItem.name
+  //         }
+  //         acc.push(listItem)
+  //       }
+  //       if (!acc.includes(pantryItem) && pantryItem.ingredient === listItem.id) {
+  //         pantryItem.amount++
+  //         acc.push(pantryItem)
+  //       }
+  //     })
+  //       this.shelf = acc
+  //     return acc
+  //   }, [])
+  // }
+
 };
 
 export default Pantry;

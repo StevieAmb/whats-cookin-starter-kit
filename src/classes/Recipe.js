@@ -14,8 +14,6 @@ class Recipe {
 
   findRecipeIngredientInfo() {
     const recipeIngredients = this.ingredients.map(recipeIngredient => {
-      // const ingredientAmt = recipeIngredient.quantity.amount;
-      // const ingredientUnit = recipeIngredient.quantity.unit;
       ingredientsData.find(ingredientItem => {
         if (ingredientItem.id === recipeIngredient.id) {
           recipeIngredient.name = ingredientItem.name;
