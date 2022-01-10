@@ -47,7 +47,7 @@ class Pantry {
     })
   }
 
-  cookRecipe(recipe) {
+  cookRecipe(recipe) { //-subtract
     return this.shelf.reduce((acc, pantryIngredient) => {
       recipe.ingredients.forEach(recipeIngredient => {
         if (pantryIngredient.ingredient === recipeIngredient.id) {
@@ -62,8 +62,10 @@ class Pantry {
         return acc
     }, [])
   }
+  //make this method add ingredients by positive or negative number based on cooking or shopping
+  //return the pantry array with all updates
 
-  makeShoppingList(ingredientNames) {
+  makeShoppingList(ingredientNames) { 
     return ingredientNames.map(name => {
     ingredientsData.forEach(ingredient => {
         if (ingredient.name === name) {
@@ -74,27 +76,28 @@ class Pantry {
     })  
   }
   
-  // shopForIngredients(ingredientNames) {
-  //   let groceries = this.makeShoppingList(ingredientNames);
-  //   this.shelf.reduce((acc, pantryItem) => {
-  //     groceries.forEach(listItem => {
-  //       if (!acc.includes(listItem)) {
-  //         listItem = {
-  //           ingredient: listItem.id,
-  //           amount: 1,
-  //           name: listItem.name
-  //         }
-  //         acc.push(listItem)
-  //       }
-  //       if (!acc.includes(pantryItem) && pantryItem.ingredient === listItem.id) {
-  //         pantryItem.amount++
-  //         acc.push(pantryItem)
-  //       }
-  //     })
-  //       this.shelf = acc
-  //     return acc
-  //   }, [])
-  // }
+  shopForIngredients(ingredientNames) { //-add
+    let groceries = this.makeShoppingList(ingredientNames);
+    this.shelf.reduce((acc, pantryItem) => {
+      groceries.forEach(listItem => {
+        if (!acc.includes(listItem)) {
+          listItem = {
+            ingredient: listItem.id,
+            amount: 1,
+            name: listItem.name
+          }
+          acc.push(listItem)
+        }
+        if (!acc.includes(pantryItem) && pantryItem.ingredient === listItem.id) {
+          pantryItem.amount++
+          acc.push(pantryItem)
+        }
+      })
+      console.log(acc)
+        this.shelf = acc
+      return acc
+    }, [])
+  }
 
 };
 

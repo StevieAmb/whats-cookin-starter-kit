@@ -68,33 +68,37 @@ let pantry;
 
 //EXECUTION FUNCTIONS
 
+//input: old pantry, cookARecipe(), update pantry. 
+//if neededIngredients list === 0, cookARecipe(), subtract recipe ingredients from pantry.
 
-// const addIngredientsToPantry = () => {
-//   fetch('http://localhost:3001/api/v1/users', {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({
-//         userId: newUser.id,
-//         ingredientID: userIngredientIdNeeded.value,
-//         ingredientModification: userAmountNeeded.value
-//       })
-//     })
-//     .then(response => displayUserErrorMessage(response))
-//     .catch(err => {
-//         displayServerErrorMessage(err)
-//       });
-//     }
+//input: old pantry, goShopping(), update pantry. 
+//if 
+//output: new pantry 
+  //post 
+
+  // fetch('http://localhost:3001/api/v1/users', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({
+  //     userId: newUser.id,
+  //     userPantry: newUser.pantry
+  //     })
+  //   })
+  //   .then(response => displayUserErrorMessage(response))
+  //   .catch(err => {
+  //       displayServerErrorMessage(err)
+  //     });
     
-    // const displayUserErrorMessage = (response) => {
-      //   if (!response.ok) {
+  //   const displayUserErrorMessage = (response) => {
+  //       if (!response.ok) {
 
-        //     errorHandlingLine.innerText = 'Please fill out all fields!';
-        //   } else {
-          //     return response.json();
-          //   }
-          // }
+  //           errorHandlingLine.innerText = 'Please fill out all fields!';
+  //         } else {
+  //             return response.json();
+  //           }
+  //         }
           
-          // const displayServerErrorMessage = (err) => {
+  //         // const displayServerErrorMessage = (err) => {
             //   errorHandlingLine.innerText = err.message;
             // }
 
@@ -111,7 +115,6 @@ const loadPage = () => {
     groceryStore = data[0];
     displayHomePage();
   })
-  console.log('here', recipe)
 };
                 
 const getData = () => {
@@ -152,11 +155,9 @@ const searchByTags = (event) => {
 };
 
 const searchByFavoriteInput = () => {
-  console.log('userValue', userSearchBox.value)
   if (nameRadioButton.checked) {
     return newUser.filterFavoritesByName(userSearchBox.value)
   } else if (ingredientRadioButton.checked) {
-    console.log('favoritesByInput', newUser.filterFavoritesByIngredient(userSearchBox.value))
     return newUser.filterFavoritesByIngredient(userSearchBox.value);
   }
 };
@@ -279,7 +280,6 @@ const showAllRecipes = () => {
 
 const showRecipeInformation = (event) => {
   event.preventDefault();
-  console.log('shelf', pantry.shelf)
   addOrRemoveFavoriteButton();
   cookbook.recipesCollection.forEach(oneRecipe => {
     if(event.target.parentNode.id === `${oneRecipe.id}`) {
@@ -312,7 +312,6 @@ const showRecipeInformation = (event) => {
 
 const displayIngredientsNeeded = (recipe) => {
   let userNeededIngredients = pantry.determineIfEnoughIngredientsForRecipe(recipe);
-  console.log('ingredients', userNeededIngredients)
   userNeededIngredients.forEach((ingredient) => {
     ingredientsNeededList.insertAdjacentHTML('beforeEnd', `
     <li>${ingredient.quantity.amount} ${ingredient.name}</li>`)
@@ -324,6 +323,8 @@ const displayIngredientsNeeded = (recipe) => {
     //add ingredients to cook (POST)
   }
 };
+
+
 
 
 
@@ -462,13 +463,13 @@ const hide = (elements) => {
 const showMainPage = () => {
   displayHomePage();
   addOrRemoveFavoriteButton();
-  show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton, searchButton]);
+  show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton, searchButton, dropDownButton]);
   hide([favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView, userShoppingView, recipesToCookView, userShoppingView]);
 };
 
 const showRecipeSearchResults = () => {
   addOrRemoveFavoriteButton();
-  show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm, searchButton]);
+  show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm, searchButton, dropDownButton]);
   hide([ mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView, recipesToCookView]);
 };
 
@@ -479,18 +480,18 @@ const showFavoriteRecipesView = () => {
 };
 
 const showRecipeInfoCard = () => {
-  show([recipeInfoView, seeAllRecipesButton, homeButton, favoriteRecipesButton, searchButton]);
+  show([recipeInfoView, seeAllRecipesButton, homeButton, favoriteRecipesButton, searchButton, dropDownButton]);
   hide([allRecipesView, mainPageView, recipeResultsView, searchButton2, favoriteRecipesView, recipesToCookView]);
 };
 
 const showRecipesToCookView = () => {
-  show([recipesToCookView, homeButton, favoriteRecipesButton, searchButton]);
+  show([recipesToCookView, homeButton, favoriteRecipesButton, searchButton, dropDownButton]);
   hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, searchButton2, favoriteRecipesView, userShoppingView]);
 };
 
 const showRecipeInformationView = () => {
   addOrRemoveFavoriteButton();
-  show([allRecipesView, homeButton, favoriteRecipesButton])
+  show([allRecipesView, homeButton, favoriteRecipesButton, dropDownButton])
   hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView])
 };
 
@@ -518,7 +519,7 @@ searchButton2.addEventListener('click', searchFavoriteResults);
 dropDownButton.addEventListener('click', showDropDown);
 myDropdown.addEventListener('click', searchByTags);
 allRecipesView.addEventListener('click', showRecipeInformation); 
-recipeResultsView.addEventListener('click', showRecipeInformation);
+recipeResultsView.addEventListener('click', displaySelectedFavoriteRecipe);
 tryRecipeButton.addEventListener('click', displayRecommendedRecipeInfo);
 favoriteRecipesView.addEventListener('click', displaySelectedFavoriteRecipe);
 addRecipeToCookButton.addEventListener('click', userAddRecipeToCook);

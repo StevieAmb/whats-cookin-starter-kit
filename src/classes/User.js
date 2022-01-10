@@ -53,26 +53,26 @@ class User {
   filterFavoritesByIngredient(userInput) {
     return this.favoriteRecipes.reduce((acc, recipe) => {
       const matchingIngredient = ingredientsData.find((ingredient) => {
-        if (ingredient.name.includes(userInput)) {
-          return ingredient
+        if (userInput === ingredient.name) {
         }
+        return ingredient
       });
       recipe.ingredients.filter((ingredient) => {
         if (ingredient.id === matchingIngredient.id) {
-          console.log('two')
           acc.push(recipe)
         }
         return recipe
       })
-      console.log('acc', acc)
       return acc
     }, [])
   }
-
+  
   filterFavoritesByTag(userInput) {
     return this.favoriteRecipes.filter((recipe) => recipe.tags.includes(userInput))
   }
 
 };
+
+
 
 export default User;
