@@ -20,6 +20,7 @@ class Pantry {
   }
 
   determineIfEnoughIngredientsForRecipe(recipe) {
+    console.log('hi')
     let pantryIngredients = this.showPantryIngredientInfo();
     let recipeIngredients = recipe.findRecipeIngredientInfo();
     return recipeIngredients.reduce((acc, ingredient) => {

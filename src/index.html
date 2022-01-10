@@ -48,21 +48,25 @@
   <article class="recipe-information-view hidden" id="recipeInfoView">
     <button class="favorite-button" id="favoritingButton">favorite this recipe</button>
     <button class="unfavorite-button hidden" id="unfavoritingButton">unfavorite this recipe</button>
-    <button class="add-recipe-to-cook-button" id="addRecipeToCookButton">Add Recipe To Cook</button>
-    <button class="remove-recipe-to-cook-button" id="removeRecipeToCookButton">Remove Recipe To Cook</button>
     <button class="go-shopping" id="goShopping">Go Shopping</button>
     <h2 id="recipeTitle">Recipe Title</h2> 
     <img class="current-recipe-image" id= "currentRecipeImage" src="./images/cookies.jpg" alt="food-image">
     <h3>Recipe ingredients</h3>
     <ul id="ingredientsList">
     </ul>
+    <h3 class="total-cost">Recipe Cost Total: <span id="totalCost">$$$$$</span></h3>
     <h3>Recipe Instructions</h3>
     <ol id="instructionsList">
     </ol>
-    <h3 class="total-cost">Recipe Cost Total: <span id="totalCost">$$$$$</span></h3>
     <aside class="user-pantry-view" id="userPantryView">
       <h3 class="user-pantry-name" id="userPantryName"></h3>
     </aside>
+    <section class="ingredients-needed-for-user" id="ingredientsNeededForUser"> 
+      <button class="add-recipe-to-cook-button hidden" id="addRecipeToCookButton">Add Recipe To Cook</button>
+      <button class="remove-recipe-to-cook-button hidden" id="removeRecipeToCookButton">Remove Recipe To Cook</button>
+      <h3>Needed Ingredients for this Recipe</h3>
+      <ul id="ingredientsNeededList"></ul>
+    </section>
   </article>
   
   <section class="favorite-recipes-view hidden" id="favoriteRecipesView">
@@ -73,9 +77,9 @@
   </section>
   <section class="fave-recipes-filtered-view" id="userFaveRecipeFilteredView">
   </section>
-  <section class="recipes-to-cook" id="recipesToCookView">
+  <section class="recipes-to-cook hidden" id="recipesToCookView">
   </section>
-  <section class="user-shopping-view" id="userShoppingView">
+  <section class="user-shopping-view hidden" id="userShoppingView">
     <form>
       <label for="amt">Amount Needed:</label><br>
       <input type="text" id="amt" name="amt" required><br>
