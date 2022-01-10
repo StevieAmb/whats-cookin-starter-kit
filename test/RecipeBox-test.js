@@ -38,21 +38,25 @@ describe('RecipeBox', () => {
     });
 
     it('Should be able to store recipes by one or more tag', () => {
-      
-      expect(recipeBox.storeByTag("snack")).to.deep.equal(recipeBox.matchingRecipesTags);
-      expect(recipeBox.storeByTag("lunch")).to.deep.equal(recipeBox.matchingRecipesTags);
-      expect(recipeBox.storeByTag("sauce")).to.deep.equal(recipeBox.matchingRecipesTags);
+      expect(recipeBox.storeByTag("snack")).to.deep.equal([recipe1]);
+      expect(recipeBox.storeByTag("lunch")).to.deep.equal([recipe2]);
+      expect(recipeBox.storeByTag("sauce")).to.deep.equal([recipe3]);
     });
 
-    it('Should be able to filter recipes based on name', () => {
-      expect(recipeBox.findRecipeName("Loaded")).to.deep.equal(recipeBox.matchingRecipes);
-      expect(recipeBox.findRecipeName("Dijon")).to.deep.equal(recipeBox.matchingRecipes);
-      expect(recipeBox.findRecipeName("Wing")).to.deep.equal(recipeBox.matchingRecipes);
+  it('Should be able to filter recipes based on name', () => {
+    console.log('recipe1', recipe1.name)
+    console.log('recipe2', recipe2.name)
+    console.log('recipe3', recipe3.name)
+    console.log('LOADED', recipeBox.findRecipeName("Loaded"))
+    expect(recipeBox.findRecipeName("Loaded")).to.deep.equal([recipe1]);
+    console.log(recipeBox.matchingRecipes)
+      expect(recipeBox.findRecipeName("Dijon")).to.deep.equal([recipe2]);
+      expect(recipeBox.findRecipeName("Wing")).to.deep.equal([recipe3]);
     });
 
   it('Should be able to search by ingredients ', () => {
-    expect(recipeBox.findIngredientById('wheat flour')).to.deep.equal(recipeBox.recipeMatch);
-    expect(recipeBox.findIngredientById('apple')).to.deep.equal(recipeBox.recipeMatch);
+    expect(recipeBox.findIngredientById('wheat flour')).to.deep.equal([recipe1]);
+    expect(recipeBox.findIngredientById('apple')).to.deep.equal([recipe]);
   });
   });
 
