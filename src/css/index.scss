@@ -1,20 +1,13 @@
-/* @import './node_modules/normalize.css/normalize.css'; */
+@import './_variables.scss';
+@import './_reset.scss';
 
-* {
-  font-family: 'Mochiy Pop P One', sans-serif;
-  font-size: 16px;
-  border-radius: 5px;
-}
-
-$primary-color: #396204; 
-$border-color: #4B9933;
 
 body, html {
   margin: 0;
   height: 100vh;
   width: 100vw;
   overscroll-behavior: none;
-  background-image: url("whatscookin.jpg");
+  background-image: url("../whatscookin.jpg");
   background-size: cover;
   height: 100%;
   background-repeat: no-repeat;
@@ -32,9 +25,19 @@ header {
 h1 {
   height: fit-content;
   margin: 0 0 0 1rem;
-  border-style:solid;
+  border-style: solid;
   border-color: $border-color;
-  background-color:#e8f1f2;
+  border-width: 5px;
+  background-color: $text-bg-color;
+  @include header-options()
+}
+
+.title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 34px;
+  border-color: $primary-color;
+  background-color: $gradient;
+  width: 7em;
 }
 
 .category-form-view {
@@ -51,18 +54,61 @@ input.radio {
 
 input {
   height: 3vh;
-  width: 10vw;
+  width: 20vw;
   border-radius: 3px;
+  font-family: $button-font;
+}
+
+label {
+  font-family: $button-font;
+
 }
 
 .home-btn, 
 .recipes-to-cook,
 .favorited-recipes-btn,
 .see-all-recipes,
-.see-user-pantry-button {
-  height: 10vh;
-  width: 10vw;
-  margin: 0 1rem 0 0;
+.see-user-pantry-button,
+.add-recipe-to-cook-button,
+.remove-recipe-to-cook-button,
+.unfavorite-button,
+.favorite-button,
+.dropbtn {
+  width: 140px;
+  height: 45px;
+ @include button-options()
+}
+
+
+.favorite-button:hover,
+.unfavorite-button:hover,
+.add-recipe-to-cook-button:hover,
+.remove-recipe-to-cook-button:hover,
+.favorite-button:focus,
+.unfavorite-button:focus,
+.add-recipe-to-cook-button:focus,
+.remove-recipe-to-cook-button:focus {
+  background-color: #FADADD;
+}
+
+.suggested-recipe-view {
+  display: flex;
+  width: 50vw;
+  height: 60vh;
+  align-items: center;
+  margin: 10%;
+  background: $gradient;
+}
+
+img {
+  border-style:solid;
+  border-color: $border-color;
+  border-width: 15px;
+  width: 25em;
+}
+
+.suggested-recipe-image {
+  height: 40vh;
 }
 
 .add-recipe-to-cook-button,
@@ -74,30 +120,28 @@ input {
   width: 10vw;
 }
 
-.favorite-button:hover,
-.unfavorite-button:hover,
-.add-recipe-to-cook-button:hover,
-.remove-recipe-to-cook-button:hover {
-  background-color: #FADADD;
-}
-
-.suggested-recipe-view {
-  display: flex;
-  width: 50vw;
-  height: 60vh;
-  align-items: center;
-  margin: 10%;
-  background: #52A838;
-}
-
-img {
-  border-style:solid;
-  border-color: $border-color;
-
-}
-
-.suggested-recipe-image {
-  height: 40vh;
+.dropbtn:hover, 
+.dropbtn:focus,
+.search-button:hover,
+.search-button:focus,
+.search-button2:hover,
+.search-button2:focus,
+.home-btn:hover,
+.home-btn:focus, 
+.recipes-to-cook:hover,
+.recipes-to-cook:focus,
+.favorited-recipes-btn:hover,
+.favorited-recipes-btn:focus,
+.see-all-recipes:hover,
+.see-all-recipes:focus,
+.see-user-pantry-button:hover,
+.see-user-pantry-button:focus,
+.try-this-recipe-btn:hover,
+.try-this-recipe-btn:focus {
+  background-color: #81B47E;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
 }
 
 .try-this-recipe-btn {
@@ -108,15 +152,16 @@ img {
   bottom: 3vh;
   right: 2vw;
   align-self: flex-start;
-  background-color: #e8f1f2;
+  background-color: $text-bg-color;
+  font-family: $button-font;
 }
 
 h2,
 h3 {
   margin: 0;
-  background-color: #e8f1f2;
+  background-color: $text-bg-color;
   width: 30em;
-  
+  @include header-options()
 }
 
 .all-recipes-view,
@@ -124,6 +169,7 @@ h3 {
 .recipe-results {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .recipes-views,
@@ -146,13 +192,14 @@ h3 {
 h3 {
   margin: 0;
   width: fit-content;
-  border-color: $border-color
+  border-color: $border-color;
+  @include header-options()
 }
 
 ol,
 ul {
   width: 47em;
-  background-color: #e8f1f2;
+  background-color: $text-bg-color;
   border-color: $border-color
 }
 
@@ -169,31 +216,12 @@ ul {
 
 .search-button,
 .search-button2 {
-  background-color: #e8f1f2;
+  width: 70px;
+  height: 30px;
+  @include button-options()
 }
 
-/* dropdown CSS  */
-.dropbtn {
-  background-color: #e8f1f2;
-  padding: .5em;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
-  /* border-radius: 8px; */
-}
-
-.dropbtn:hover, 
-.dropbtn:focus,
-.search-button:hover,
-.search-button2:hover,
-.home-btn:hover, 
-.recipes-to-cook:hover,
-.favorited-recipes-btn:hover,
-.see-all-recipes:hover,
-.see-user-pantry-button:hover,
-.try-this-recipe-btn:hover  {
-  background-color: #5AB83D;
-}
+/* dropDown CSS Begins  */
 
 .dropdown {
   display: inline-block;

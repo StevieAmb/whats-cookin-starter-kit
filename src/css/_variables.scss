@@ -1,0 +1,29 @@
+$primary-color: #3E673C;
+$border-color: #5D9A5B;
+$text-bg-color: #e8f1f2;
+$button-font: 'Roboto', sans-serif;
+
+
+$gradient: linear-gradient(to right, #1B3627 0%, #3E673C 100%);
+
+@mixin button-options() {
+  font-family: $button-font;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+@mixin header-options() {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  border-radius: 3px;
+}
