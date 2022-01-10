@@ -3,6 +3,7 @@ import './images/cookies.jpg';
 import RecipeBox from './classes/RecipeBox';
 import Recipe from './classes/Recipe';
 import User from './classes/User';
+import Pantry from './classes/Pantry';
 import { usersData } from './data/users';
 import './css/index.scss';
 import './css/_variables.scss';
@@ -44,6 +45,7 @@ const allRecipesView = document.getElementById('allRecipesView');
 const favoriteRecipesView = document.getElementById('favoriteRecipesView');
 const recipesToCookView = document.getElementById('recipesToCookView');
 const userShoppingView = document.getElementById('userShoppingView');
+const ingredientsNeededForUser = document.getElementById('ingredientsNeededForUser')
 
 
 //RANDOM
@@ -53,6 +55,8 @@ const instructionsList = document.getElementById('instructionsList');
 const ingredientsList = document.getElementById('ingredientsList');
 const totalCost = document.getElementById('totalCost');
 const errorHandlingLine = document.getElementById('errorMessage')
+const ingredientsNeededList = document.getElementById('ingredientsNeededList')
+const userPantryName = document.getElementById('userPantryName')
 
 
 //CLASS INSTANSTIATION
@@ -60,25 +64,26 @@ var cookbook;
 let recipe;
 let newUser;
 let groceryStore;
+let pantry;
 
 //EXECUTION FUNCTIONS
 
 
-const addIngredientsToPantry = () => {
-  fetch('http://localhost:3001/api/v1/users', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        userId: newUser.id,
-        ingredientID: userIngredientIdNeeded.value,
-        ingredientModification: userAmountNeeded.value
-      })
-    })
-    .then(response => displayUserErrorMessage(response))
-    .catch(err => {
-        displayServerErrorMessage(err)
-      });
-    }
+// const addIngredientsToPantry = () => {
+//   fetch('http://localhost:3001/api/v1/users', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({
+//         userId: newUser.id,
+//         ingredientID: userIngredientIdNeeded.value,
+//         ingredientModification: userAmountNeeded.value
+//       })
+//     })
+//     .then(response => displayUserErrorMessage(response))
+//     .catch(err => {
+//         displayServerErrorMessage(err)
+//       });
+//     }
     
     // const displayUserErrorMessage = (response) => {
       //   if (!response.ok) {
@@ -102,9 +107,11 @@ const loadPage = () => {
     newUser = new User(randomUser);
     cookbook = new RecipeBox(data[1]);
     recipe = new Recipe(data[1]);
+    pantry = new Pantry(newUser)
     groceryStore = data[0];
     displayHomePage();
   })
+  console.log('here', recipe)
 };
                 
 const getData = () => {
@@ -198,7 +205,6 @@ const userAddRecipeToCook = () => { //attached to EL - button
 
 const userRemoveRecipeToCook = () => { //attached to EL - button
   newUser.removeRecipeToCook(recipe);
-  console.log(newUser.recipesToCook);
   hide([removeRecipeToCookButton])
   show([addRecipeToCookButton])
 };
@@ -211,8 +217,6 @@ const displayHomePage = () => {
   `<img class="suggested-recipe-image" src="${randomRecipe.image}" alt="food image" id="${randomRecipe.id}">
   <h2>${randomRecipe.name}</h2>`)
   tryRecipeButton.value = `${randomRecipe.id}`
-  console.log('tryBtnValue', tryRecipeButton.value)
-  console.log('recipeId', randomRecipe.id)
 };
 
 const showDropDown = () => {
@@ -241,7 +245,6 @@ const displayRecommendedRecipeInfo = (event) => {
   event.preventDefault();
   showRecipeInfoCard();
   addOrRemoveRecipeToCookButton();
-  displayUserPantry();
   for (var i = 0; i < cookbook.recipesCollection.length; i++) {
     if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
       recipe = new Recipe(cookbook.recipesCollection[i])
@@ -266,6 +269,8 @@ const displayRecommendedRecipeInfo = (event) => {
       totalCost.innerText = `$${recipeCostTotal}`
     }
   }
+  displayUserPantry();
+  displayIngredientsNeeded(recipe);
 } 
 
 const showAllRecipes = () => {
@@ -282,16 +287,15 @@ const showAllRecipes = () => {
 
 const showRecipeInformation = (event) => {
   event.preventDefault();
+  console.log('shelf', pantry.shelf)
   addOrRemoveFavoriteButton();
   addOrRemoveRecipeToCookButton();
   cookbook.recipesCollection.forEach(oneRecipe => {
-    console.log(oneRecipe.id)
-    console.log(event.target.parentNode.id)
     if(event.target.parentNode.id === `${oneRecipe.id}`) {
       showRecipeInfoCard();
       recipe = new Recipe(oneRecipe)
       
-      const recipeIngredients = recipe.findRecipeIngredientInfo();
+      const recipeIngredients = recipe.findRecipeIngredientInfo(recipe);
       const recipeInstructions = recipe.getRecipeInstructions();
       const recipeCostTotal = recipe.calculateRecipeCost();
       recipeTitle.innerHTML = ``
@@ -311,8 +315,18 @@ const showRecipeInformation = (event) => {
       totalCost.innerText = `$${recipeCostTotal}`
     }
   })
+  displayIngredientsNeeded(recipe);
   displayUserPantry();
 }
+
+const displayIngredientsNeeded = (recipe) => {
+  let userNeededIngredients = pantry.determineIfEnoughIngredientsForRecipe(recipe);
+  console.log('ingredients', userNeededIngredients)
+  userNeededIngredients.forEach((ingredient) => {
+    ingredientsNeededList.insertAdjacentHTML('beforeEnd', `
+    <li>${ingredient.quantity.amount} ${ingredient.name}</li>`)
+  })
+};
 
 const showSearchResults = (event) => {
   event.preventDefault();
@@ -377,20 +391,23 @@ const displaySelectedFavoriteRecipe = (event) => {
       totalCost.innerText = `$${recipeCostTotal}`
     }
   }
+  displayIngredientsNeeded(recipe);
+  displayUserPantry();
 };
 
-const userPantryName = document.getElementById('userPantryName')
-
 const displayUserPantry = () => {
-  // newUser = newUser(userData[0]);
-  let userPantryIngredients = newUser.showPantryIngredientInfo();
+  let userPantryIngredients = pantry.showPantryIngredientInfo();
   userPantryName.innerText = `${newUser.name}'s Pantry`
+  if (userPantryIngredients.length === 0) {
+    userPantryName.insertAdjacentHTML('afterEnd', `<p> You have no ingredients in your pantry </p>` )
+  } else {
+    addOrRemoveRecipeToCookButton();
   userPantryIngredients.forEach((ingredient) => {
     userPantryName.insertAdjacentHTML('beforeEnd', `
-    <li>${ingredient}</li>`)
-  })
+    <li>${ingredient.amount} ${ingredient.name}</li>`)
+    })
+  }
 }
-
 
 const addOrRemoveRecipeToCookButton = () => { //attached to EL on page load
   if (recipe.addedToCook) {
@@ -415,14 +432,12 @@ const showRecipeToCook = () => {   //connected to EL for button on NAV
 
 const addFavorite = () => { //attached to EL - button
   newUser.addFavoriteRecipe(recipe);
-  console.log(newUser.favoriteRecipes);
   show([unfavoritingButton])
   hide([favoritingButton])
 };
 
 const removeFavoriteRecipe = () => { //attached to EL - button
   newUser.removeFavoriteRecipe(recipe);
-  console.log(newUser.favoriteRecipes);
   hide([unfavoritingButton])
   show([favoritingButton])
 };
@@ -437,14 +452,6 @@ const addOrRemoveFavoriteButton = () => { //attached to EL on page load
   }
 };
 
-//input: recipe data file, in order to access the unit for the ingredients
-//output: the amounts and the units next to the ingredient name in the recipe info card
-
-//we already have access to the ingredient name based on the id from the recipe data
-//we need to stay IN the recipe data, but pull out the amount and the unit needed. 
-//iterate through recipeData (recipeData.forEach(recipe => {
-//   recipe.ingredients.amount recipe.ingredients.unit
-// }))
 
 //HELPER FUNCTIONS
 const show = (elements) => {
@@ -459,7 +466,7 @@ const showMainPage = () => {
   displayHomePage();
   addOrRemoveFavoriteButton();
   show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton, searchButton]);
-  hide([favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView, recipesToCookView]);
+  hide([favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView, userShoppingView, recipesToCookView, userShoppingView]);
 };
 
 const showRecipeSearchResults = () => {
@@ -471,7 +478,7 @@ const showRecipeSearchResults = () => {
 const showFavoriteRecipesView = () => {
 
   show([favoriteRecipesView, searchButton2, homeButton, searchButton]);
-  hide([mainPageView, favoriteRecipesButton, recipeInfoView, allRecipesView, recipeResultsView, searchButton, recipesToCookView, dropDownButton]);
+  hide([mainPageView, favoriteRecipesButton, recipeInfoView, allRecipesView, recipeResultsView, searchButton, recipesToCookView, dropDownButton, userShoppingView]);
 };
 
 const showRecipeInfoCard = () => {
@@ -481,20 +488,19 @@ const showRecipeInfoCard = () => {
 
 const showRecipesToCookView = () => {
   show([recipesToCookView, homeButton, favoriteRecipesButton, searchButton]);
-  hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, searchButton2, favoriteRecipesView]);
+  hide([mainPageView, recipeInfoView, allRecipesView, recipeResultsView, searchButton2, favoriteRecipesView, userShoppingView]);
 };
 
 const showRecipeInformationView = () => {
   addOrRemoveFavoriteButton();
-  addOrRemoveRecipeToCookButton();
   show([allRecipesView, homeButton, favoriteRecipesButton])
   hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView])
 };
 
-const showShoppingCart = () => {
-  show([userShoppingView, homeButton, ])
-  hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView, favoriteRecipesButton])
-}
+// const showShoppingCart = () => {
+//   show([userShoppingView, homeButton, ])
+//   hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView, favoriteRecipesButton])
+// }
 
 const getRandomIndex = (array) => {
   return Math.floor(Math.random() * array.length);
