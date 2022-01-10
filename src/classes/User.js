@@ -1,8 +1,4 @@
-import { usersData } from "../data/users";
-
-// const { recipeData } = require("../data/recipes");
 const { ingredientsData } = require("../data/ingredients");
-// import Recipe from '../src/classes/Recipe';
 
 
 class User {
@@ -12,7 +8,6 @@ class User {
     this.pantry = human.pantry;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
-    this.recipeMatch = [];
   }
   
   addFavoriteRecipe(recipe) {
@@ -56,20 +51,20 @@ class User {
   }
 
   filterFavoritesByIngredient(userInput) {
-    let matchingIngredientId = null;
-    ingredientsData.forEach((ingredient) => {
-      if (ingredient.name === userInput) {
-        matchingIngredientId = ingredient.id
-      }
-    })
-    this.favoriteRecipes.forEach((recipe) => {
-      recipe.ingredients.forEach((ingredient) => {
-        if (ingredient.id === matchingIngredientId) {
-          this.recipeMatch.push(recipe)
+    return this.favoriteRecipes.reduce((acc, recipe) => {
+      const matchingIngredient = ingredientsData.find((ingredient) => {
+        if (userInput === ingredient.name) {
         }
+        return ingredient
+      });
+      recipe.ingredients.filter((ingredient) => {
+        if (ingredient.id === matchingIngredient.id) {
+          acc.push(recipe)
+        }
+        return recipe
       })
-    })
-    return this.recipeMatch;
+      return acc
+    }, [])
   }
 
   filterFavoritesByTag(userInput) {
@@ -77,6 +72,5 @@ class User {
   }
 
 };
-
 
 export default User;

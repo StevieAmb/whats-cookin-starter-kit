@@ -1,51 +1,43 @@
-const { recipeData } = require("../data/recipes");
 const { ingredientsData } = require("../data/ingredients");
 
 class RecipeBox {
   constructor(recipesCollection) {
     this.recipesCollection = recipesCollection;
-    this.matchingRecipesTags = [];
-    this.matchingRecipes = [];
-    this.recipeMatch = [];
   }
+
   storeByTag(theUserInput) {
     let lowerCaseInput = theUserInput.toLowerCase();
 
-    this.matchingRecipesTags = this.recipesCollection.filter((recipe) => {
-      if (recipe.tags.includes(lowerCaseInput) && !this.matchingRecipesTags.includes(recipe)) {
+    return this.recipesCollection.filter((recipe) => {
+      if (recipe.tags.includes(lowerCaseInput)) {
         return recipe
       }
     })
-    return this.matchingRecipesTags;
   }
-  
+
   findRecipeName(theUserInput) {
     let lowerCaseInput = theUserInput.toLowerCase();
 
-    this.matchingRecipes = this.recipesCollection.filter((recipe) => {
+    return this.recipesCollection.filter((recipe) => {
       let lowerCasedName = recipe.name.toLowerCase();
-      if (lowerCasedName.includes(lowerCaseInput) && !this.matchingRecipes.includes(recipe)) {
+
+      if (lowerCasedName.includes(lowerCaseInput)) {
         return recipe
       }
     })
-    return this.matchingRecipes;
   }
 
-  findIngredientById(theUserInput) {
-    let matchingIngredientId = null;
-    ingredientsData.forEach((ingredient) => {
-      if (ingredient.name === theUserInput) {
-        matchingIngredientId = ingredient.id
-      }
-    })
-    this.recipesCollection.forEach((recipe) => {
-      recipe.ingredients.forEach((ingredient) => {
-        if (ingredient.id === matchingIngredientId) {
-          this.recipeMatch.push(recipe)
+  findIngredientById(theUserInput) {    
+    return this.recipesCollection.reduce((acc, recipe) => {
+      const matchingIngredient = ingredientsData.find((ingredient) => ingredient.name === theUserInput);
+      recipe.ingredients.filter((ingredient) => {
+        if (ingredient.id === matchingIngredient.id) {
+          acc.push(recipe)
         }
+        return recipe
       })
-    })
-    return this.recipeMatch;
+       return acc
+    }, [])
   }
 
 };

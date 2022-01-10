@@ -41,108 +41,108 @@ describe('Recipe', () => {
       expect(myRecipe.tags).to.deep.equal(recipeData[0].tags);
     });
     
-  it('Should return the names of the ingredients in a recipe', () => {
-    const expected = [{
-        id: 20081,
-        quantity: {
-          amount: 1.5,
-          unit: 'c'
+    it('Should return the names of the ingredients in a recipe', () => {
+      const expected = [{
+          id: 20081,
+          quantity: {
+            amount: 1.5,
+            unit: 'c'
+          },
+          name: 'wheat flour'
         },
-        name: 'wheat flour'
-      },
-      {
-        id: 18372,
-        quantity: {
-          amount: 0.5,
-          unit: 'tsp'
+        {
+          id: 18372,
+          quantity: {
+            amount: 0.5,
+            unit: 'tsp'
+          },
+          name: 'bicarbonate of soda'
         },
-        name: 'bicarbonate of soda'
-      },
-      {
-        id: 1123,
-        quantity: {
-          amount: 1,
-          unit: 'large'
+        {
+          id: 1123,
+          quantity: {
+            amount: 1,
+            unit: 'large'
+          },
+          name: 'eggs'
         },
-        name: 'eggs'
-      },
-      {
-        id: 19335,
-        quantity: {
-          amount: 0.5,
-          unit: 'c'
+        {
+          id: 19335,
+          quantity: {
+            amount: 0.5,
+            unit: 'c'
+          },
+          name: 'sucrose'
         },
-        name: 'sucrose'
-      },
-      {
-        id: 19206,
-        quantity: {
-          amount: 3,
-          unit: 'Tbsp'
+        {
+          id: 19206,
+          quantity: {
+            amount: 3,
+            unit: 'Tbsp'
+          },
+          name: 'instant vanilla pudding',
+          amountNeeded: 1
         },
-        name: 'instant vanilla pudding',
-        amountNeeded: 1
-      },
-      {
-        id: 19334,
-        quantity: {
-          amount: 0.5,
-          unit: 'c'
+        {
+          id: 19334,
+          quantity: {
+            amount: 0.5,
+            unit: 'c'
+          },
+          name: 'brown sugar',
+          amountNeeded: 0.5
         },
-        name: 'brown sugar',
-        amountNeeded: 0.5
-      },
-      {
-        id: 2047,
-        quantity: {
-          amount: 0.5,
-          unit: 'tsp'
+        {
+          id: 2047,
+          quantity: {
+            amount: 0.5,
+            unit: 'tsp'
+          },
+          name: 'salt'
         },
-        name: 'salt'
-      },
-      {
-        id: 1012047,
-        quantity: {
-          amount: 24,
-          unit: 'servings'
+        {
+          id: 1012047,
+          quantity: {
+            amount: 24,
+            unit: 'servings'
+          },
+          name: 'fine sea salt',
+          amountNeeded: 24
         },
-        name: 'fine sea salt',
-        amountNeeded: 24
-      },
-      {
-        id: 10019903,
-        quantity: {
-          amount: 2,
-          unit: 'c'
+        {
+          id: 10019903,
+          quantity: {
+            amount: 2,
+            unit: 'c'
+          },
+          name: 'semi sweet chips',
+          amountNeeded: 2
         },
-        name: 'semi sweet chips',
-        amountNeeded: 2
-      },
-      {
-        id: 1145,
-        quantity: {
-          amount: 0.5,
-          unit: 'c'
+        {
+          id: 1145,
+          quantity: {
+            amount: 0.5,
+            unit: 'c'
+          },
+          name: 'unsalted butter'
         },
-        name: 'unsalted butter'
-      },
-      {
-        id: 2050,
-        quantity: {
-          amount: 0.5,
-          unit: 'tsp'
-        },
-        name: 'vanilla'
-      }
-    ]
-  
-  const actual = myRecipe.findRecipeIngredientInfo();
-  
-  expect(actual).to.deep.equal(expected);
-});
+        {
+          id: 2050,
+          quantity: {
+            amount: 0.5,
+            unit: 'tsp'
+          },
+          name: 'vanilla'
+        }
+      ]
+    
+    const actual = myRecipe.findRecipeIngredientInfo();
+    
+    expect(actual).to.deep.equal(expected);
+  });
 
-it('Should return recipe instructions ', () => {
-  let collectInstructions = recipeData[0].instructions.reduce((instructionBox, elem) => {
+  it('Should return recipe instructions ', () => {
+    let collectInstructions = recipeData[0].instructions.reduce((instructionBox, elem) => {
         instructionBox.push(elem.instruction)
         return instructionBox;
       }, [])    
