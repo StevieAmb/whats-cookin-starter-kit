@@ -244,7 +244,6 @@ window.onclick = function (event) {
 const displayRecommendedRecipeInfo = (event) => {
   event.preventDefault();
   showRecipeInfoCard();
-  addOrRemoveRecipeToCookButton();
   for (var i = 0; i < cookbook.recipesCollection.length; i++) {
     if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
       recipe = new Recipe(cookbook.recipesCollection[i])
@@ -289,7 +288,6 @@ const showRecipeInformation = (event) => {
   event.preventDefault();
   console.log('shelf', pantry.shelf)
   addOrRemoveFavoriteButton();
-  addOrRemoveRecipeToCookButton();
   cookbook.recipesCollection.forEach(oneRecipe => {
     if(event.target.parentNode.id === `${oneRecipe.id}`) {
       showRecipeInfoCard();
@@ -326,7 +324,15 @@ const displayIngredientsNeeded = (recipe) => {
     ingredientsNeededList.insertAdjacentHTML('beforeEnd', `
     <li>${ingredient.quantity.amount} ${ingredient.name}</li>`)
   })
+  if (userNeededIngredients.length === 0) {
+    show([addRecipeToCookButton])
+    addOrRemoveRecipeToCookButton();
+  } else {
+    //add ingredients to cook (POST)
+  }
 };
+
+
 
 const showSearchResults = (event) => {
   event.preventDefault();
@@ -364,7 +370,6 @@ const displayFavoritedRecipes = () => {
 
 const displaySelectedFavoriteRecipe = (event) => {
   addOrRemoveFavoriteButton();
-  addOrRemoveRecipeToCookButton();
   for (var i = 0; i < newUser.favoriteRecipes.length; i++) {
     if (`${newUser.favoriteRecipes[i].id}` === event.target.parentNode.id) {
       showRecipeInfoCard();
@@ -401,7 +406,6 @@ const displayUserPantry = () => {
   if (userPantryIngredients.length === 0) {
     userPantryName.insertAdjacentHTML('afterEnd', `<p> You have no ingredients in your pantry </p>` )
   } else {
-    addOrRemoveRecipeToCookButton();
   userPantryIngredients.forEach((ingredient) => {
     userPantryName.insertAdjacentHTML('beforeEnd', `
     <li>${ingredient.amount} ${ingredient.name}</li>`)
@@ -410,7 +414,7 @@ const displayUserPantry = () => {
 }
 
 const addOrRemoveRecipeToCookButton = () => { //attached to EL on page load
-  if (recipe.addedToCook) {
+  if (!recipe.addedToCook) {
     show([removeRecipeToCookButton])
     hide([addRecipeToCookButton])
   } else if (!recipe.addedToCook) {
