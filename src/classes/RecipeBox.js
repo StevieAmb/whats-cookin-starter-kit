@@ -30,7 +30,6 @@ class RecipeBox {
   findIngredientById(theUserInput) {    
     return this.recipesCollection.reduce((acc, recipe) => {
       const matchingIngredient = ingredientsData.find((ingredient) => ingredient.name === theUserInput);
-
       recipe.ingredients.filter((ingredient) => {
         if (ingredient.id === matchingIngredient.id) {
           acc.push(recipe)
