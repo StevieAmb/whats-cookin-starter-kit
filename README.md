@@ -18,7 +18,6 @@ This application is a group collaboration where we created a recipe tracking / m
 - Clone this repository down to your local machine
 - Navigate into the `whats-cookin-starter-kit` directory
 - Run `npm install`
-- Ensure you have `mocha` and `chai` 
 - Run npm `start` 
 - Copy `http:localhost//` in your browser to run live preview 
 - Run `open index.html` in the terminal to test application

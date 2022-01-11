@@ -66,11 +66,13 @@ class User {
       return acc
     }, [])
   }
-
+  
   filterFavoritesByTag(userInput) {
     return this.favoriteRecipes.filter((recipe) => recipe.tags.includes(userInput))
   }
 
 };
+
+
 
 export default User;

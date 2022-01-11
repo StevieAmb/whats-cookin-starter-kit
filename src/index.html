@@ -3,7 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.11.0/build/cssnormalize/cssnormalize-min.css">
   <title>What's Cookin'</title>
 </head>
 
@@ -48,7 +50,6 @@
   <article class="recipe-information-view hidden" id="recipeInfoView">
     <button class="favorite-button" id="favoritingButton">favorite this recipe</button>
     <button class="unfavorite-button hidden" id="unfavoritingButton">unfavorite this recipe</button>
-    <button class="go-shopping" id="goShopping">Go Shopping</button>
     <h2 id="recipeTitle">Recipe Title</h2> 
     <img class="current-recipe-image" id= "currentRecipeImage" src="./images/cookies.jpg" alt="food-image">
     <h3>Recipe ingredients</h3>
@@ -80,11 +81,12 @@
   <section class="recipes-to-cook hidden" id="recipesToCookView">
   </section>
   <section class="user-shopping-view hidden" id="userShoppingView">
+    <button class="lets-cook-button" id="letsCookButton">Let's Cook</button>
     <form>
       <label for="amt">Amount Needed:</label><br>
       <input type="text" id="amt" name="amt" required><br>
-      <label for="ingredient">Ingredient Needed:</label><br>
-      <input type="text" id="ingredient" name="ingredient" required>
+      <label for="ingredientPost">Ingredient Needed:</label><br>
+      <input type="text" id="ingredientPost" name="ingredientPost" required>
       <input type="submit" id="shoppingSubmitButton" value="Get Your Things!">
     </form>
     <p class="error-message" id="errorMessage">Error Messages</p>
