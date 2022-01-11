@@ -183,16 +183,4 @@ describe('Pantry', () => {
     }
     ]);
   });
-
-  // it('Should be able to shop for ingredients and add them to the pantry', () => {
-  //   console.log('og pantry', pantry.shelf.length)
-  //   pantry.addToShoppingList('wheat flour', 3475);
-  //   pantry.addToShoppingList('fine sea salt', 90678);
-  //   pantry.addToShoppingList('extra virgin olive oil', 7);
-  //   // console.log("user's shopping list", pantry.makeShoppingList());
-  //   let updatedPantry = pantry.shopForIngredients();
-  //   console.log('after shopping', pantry.shelf.length)
-  //   expect(updatedPantry).to.equal();
-  // });
-
 });

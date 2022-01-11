@@ -149,7 +149,6 @@ showRecipeInformation(event) {
     if((event.target.parentNode.id === `${oneRecipe.id}`) || (`${tryRecipeButton.value}` === `${oneRecipe.id}`)) {
       domUpdates.showRecipeInfoCard();
       recipe = new Recipe(oneRecipe)
-      console.log('favorite', recipe)
       
       const recipeIngredients = recipe.findRecipeIngredientInfo(recipe);
       const recipeInstructions = recipe.getRecipeInstructions();
@@ -247,7 +246,7 @@ displayUserPantry() {
   }
 },
 
-showRecipeToCook() {   //connected to EL for button on NAV
+showRecipeToCook() {   
   domUpdates.showRecipesToCookView();
   newUser.recipesToCook.forEach(recipe => {
     recipesToCookView.insertAdjacentHTML('afterbegin',
@@ -321,25 +320,25 @@ searchFavoriteResults(event) {
   })
 },
 
-userAddRecipeToCook() { //attached to EL - button
+userAddRecipeToCook() { 
   newUser.addRecipeToCook(recipe);
   domUpdates.show([removeRecipeToCookButton])
   domUpdates.hide([addRecipeToCookButton])
 },
 
-userRemoveRecipeToCook() { //attached to EL - button
+userRemoveRecipeToCook() { 
   newUser.removeRecipeToCook(recipe);
   domUpdates.hide([removeRecipeToCookButton])
   domUpdates.show([addRecipeToCookButton])
 },
 
-addFavorite() { //attached to EL - button
+addFavorite() { 
   newUser.addFavoriteRecipe(recipe);
   domUpdates.show([unfavoritingButton])
   domUpdates.hide([favoritingButton])
 },
 
-removeFavoriteRecipe() { //attached to EL - button
+removeFavoriteRecipe() { 
   newUser.removeFavoriteRecipe(recipe);
   domUpdates.hide([unfavoritingButton])
   domUpdates.show([favoritingButton])
@@ -354,7 +353,7 @@ showMainPage() {
 
 showRecipeSearchResults() {
   domUpdates.show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm, searchButton, dropDownButton]);
-  domUpdates.hide([ mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView, recipesToCookView]);
+  domUpdates.hide([ mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView, recipesToCookView, userShoppingView]);
 },
 
 showFavoriteRecipesView() {
@@ -375,7 +374,7 @@ showRecipesToCookView() {
 showRecipeInformationView(){
   domUpdates.addOrRemoveFavoriteButton();
   domUpdates.show([allRecipesView, homeButton, favoriteRecipesButton, dropDownButton])
-  domUpdates.hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView])
+  domUpdates.hide([mainPageView, seeAllRecipesButton, favoriteRecipesView, recipeInfoView, recipesToCookView, userShoppingView])
 },
 
 
