@@ -19,35 +19,35 @@ describe('Pantry', () => {
       "id": 595736,
       "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
       "ingredients": [{
-          "id": 20081,
-          "quantity": {
-            "amount": 1.5,
-            "unit": "c"
-          }
-        },
-        {
-          "id": 1001,
-          "quantity": {
-            "amount": 0.5,
-            "unit": "tsp"
-          }
-        },
-        {
-          "id": 1230,
-          "quantity": {
-            "amount": 2,
-            "unit": "c"
-          }
+        "id": 20081,
+        "quantity": {
+          "amount": 1.5,
+          "unit": "c"
         }
+      },
+      {
+        "id": 1001,
+        "quantity": {
+          "amount": 0.5,
+          "unit": "tsp"
+        }
+      },
+      {
+        "id": 1230,
+        "quantity": {
+          "amount": 2,
+          "unit": "c"
+        }
+      }
       ],
       "instructions": [{
-          "instruction": "Heat the oil in a large pot or pan to medium heat, then stir in the raw flour.",
-          "number": 1
-        },
-        {
-          "instruction": "Stir constantly. The oil and flour will combine to form a liquid slurry. If you don’t keep stirring, the roux will start to burn and you’ll have to start over, so do not stop stirring.",
-          "number": 2
-        }
+        "instruction": "Heat the oil in a large pot or pan to medium heat, then stir in the raw flour.",
+        "number": 1
+      },
+      {
+        "instruction": "Stir constantly. The oil and flour will combine to form a liquid slurry. If you don’t keep stirring, the roux will start to burn and you’ll have to start over, so do not stop stirring.",
+        "number": 2
+      }
       ],
       "name": "Roux",
       "tags": [
@@ -110,7 +110,7 @@ describe('Pantry', () => {
           unit: 'c'
         },
         name: 'semi sweet chips'
-        }])
+      }])
     expect(neededIngredients2).to.deep.equal([]);
   });
 
@@ -150,7 +150,7 @@ describe('Pantry', () => {
         amountNeeded: 2
       }
     ]);
-  });  
+  });
 
   it('Should be able to use pantry items to cook a recipe', () => {
     let cookedRecipe = pantry.cookRecipe(myRecipe1)
@@ -158,38 +158,37 @@ describe('Pantry', () => {
   });
 
   it('Should be able to find ingredients to shop for', () => {
-    let ingredientNames = ['wheat flour', 'fine sea salt', 'extra virgin olive oil', 'fine sea salt']
-    let groceries = pantry.makeShoppingList(ingredientNames);
-    expect(groceries).to.deep.equal([{
-            id: 20081,
-            name: 'wheat flour',
-            estimatedCostInCents: 142
-          },
-          {
-            id: 1012047,
-            name: 'fine sea salt',
-            estimatedCostInCents: 528
-          },
-          {
-            id: 1034053,
-            name: 'extra virgin olive oil',
-            estimatedCostInCents: 305
-          },
-          {
-            id: 1012047,
-            name: 'fine sea salt',
-            estimatedCostInCents: 528
-          }
-        ]);
+    pantry.addToShoppingList('wheat flour', 3475);
+    pantry.addToShoppingList('fine sea salt', 90678);
+    pantry.addToShoppingList('extra virgin olive oil', 7);
+
+    expect(pantry.shoppingList).to.deep.equal([{
+      id: 20081,
+      name: 'wheat flour',
+      amount: 3475
+    },
+    {
+      id: 1012047,
+      name: 'fine sea salt',
+      amount: 90678
+    },
+    {
+      id: 1034053,
+      name: 'extra virgin olive oil',
+      amount: 7
+    }
+    ]);
   });
 
-  // it('Should be able to shop for ingredients and add them to the pantry', () => {
-  //   console.log('og pantry', pantry.shelf)
-  //   let ingredientNames = ['wheat flour', 'fine sea salt', 'extra virgin olive oil', 'fine sea salt']
-  //   pantry.makeShoppingList(ingredientNames);
-  //   let updatedPantry = pantry.shopForIngredients(ingredientNames);
-  //   console.log('after shopping', pantry.shelf)
-  //   expect(updatedPantry).to.equal();
-  // });
+  it('Should be able to shop for ingredients and add them to the pantry', () => {
+    console.log('og pantry', pantry.shelf.length)
+    pantry.addToShoppingList('wheat flour', 3475);
+    pantry.addToShoppingList('fine sea salt', 90678);
+    pantry.addToShoppingList('extra virgin olive oil', 7);
+    // console.log("user's shopping list", pantry.makeShoppingList());
+    let updatedPantry = pantry.shopForIngredients();
+    console.log('after shopping', pantry.shelf.length)
+    expect(updatedPantry).to.equal();
+  });
 
 });
