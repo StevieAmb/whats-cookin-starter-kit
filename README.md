@@ -24,24 +24,24 @@ This application is a group collaboration where we created a recipe tracking / m
    
 ## Screenshots  
 Users view all recipes available online. 
-![home-view](https://media.giphy.com/media/TYckI9CgvMbJeIGhD8/giphy.gif)
+![home-view](https://media.giphy.com/media/VVUulILI1qrqfJMNMO/giphy.gif)
    
 Users can favorite a recipe and view it.  
-![favorite-recipe](https://media.giphy.com/media/zhQIY2o7jdefFessCX/giphy.gif)
+![favorite-recipe](https://media.giphy.com/media/TXCEzLU1TlZFqygyWl/giphy.gif)
 
 Users can click on a recipe in the list to see the directions and instructions. 
-![recipe-info](https://media.giphy.com/media/49H0oCUTNHzVD9hbxZ/giphy.gif)
+![recipe-info](https://media.giphy.com/media/s16Wyree4SJmhXHoJW/giphy.gif)
 
-Users can search through their favorites recipes for specific recipe names 
-![search-recipe](https://media.giphy.com/media/zhQIY2o7jdefFessCX/giphy.gif)
+Users can use the dropdown to search through filtered tags for recipes
+![search-recipe](https://media.giphy.com/media/f3u6W3L0qkazOnvYlQ/giphy.gif)
 
 ## Links  
 Checkout the Turing spec sheet [here](https://frontend.turing.edu/projects/whats-cookin-part-one.html)
+
 Checkout the our GitHub Repo [here](https://github.com/StevieAmb/whats-cookin-starter-kit)
 
 ## Future Additions
-- Add CSS styling for better UI / UX 
-- Add Grocery List for the User to know which ingredient they will need.   
+- Add functionality for adding ingredients to user's Pantry   
 
 ## Contributors  
 [Stevie Ambroise](https://github.com/StevieAmb)
@@ -59,3 +59,7 @@ JavaScript
 Fetch API 
 
 Webpack
+
+SASS 
+
+

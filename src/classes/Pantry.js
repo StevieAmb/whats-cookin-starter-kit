@@ -1,12 +1,12 @@
 const {
   ingredientsData
 } = require("../data/ingredients");
-// const { userData } = require("../data/users");
+
 
 class Pantry {
   constructor(user) {
     this.shelf = user.pantry;
-    this.shoppingList = []; //Write test for this property
+    this.shoppingList = []; 
   }
 
   showPantryIngredientInfo() {
@@ -47,30 +47,13 @@ class Pantry {
     })
   }
 
-  cookRecipe(recipe) { //-subtract
+  cookRecipe(recipe) { 
     const negative = recipe.ingredients.map(elem => {
       elem.quantity.amount = -elem.quantity.amount
       return elem
     })
     return negative
   }
-  //   return recipe.ingredients.reduce((acc, recipeIngredient) => {
-  //     this.shelf.forEach(pantryIngredient => {
-  //       if (pantryIngredient.ingredient === recipeIngredient.id && (!acc.includes(recipeIngredient))) {
-  //         recipeIngredient.quantity.amount = -recipeIngredient.quantity.amount
-  //         console.log(recipeIngredient.quantity.amount)
-  //       } 
-  //     })
-  //     acc.push(recipeIngredient)
-  //     // if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount !== 0)) {
-  //       // acc.push(pantryIngredient)
-  //       // this.shelf = acc
-  //     // }I
-  //       return acc
-  //   }, [])
-  // }
-  //make this method add ingredients by positive or negative number based on cooking or shopping
-  //return the pantry array with all updates
 
   addToShoppingList(nameInput, amountInput) { 
     let groceryItem = {
@@ -80,7 +63,7 @@ class Pantry {
     this.shoppingList.push(groceryItem)
     let groceryStuff = this.shoppingList.map(name => {
       ingredientsData.forEach(ingredient => {
-        if (ingredient.name === name.name) { //Do we need say only add the id if it doesn't exist?
+        if (ingredient.name === name.name) { 
           groceryItem.id = ingredient.id
   
         }
@@ -88,12 +71,6 @@ class Pantry {
     })  
     return groceryStuff
   }
-
-
-
-  //returns an array of the ingredients that a user would like to add to their pantry
-  //userInput.value for ingredient name && userInput.value for the amount
-  
   shopForIngredients() { 
     let groceries = this.shoppingList.forEach(listItem => {
     this.shelf.reduce((acc, pantryItem) => {
