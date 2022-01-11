@@ -39,7 +39,6 @@ class RecipeBox {
        return acc
     }, [])
   }
-
 };
 
 export default RecipeBox;

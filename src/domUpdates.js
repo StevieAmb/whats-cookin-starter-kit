@@ -10,6 +10,10 @@ let newUser;
 let pantry;
 let groceryStore;
 
+const nameRadioButton = document.getElementById('name');
+const ingredientRadioButton = document.getElementById('ingredient');
+const userSearchBox = document.getElementById('userSearchBox');
+
 let domUpdates = {
   //HELPER FUNCTIONS
   show(elements) {
@@ -197,7 +201,7 @@ showSearchResults(event) {
   } else if (userSearchBox.value) {
     domUpdates.showRecipeSearchResults();
     recipeResultsView.innerHTML = ``
-    let searchedRecipeValues = searchByInput();
+    let searchedRecipeValues = domUpdates.searchByInput();
     searchedRecipeValues.forEach((searchedRecipe) => {
       recipeResultsView.insertAdjacentHTML('afterBegin',
       `<article class="result-card ${searchedRecipe.isFavorite}" id="${searchedRecipe.id}">
@@ -260,24 +264,19 @@ showRecipeToCook() {
 //USER STORY
 searchByInput() {
   if (nameRadioButton.checked) {
-    cookbook.matchingRecipes = [];
-    cookbook.findRecipeName(userSearchBox.value)
-    return cookbook.matchingRecipes;
+    return cookbook.findRecipeName(userSearchBox.value)
   } else if (ingredientRadioButton.checked) {
-    cookbook.recipeMatch = [];
-    cookbook.findIngredientById(userSearchBox.value);
-    return cookbook.recipeMatch;
+    return cookbook.findIngredientById(userSearchBox.value);
+    
   } 
 },
 
 searchByTags(event) {
   event.preventDefault();
-  
   let findTags = domUpdates.sortTags();
   findTags.forEach((tag) => {
     if (event.target.className === tag) {
       domUpdates.showRecipeSearchResults();
-      cookbook.matchingRecipesTags = [];
       let searchedRecipeTag = cookbook.storeByTag(tag);
       
       recipeResultsView.innerHTML = ``
