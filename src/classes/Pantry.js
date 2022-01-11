@@ -6,6 +6,7 @@ const {
 class Pantry {
   constructor(user) {
     this.shelf = user.pantry;
+    this.shoppingList = []; //Write test for this property
   }
 
   showPantryIngredientInfo() {
@@ -20,7 +21,6 @@ class Pantry {
   }
 
   determineIfEnoughIngredientsForRecipe(recipe) {
-    console.log('hi')
     let pantryIngredients = this.showPantryIngredientInfo();
     let recipeIngredients = recipe.findRecipeIngredientInfo();
     return recipeIngredients.reduce((acc, ingredient) => {
@@ -51,54 +51,61 @@ class Pantry {
     return this.shelf.reduce((acc, pantryIngredient) => {
       recipe.ingredients.forEach(recipeIngredient => {
         if (pantryIngredient.ingredient === recipeIngredient.id) {
-          pantryIngredient.amount = pantryIngredient.amount - recipeIngredient.quantity.amount
-
+          recipeIngredient.quantity.amount = pantryIngredient.amount - recipeIngredient.quantity.amount
         }
       })
-      if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount !== 0)) {
-        acc.push(pantryIngredient)
-        this.shelf = acc
-      }
+      // if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount !== 0)) {
+        // acc.push(pantryIngredient)
+        // this.shelf = acc
+      // }
+      console.log(acc)
         return acc
     }, [])
   }
   //make this method add ingredients by positive or negative number based on cooking or shopping
   //return the pantry array with all updates
 
-  makeShoppingList(ingredientNames) { 
-    return ingredientNames.map(name => {
-    ingredientsData.forEach(ingredient => {
-        if (ingredient.name === name) {
-          name = ingredient
-        }
-      })
-      return name
-    })  
-  }
+  addToShoppingList(nameInput, amountInput) { 
+    let groceryItem = {
+      'name': nameInput, 
+      'amount': amountInput
+    }
+    this.shoppingList.push(groceryItem)
+    let groceryStuff = this.shoppingList.map(name => {
+      ingredientsData.forEach(ingredient => {
+        if (ingredient.name === name.name) { //Do we need say only add the id if it doesn't exist?
+          groceryItem.id = ingredient.id
   
-  shopForIngredients(ingredientNames) { //-add
-    let groceries = this.makeShoppingList(ingredientNames);
-    this.shelf.reduce((acc, pantryItem) => {
-      groceries.forEach(listItem => {
-        if (!acc.includes(listItem)) {
-          listItem = {
-            ingredient: listItem.id,
-            amount: 1,
-            name: listItem.name
-          }
-          acc.push(listItem)
-        }
-        if (!acc.includes(pantryItem) && pantryItem.ingredient === listItem.id) {
-          pantryItem.amount++
-          acc.push(pantryItem)
         }
       })
-      console.log(acc)
-        this.shelf = acc
-      return acc
-    }, [])
+    })  
+    return groceryStuff
   }
 
+
+
+  //returns an array of the ingredients that a user would like to add to their pantry
+  //userInput.value for ingredient name && userInput.value for the amount
+  
+  shopForIngredients() { 
+    let groceries = this.shoppingList.forEach(listItem => {
+    this.shelf.reduce((acc, pantryItem) => {
+        if (!this.shelf.includes(listItem)) {
+          acc.push(listItem)
+        } else if (pantryItem.id === listItem.ingredient) {
+          pantryItem.amount 
+        }
+        if (!acc.includes(pantryItem) && pantryItem.id === listItem.id) {
+          acc.push(pantryItem)
+          pantryItem.amount++
+        }
+        this.shelf = acc
+        return acc
+      }, [])
+    })
+    console.log('new', groceries)
+    return groceries
+  }
 };
 
 export default Pantry;
