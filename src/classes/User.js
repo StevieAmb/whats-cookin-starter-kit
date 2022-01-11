@@ -14,7 +14,6 @@ class User {
     if(!this.favoriteRecipes.includes(recipe)) {
       this.favoriteRecipes.push(recipe)
       recipe.isFavorited = true 
-      console.log('favoritedRecipe', recipe)
     }
   }
 

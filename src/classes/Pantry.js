@@ -48,17 +48,18 @@ class Pantry {
   }
 
   cookRecipe(recipe) { //-subtract
-    return this.shelf.reduce((acc, pantryIngredient) => {
-      recipe.ingredients.forEach(recipeIngredient => {
-        if (pantryIngredient.ingredient === recipeIngredient.id) {
-          recipeIngredient.quantity.amount = pantryIngredient.amount - recipeIngredient.quantity.amount
-        }
+    return recipe.ingredients.reduce((acc, recipeIngredient) => {
+      this.shelf.forEach(pantryIngredient => {
+        if (pantryIngredient.ingredient === recipeIngredient.id && (!acc.includes(recipeIngredient))) {
+          recipeIngredient.quantity.amount = -recipeIngredient.quantity.amount
+          console.log(recipeIngredient.quantity.amount)
+        } 
       })
+      acc.push(recipeIngredient)
       // if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount !== 0)) {
         // acc.push(pantryIngredient)
         // this.shelf = acc
-      // }
-      console.log(acc)
+      // }I
         return acc
     }, [])
   }

@@ -7,6 +7,7 @@ import Pantry from './classes/Pantry';
 import { usersData } from './data/users';
 import './css/index.scss';
 import './css/_variables.scss';
+// import './domUpdates.js';
 
 
 //BUTTONS
@@ -69,39 +70,40 @@ let pantry;
 
 //EXECUTION FUNCTIONS
 
-//input: old pantry, cookARecipe(), update pantry. 
-//if neededIngredients list === 0, cookARecipe(), subtract recipe ingredients from pantry.
+const postApi = () => {
+let cookedRecipe = pantry.cookRecipe();
+cookedRecipe.reduce((cookedRecipes, recipe) => {
 
-//input: old pantry, goShopping(), update pantry. 
-//if 
-//output: new pantry 
-  //post 
+  fetch('http://localhost:3001/api/v1/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: newUser.id,
+      "ingredientID":  ,
+     "ingredientModification": -${value}, 
+      }),
+    })
+    .then(response => displayUserErrorMessage(response))
+    .catch(err => {
+        displayServerErrorMessage(err)
+  });
+  return coo
+}, [])
 
-  // fetch('http://localhost:3001/api/v1/users', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({
-  //     userId: newUser.id,
-  //     userPantry: newUser.pantry
-  //     })
-  //   })
-  //   .then(response => displayUserErrorMessage(response))
-  //   .catch(err => {
-  //       displayServerErrorMessage(err)
-  //     });
+})
     
-  //   const displayUserErrorMessage = (response) => {
-  //       if (!response.ok) {
+    const displayUserErrorMessage = (response) => {
+      if (!response.ok) {
 
-  //           errorHandlingLine.innerText = 'Please fill out all fields!';
-  //         } else {
-  //             return response.json();
-  //           }
-  //         }
-          
-  //         // const displayServerErrorMessage = (err) => {
-            //   errorHandlingLine.innerText = err.message;
-            // }
+        errorHandlingLine.innerText = 'Please fill out all fields!';
+      } else {
+          return response.json();
+        }
+      }
+      
+      const displayServerErrorMessage = (err) => {
+          errorHandlingLine.innerText = err.message;
+    }
 
                 
 const loadPage = () => {
@@ -255,7 +257,6 @@ const showRecipeInformation = (event) => {
     if((event.target.parentNode.id === `${oneRecipe.id}`) || (`${tryRecipeButton.value}` === `${oneRecipe.id}`)) {
       showRecipeInfoCard();
       recipe = new Recipe(oneRecipe)
-      console.log('favorite', recipe)
       
       const recipeIngredients = recipe.findRecipeIngredientInfo(recipe);
       const recipeInstructions = recipe.getRecipeInstructions();
