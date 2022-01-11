@@ -48,21 +48,27 @@ class Pantry {
   }
 
   cookRecipe(recipe) { //-subtract
-    return recipe.ingredients.reduce((acc, recipeIngredient) => {
-      this.shelf.forEach(pantryIngredient => {
-        if (pantryIngredient.ingredient === recipeIngredient.id && (!acc.includes(recipeIngredient))) {
-          recipeIngredient.quantity.amount = -recipeIngredient.quantity.amount
-          console.log(recipeIngredient.quantity.amount)
-        } 
-      })
-      acc.push(recipeIngredient)
-      // if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount !== 0)) {
-        // acc.push(pantryIngredient)
-        // this.shelf = acc
-      // }I
-        return acc
-    }, [])
+    const negative = recipe.ingredients.map(elem => {
+      elem.quantity.amount = -elem.quantity.amount
+      return elem
+    })
+    return negative
   }
+  //   return recipe.ingredients.reduce((acc, recipeIngredient) => {
+  //     this.shelf.forEach(pantryIngredient => {
+  //       if (pantryIngredient.ingredient === recipeIngredient.id && (!acc.includes(recipeIngredient))) {
+  //         recipeIngredient.quantity.amount = -recipeIngredient.quantity.amount
+  //         console.log(recipeIngredient.quantity.amount)
+  //       } 
+  //     })
+  //     acc.push(recipeIngredient)
+  //     // if ((!acc.includes(pantryIngredient)) && (pantryIngredient.amount !== 0)) {
+  //       // acc.push(pantryIngredient)
+  //       // this.shelf = acc
+  //     // }I
+  //       return acc
+  //   }, [])
+  // }
   //make this method add ingredients by positive or negative number based on cooking or shopping
   //return the pantry array with all updates
 
@@ -104,7 +110,6 @@ class Pantry {
         return acc
       }, [])
     })
-    console.log('new', groceries)
     return groceries
   }
 };

@@ -1,3 +1,14 @@
+import { fetchApiData } from './apiCalls';
+import RecipeBox from './classes/RecipeBox';
+import Recipe from './classes/Recipe';
+import User from './classes/User';
+import Pantry from './classes/Pantry';
+
+var cookbook;
+let recipe;
+let newUser;
+let pantry;
+let groceryStore;
 
 let domUpdates = {
   //HELPER FUNCTIONS
@@ -14,6 +25,40 @@ let domUpdates = {
   },
 
   //EXECUTION FUNCTIONS
+postApi() {
+  let cookedRecipe = pantry.cookRecipe();
+  let itemsToPost = cookedRecipe.concat(pantry.shoppingList)
+    itemsToPost.forEach(elem => {
+  
+  fetch('http://localhost:3001/api/v1/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: newUser.id,
+      "ingredientID": `${elem.id}`,
+     "ingredientModification": `${elem.amount}`,
+      })
+    })
+    .then(response => domUpdates.displayUserErrorMessage(response))
+    .catch(err => {
+        domUpdates.displayServerErrorMessage(err)
+    });
+  });
+},
+ 
+displayUserErrorMessage(response) {
+  if (!response.ok) {
+
+    errorHandlingLine.innerText = 'Please fill out all fields!';
+  } else {
+      return response.json();
+    }
+},
+  
+displayServerErrorMessage(err) {
+  errorHandlingLine.innerText = err.message;
+},
+
   loadPage() {
     suggestedRecipe.innerHTML = '';
     domUpdates.getData()
@@ -44,7 +89,7 @@ let domUpdates = {
     return result
   },
 
-  addOrRemoveRecipeToCookButton = (recipe) => { //attached to EL on page load
+  addOrRemoveRecipeToCookButton(recipe) { //attached to EL on page load
     if (!recipe.addedToCook) {
       domUpdates.show([removeRecipeToCookButton])
       domUpdates.hide([addRecipeToCookButton])
@@ -294,7 +339,7 @@ addFavorite() { //attached to EL - button
   domUpdates.hide([favoritingButton])
 },
 
-removeFavoriteRecipe = () => { //attached to EL - button
+removeFavoriteRecipe() { //attached to EL - button
   newUser.removeFavoriteRecipe(recipe);
   domUpdates.hide([unfavoritingButton])
   domUpdates.show([favoritingButton])
@@ -318,7 +363,7 @@ showFavoriteRecipesView() {
 },
 
 showRecipeInfoCard() {
-  domUpdates.show([recipeInfoView, seeAllRecipesButton, homeButton, favoriteRecipesButton, searchButton, dropDownButton]);
+  domUpdates.show([recipeInfoView, seeAllRecipesButton, homeButton, favoriteRecipesButton, searchButton, dropDownButton, userShoppingView]);
   domUpdates.hide([allRecipesView, mainPageView, recipeResultsView, searchButton2, favoriteRecipesView, recipesToCookView]);
 },
 
@@ -335,19 +380,6 @@ showRecipeInformationView(){
 
 
 };
-
-window.onclick = function (event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
 
 window.addEventListener('load', domUpdates.loadPage);
 unfavoritingButton.addEventListener('click', domUpdates.removeFavoriteRecipe);
@@ -367,6 +399,21 @@ addRecipeToCookButton.addEventListener('click', domUpdates.userAddRecipeToCook);
 removeRecipeToCookButton.addEventListener('click', domUpdates.userRemoveRecipeToCook);
 recipesToCookButton.addEventListener('click', domUpdates.showRecipeToCook);
 recipesToCookView.addEventListener('click', domUpdates.showRecipeInformation);
+letsCookButton.addEventListener('click', domUpdates.postApi)
+
+window.onclick = function (event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
 
 export default  domUpdates;
 
