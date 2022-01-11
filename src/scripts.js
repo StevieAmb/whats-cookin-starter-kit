@@ -8,6 +8,7 @@ import { usersData } from './data/users';
 import './css/index.scss';
 import './css/_variables.scss';
 
+
 //BUTTONS
 const favoriteRecipesButton = document.getElementById('favoriteRecipesButton');
 const homeButton = document.getElementById('homeButton');
@@ -33,7 +34,7 @@ const userSearchBox = document.getElementById('userSearchBox');
 const mainPageNavForm = document.getElementById('mainPageNavForm');
 //USER INPUT FIELDS - POST
 const userAmountNeeded = document.getElementById('amt');
-const userIngredientIdNeeded = document.getElementById('ingredient');
+const userIngredientIdNeeded = document.getElementById('ingredientPost');
 
 
 //VIEWS
@@ -146,7 +147,7 @@ const searchByTags = (event) => {
       searchedRecipeTag.forEach((elem) => {
         recipeResultsView.insertAdjacentHTML('afterBegin',
         `<article class="result-card" id="${elem.id}">
-        <img class="result-image" alt="${elem.name}" src="${elem.image}" tabindex= "0">
+        <img class="result-image" id="${elem.id}" alt="${elem.name}" src="${elem.image}" tabindex= "0">
         <h2>${elem.name}</h2>
         </article>`)
       })
@@ -170,7 +171,7 @@ const searchFavoriteResults = (event) => {
   searchedRecipeValues2.map(searchedRecipe2 => {
     
     recipeResultsView.insertAdjacentHTML('afterbegin',
-    `<article class="result-card">
+    `<article class="result-card" id="${searchedRecipe2.id}">
     <img class="result-image" alt="${searchedRecipe2.name}" src="${searchedRecipe2.image}" tabindex= "0">
     <h2>${searchedRecipe2.name}</h2>
     </article>`)
@@ -235,37 +236,6 @@ window.onclick = function (event) {
   }
 };
 
-const displayRecommendedRecipeInfo = (event) => {
-  event.preventDefault();
-  showRecipeInfoCard();
-  for (var i = 0; i < cookbook.recipesCollection.length; i++) {
-    if (`${cookbook.recipesCollection[i].id}` === `${tryRecipeButton.value}`) {
-      recipe = new Recipe(cookbook.recipesCollection[i])
-      
-      const recipeIngredients = recipe.findRecipeIngredientInfo();
-      const recipeInstructions = recipe.getRecipeInstructions();
-      const recipeCostTotal = recipe.calculateRecipeCost();
-      recipeTitle.innerHTML = ``
-      recipeTitle.innerHTML = `${cookbook.recipesCollection[i].name}`
-      currentRecipeImage.src = `${cookbook.recipesCollection[i].image}`
-      currentRecipeImage.alt = `${cookbook.recipesCollection[i].name}`
-      ingredientsList.innerHTML = ``  
-      recipeIngredients.forEach((ingredient) => {
-        ingredientsList.insertAdjacentHTML('beforeEnd', `
-        <li> ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name} </li>`)
-        })
-      instructionsList.innerHTML = ``
-      recipeInstructions.forEach((instruction) => {
-        instructionsList.insertAdjacentHTML('beforeEnd', `
-        <li>${instruction}</li>`)
-      })
-      totalCost.innerText = `$${recipeCostTotal}`
-    }
-  }
-  displayUserPantry();
-  displayIngredientsNeeded(recipe);
-} 
-
 const showAllRecipes = () => {
   allRecipesView.innerHTML = ``
   cookbook.recipesCollection.forEach(recipe => {
@@ -281,10 +251,11 @@ const showAllRecipes = () => {
 const showRecipeInformation = (event) => {
   event.preventDefault();
   addOrRemoveFavoriteButton();
-  cookbook.recipesCollection.forEach(oneRecipe => {
-    if(event.target.parentNode.id === `${oneRecipe.id}`) {
+  cookbook.recipesCollection.find(oneRecipe => {
+    if((event.target.parentNode.id === `${oneRecipe.id}`) || (`${tryRecipeButton.value}` === `${oneRecipe.id}`)) {
       showRecipeInfoCard();
       recipe = new Recipe(oneRecipe)
+      console.log('favorite', recipe)
       
       const recipeIngredients = recipe.findRecipeIngredientInfo(recipe);
       const recipeInstructions = recipe.getRecipeInstructions();
@@ -319,14 +290,8 @@ const displayIngredientsNeeded = (recipe) => {
   if (userNeededIngredients.length === 0) {
     show([addRecipeToCookButton])
     addOrRemoveRecipeToCookButton();
-  } else {
-    //add ingredients to cook (POST)
   }
 };
-
-
-
-
 
 const showSearchResults = (event) => {
   event.preventDefault();
@@ -362,37 +327,6 @@ const displayFavoritedRecipes = () => {
   })
 };
 
-const displaySelectedFavoriteRecipe = (event) => {
-  addOrRemoveFavoriteButton();
-  for (var i = 0; i < newUser.favoriteRecipes.length; i++) {
-    if (`${newUser.favoriteRecipes[i].id}` === event.target.parentNode.id) {
-      showRecipeInfoCard();
-      recipe = new Recipe(newUser.favoriteRecipes[i])
-      const recipeIngredients = recipe.findRecipeIngredientInfo();
-      const recipeInstructions = recipe.getRecipeInstructions();
-      const recipeCostTotal = recipe.calculateRecipeCost();
-      
-      recipeTitle.innerHTML = ``;
-      recipeTitle.innerHTML = `${newUser.favoriteRecipes[i].name}`
-      currentRecipeImage.src = `${newUser.favoriteRecipes[i].image}`
-      currentRecipeImage.alt = `${newUser.favoriteRecipes[i].name}`
-      
-      ingredientsList.innerHTML = ``
-      recipeIngredients.forEach((ingredient) => {
-        ingredientsList.insertAdjacentHTML('beforeEnd', `
-        <li>${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}</li>`)
-      })
-      instructionsList.innerHTML = ``
-      recipeInstructions.forEach((instruction) => {
-        instructionsList.insertAdjacentHTML('beforeEnd', `
-        <li>${instruction}</li>`)
-      })
-      totalCost.innerText = `$${recipeCostTotal}`
-    }
-  }
-  displayIngredientsNeeded(recipe);
-  displayUserPantry();
-};
 
 const displayUserPantry = () => {
   let userPantryIngredients = pantry.showPantryIngredientInfo();
@@ -407,7 +341,7 @@ const displayUserPantry = () => {
   }
 }
 
-const addOrRemoveRecipeToCookButton = () => { //attached to EL on page load
+const addOrRemoveRecipeToCookButton = (recipe) => { //attached to EL on page load
   if (!recipe.addedToCook) {
     show([removeRecipeToCookButton])
     hide([addRecipeToCookButton])
@@ -444,7 +378,8 @@ const addOrRemoveFavoriteButton = () => { //attached to EL on page load
   if (recipe.isFavorited) {
     show([unfavoritingButton])
     hide([favoritingButton])
-  } else if (!recipe.isFavorited) {
+  } 
+  if (!recipe.isFavorited) {
     hide([unfavoritingButton])
     show([favoritingButton])
   }
@@ -462,13 +397,11 @@ const hide = (elements) => {
 
 const showMainPage = () => {
   displayHomePage();
-  addOrRemoveFavoriteButton();
   show([mainPageView, mainPageNavForm, favoriteRecipesButton, seeAllRecipesButton, searchButton, dropDownButton]);
   hide([favoriteRecipesView, recipeInfoView, recipeResultsView, searchButton2, allRecipesView, userShoppingView, recipesToCookView, userShoppingView]);
 };
 
 const showRecipeSearchResults = () => {
-  addOrRemoveFavoriteButton();
   show([recipeResultsView, seeAllRecipesButton, homeButton, favoriteRecipesButton, mainPageNavForm, searchButton, dropDownButton]);
   hide([ mainPageView, favoriteRecipesView, recipeInfoView, searchButton2, allRecipesView, recipesToCookView]);
 };
@@ -519,9 +452,9 @@ searchButton2.addEventListener('click', searchFavoriteResults);
 dropDownButton.addEventListener('click', showDropDown);
 myDropdown.addEventListener('click', searchByTags);
 allRecipesView.addEventListener('click', showRecipeInformation); 
-recipeResultsView.addEventListener('click', displaySelectedFavoriteRecipe);
-tryRecipeButton.addEventListener('click', displayRecommendedRecipeInfo);
-favoriteRecipesView.addEventListener('click', displaySelectedFavoriteRecipe);
+recipeResultsView.addEventListener('click', showRecipeInformation);
+tryRecipeButton.addEventListener('click', showRecipeInformation);
+favoriteRecipesView.addEventListener('click', showRecipeInformation);
 addRecipeToCookButton.addEventListener('click', userAddRecipeToCook);
 removeRecipeToCookButton.addEventListener('click', userRemoveRecipeToCook);
 recipesToCookButton.addEventListener('click', showRecipeToCook);
